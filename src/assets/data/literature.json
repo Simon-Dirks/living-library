@@ -1,0 +1,16 @@
+[{
+        "id": "article_1",
+        "title": "Affect / Teaching Practice Article #1",
+        "themes": ["affect", "teaching-practice"]
+    },
+    {
+        "id": "article_2",
+        "title": "Affect Article #2",
+        "themes": ["affect"]
+    },
+    {
+        "id": "article_3",
+        "title": "Multi-themed Article #3",
+        "themes": ["affect", "teaching-practice", "third-theme"]
+    }
+]
