@@ -81,26 +81,19 @@ export default {
         .on("click", (d, data) => {
           this.onThemeCircleClicked(data);
         });
+
+      /* TODO: Add theme titles as texts */
+
       this.themeCircles.push(circle.data());
     },
     initThemeCircles() {
       const circleRadius = 50;
       for (let i = 0; i < 5; i++) {
-        const r = Math.floor(Math.random() * 255);
-        const g = Math.floor(Math.random() * 255);
-        // const b = Math.floor(Math.random() * 255);
-
-        let themeId = Object.keys(this.THEMES)[i];
+        const themeId = Object.keys(this.THEMES)[i];
 
         const x = i * 75 + circleRadius;
-        this.addThemeCircle(
-          themeId,
-          x,
-          circleRadius,
-          circleRadius,
-          `${r}, ${g}, ${128}`,
-          0.4
-        );
+        const color = this.THEMES[themeId].color;
+        this.addThemeCircle(themeId, x, circleRadius, circleRadius, color, 0.4);
       }
     },
   },

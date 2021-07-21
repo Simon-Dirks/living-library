@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import THEMES from "@/assets/data/themes.json";
 import LiteratureViewer from "./LiteratureViewer.vue";
 import ThemeSelect from "./ThemeSelect.vue";
 import { IonToolbar, IonContent, IonTitle, IonHeader } from "@ionic/vue";
@@ -25,13 +26,7 @@ export default {
   data() {
     return {
       selectedThemeIds: [],
-      THEMES: {
-        "them.AFF": { title: "Affect" },
-        "them.TEC": { title: "Teaching practice" },
-        "them.TPD": { title: "Context of teaching" },
-        "them.AS": { title: "Academic achievement and assessment" },
-        "them.EQU": { title: "Equity" },
-      },
+      THEMES: THEMES,
     };
   },
   name: "Home",
@@ -58,20 +53,31 @@ export default {
     themeIsSelected(themeId) {
       return this.selectedThemeIds.indexOf(themeId) !== -1;
     },
-    getThemeTitle(themeId) {
+    getThemeData(themeId) {
       if (Object.keys(this.THEMES).includes(themeId)) {
-        return this.THEMES[themeId].title;
+        return this.THEMES[themeId];
       }
-      return themeId;
+      return null;
+    },
+    getThemeTitle(themeId) {
+      return this.getThemeData(themeId)?.title ?? themeId;
+    },
+    getThemeColor(themeId, opacity = 1) {
+      const color = this.getThemeData(themeId)?.color;
+      return color
+        ? `rgba(${color}, ${opacity})`
+        : `rgba(100, 100, 100, ${opacity})`;
     },
   },
   provide() {
     return {
       selectedThemeIds: this.selectedThemeIds,
       themeIsSelected: this.themeIsSelected,
+      getThemeData: this.getThemeData,
       getThemeTitle: this.getThemeTitle,
+      getThemeColor: this.getThemeColor,
       selectTheme: this.selectTheme,
-      THEMES: this.THEMES
+      THEMES: this.THEMES,
     };
   },
 };

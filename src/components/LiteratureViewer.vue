@@ -31,6 +31,10 @@ export default {
   },
   computed: {
     shownLiteratureData() {
+      const noThemesSelected = this.selectedThemeIds.length === 0;
+      if (noThemesSelected) {
+        return this.literatureData;
+      }
       const shownLiteratureData = this.literatureData.filter(
         (item) => this.getNumSelectedThemesForLiteratureItem(item) > 0
       );

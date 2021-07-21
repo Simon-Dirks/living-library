@@ -5,11 +5,14 @@
       <br />
       <ion-chip
         @click="selectTheme(themeId)"
+        :style="{
+          '--background': getThemeChipColor(themeId),
+        }"
         v-for="themeId in literatureItem['Theme.FINDINGS']"
         :key="themeId"
       >
         <ion-label color="secondary"
-          ><strong v-if="themeIsSelected(themeId)">
+          ><strong v-if="themeIsSelected(themeId)" style="color: white;">
             {{ getThemeTitle(themeId) }}</strong
           ><template v-else>{{ getThemeTitle(themeId) }}</template></ion-label
         >
@@ -57,8 +60,15 @@ export default {
     IonChip,
     IonLabel,
   },
+  methods: {
+    getThemeChipColor(themeId) {
+      return this.themeIsSelected(themeId)
+        ? this.getThemeColor(themeId)
+        : this.getThemeColor(themeId, 0.1);
+    },
+  },
   props: ["literatureItem"],
-  inject: ["themeIsSelected", "getThemeTitle", "selectTheme"],
+  inject: ["themeIsSelected", "getThemeTitle", "getThemeColor", "selectTheme"],
   name: "LiteratureItem",
 };
 </script>
