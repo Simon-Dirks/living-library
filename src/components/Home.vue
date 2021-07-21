@@ -25,6 +25,13 @@ export default {
   data() {
     return {
       selectedThemeIds: [],
+      THEMES: {
+        "them.AFF": { title: "Affect" },
+        "them.TEC": { title: "Teaching practice" },
+        "them.TPD": { title: "Context of teaching" },
+        "them.AS": { title: "Academic achievement and assessment" },
+        "them.EQU": { title: "Equity" },
+      },
     };
   },
   name: "Home",
@@ -51,11 +58,19 @@ export default {
     themeIsSelected(themeId) {
       return this.selectedThemeIds.indexOf(themeId) !== -1;
     },
+    getThemeTitle(themeId) {
+      if (Object.keys(this.THEMES).includes(themeId)) {
+        return this.THEMES[themeId].title;
+      }
+      return themeId;
+    },
   },
   provide() {
     return {
       selectedThemeIds: this.selectedThemeIds,
       themeIsSelected: this.themeIsSelected,
+      getThemeTitle: this.getThemeTitle,
+      THEMES: this.THEMES,
     };
   },
 };

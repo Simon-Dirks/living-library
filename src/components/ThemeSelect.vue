@@ -5,7 +5,13 @@
       <strong>
         Selected theme<span v-if="numSelectedThemes > 1">s</span> </strong
       >:
-      {{ selectedThemeIds.join(", ") }}
+      <span
+        class="ion-margin-end"
+        v-for="selectedThemeId in selectedThemeIds"
+        :key="selectedThemeId"
+      >
+        {{ THEMES[selectedThemeId].title }}
+      </span>
     </p>
     <p v-else><em>No themes selected.</em></p>
     <svg width="100%" height="400px"></svg>
@@ -26,16 +32,9 @@ export default {
   data() {
     return {
       themeCircles: [],
-      THEMES: {
-        "them.AFF": { title: "Affect" },
-        "them.TEC": { title: "TEC" },
-        "them.TPD": { title: "TPD" },
-        "them.TA": { title: "TA" },
-        "them.ORG": { title: "ORG" },
-      },
     };
   },
-  inject: ["selectedThemeIds"],
+  inject: ["selectedThemeIds", "THEMES"],
   methods: {
     setThemeCircleColors() {
       const circles = d3.selectAll(".theme-circle");
