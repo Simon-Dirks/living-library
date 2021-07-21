@@ -3,19 +3,15 @@
     <h2>Literature</h2>
 
     <template
-      v-for="literatureItem in literatureData"
+      v-for="literatureItem in shownLiteratureData"
       :key="literatureItem['Article name']"
     >
-      <literature-item
-        v-if="literatureItemIsVisible(literatureItem)"
-        :literatureItem="literatureItem"
-      ></literature-item>
+      <literature-item :literatureItem="literatureItem"></literature-item>
     </template>
   </ion-content>
 </template>
 
 <script>
-// import rawLiteratureData from "../assets/data/literature.json";
 import LiteratureItem from "./LiteratureItem.vue";
 import rawLiteratureData from "@/assets/data/coded-articles-v2.csv";
 import Papa from "papaparse";
@@ -30,10 +26,30 @@ export default {
   },
   data() {
     return {
-      literatureData: null,
+      literatureData: [],
     };
   },
+  computed: {
+    shownLiteratureData() {
+      const shownLiteratureData = this.literatureData.filter(
+        (item) => this.getNumSelectedThemesForLiteratureItem(item) > 0
+      );
+      shownLiteratureData.sort((firstItem, secondItem) => {
+        return (
+          this.getNumSelectedThemesForLiteratureItem(secondItem) -
+          this.getNumSelectedThemesForLiteratureItem(firstItem)
+        );
+      });
+
+      return shownLiteratureData;
+    },
+  },
   methods: {
+    getNumSelectedThemesForLiteratureItem(literatureItem) {
+      return literatureItem["Theme.FINDINGS"].filter((theme) =>
+        this.selectedThemeIds.includes(theme)
+      ).length;
+    },
     loadLiteratureFromFile() {
       this.literatureData = Papa.parse(rawLiteratureData, {
         header: true,
@@ -53,19 +69,6 @@ export default {
           literatureItem[themeKey] = literatureItem[themeKey].split(";");
         }
       }
-    },
-
-    literatureItemIsVisible(literatureItem) {
-      const noThemesSelected = this.selectedThemeIds.length === 0;
-      if (noThemesSelected) {
-        return true;
-      }
-
-      return (
-        literatureItem["Theme.FINDINGS"].filter((theme) =>
-          this.selectedThemeIds.includes(theme)
-        ).length > 0
-      );
     },
   },
   mounted() {
