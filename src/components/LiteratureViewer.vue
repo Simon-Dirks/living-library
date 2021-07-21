@@ -6,70 +6,27 @@
       v-for="literatureItem in literatureData"
       :key="literatureItem['Article name']"
     >
-      <ion-card v-if="literatureItemThemesAreSelected(literatureItem)">
-        <ion-card-header>
-          <ion-card-title>{{ literatureItem["Article name"] }}</ion-card-title>
-          <ion-card-subtitle
-            ><ion-icon class="ion-margin-end" name="book" />{{
-              literatureItem["Journal"]
-            }}</ion-card-subtitle
-          >
-        </ion-card-header>
-        <ion-card-content>
-          <p>
-            <a :href="literatureItem['Article Link']" target="_blank"
-              ><ion-icon class="ion-margin-end" name="link" />
-              <span v-if="literatureItem.Authors">
-                {{ literatureItem.Authors }}</span
-              ><span v-else>Article link</span>
-            </a>
-          </p>
-
-          <p>
-            <ion-icon name="bulb" />
-            <span
-              class="ion-margin-start"
-              v-for="themeId in literatureItem['Theme.FINDINGS']"
-              :key="themeId"
-            >
-              <strong v-if="themeIsSelected(themeId)">
-                {{ getThemeTitle(themeId) }}</strong
-              ><template v-else>{{ getThemeTitle(themeId) }}</template>
-            </span>
-            <!-- <span v-html="literatureItem['Theme.FINDINGS'].join(', ')"></span> -->
-          </p>
-        </ion-card-content>
-      </ion-card>
+      <literature-item
+        v-if="literatureItemIsVisible(literatureItem)"
+        :literatureItem="literatureItem"
+      ></literature-item>
     </template>
   </ion-content>
 </template>
 
 <script>
 // import rawLiteratureData from "../assets/data/literature.json";
+import LiteratureItem from "./LiteratureItem.vue";
 import rawLiteratureData from "@/assets/data/coded-articles-v2.csv";
 import Papa from "papaparse";
-
-import {
-  IonIcon,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
-  IonContent,
-} from "@ionic/vue";
+import { IonContent } from "@ionic/vue";
 
 export default {
   inject: ["selectedThemeIds", "themeIsSelected", "getThemeTitle"],
   name: "LiteratureViewer",
   components: {
-    IonIcon,
     IonContent,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
+    LiteratureItem,
   },
   data() {
     return {
@@ -100,7 +57,12 @@ export default {
       console.log(this.literatureData);
     },
 
-    literatureItemThemesAreSelected(literatureItem) {
+    literatureItemIsVisible(literatureItem) {
+      const noThemesSelected = this.selectedThemeIds.length === 0;
+      if (noThemesSelected) {
+        return true;
+      }
+
       return (
         literatureItem["Theme.FINDINGS"].filter((theme) =>
           this.selectedThemeIds.includes(theme)
@@ -115,8 +77,4 @@ export default {
 </script>
 
 <style scoped>
-a {
-  color: #3880ff;
-  text-decoration: none;
-}
 </style>
