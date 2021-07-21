@@ -21,11 +21,18 @@ export default {
   computed: {
     numSelectedThemes() {
       return this.selectedThemeIds.length;
-    }
+    },
   },
   data() {
     return {
       themeCircles: [],
+      THEMES: {
+        "them.AFF": { title: "Affect" },
+        "them.TEC": { title: "TEC" },
+        "them.TPD": { title: "TPD" },
+        "them.TA": { title: "TA" },
+        "them.ORG": { title: "ORG" },
+      },
     };
   },
   inject: ["selectedThemeIds"],
@@ -73,19 +80,13 @@ export default {
     },
     initThemeCircles() {
       const circleRadius = 50;
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 5; i++) {
         const r = Math.floor(Math.random() * 255);
         const g = Math.floor(Math.random() * 255);
         // const b = Math.floor(Math.random() * 255);
 
-        let themeId = "theme_" + (i + 1);
-        if (i === 0) {
-          themeId = "affect";
-        } else if (i === 1) {
-          themeId = "teaching-practice";
-        } else if (i === 2) {
-          themeId = "third-theme";
-        }
+        let themeId = Object.keys(this.THEMES)[i];
+
         const x = i * 75 + circleRadius;
         this.addThemeCircle(
           themeId,

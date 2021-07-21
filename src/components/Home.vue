@@ -48,10 +48,14 @@ export default {
         this.selectedThemeIds.push(themeId);
       }
     },
+    themeIsSelected(themeId) {
+      return this.selectedThemeIds.indexOf(themeId) !== -1;
+    },
   },
   provide() {
     return {
       selectedThemeIds: this.selectedThemeIds,
+      themeIsSelected: this.themeIsSelected,
     };
   },
 };
