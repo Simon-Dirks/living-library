@@ -10,7 +10,7 @@
         v-for="selectedThemeId in selectedThemeIds"
         :key="selectedThemeId"
       >
-        {{ THEMES[selectedThemeId].title }}
+        {{ getThemeTitle(selectedThemeId) }}
       </span>
     </p>
     <p v-else><em>No themes selected.</em></p>
@@ -23,7 +23,6 @@ import * as d3 from "d3";
 
 export default {
   name: "ThemeSelect",
-  emits: ["theme-selected"],
   computed: {
     numSelectedThemes() {
       return this.selectedThemeIds.length;
@@ -34,9 +33,18 @@ export default {
       themeCircles: [],
     };
   },
-  inject: ["selectedThemeIds", "THEMES"],
+  watch: {
+    selectedThemeIds: {
+      handler: function (new_themes, prev_themes) {
+        console.log("Selected themes updated: ", new_themes);
+        this.updateThemeCircleColors();
+      },
+      deep: true,
+    },
+  },
+  inject: ["selectedThemeIds", "selectTheme", "getThemeTitle", "THEMES"],
   methods: {
-    setThemeCircleColors() {
+    updateThemeCircleColors() {
       const circles = d3.selectAll(".theme-circle");
       for (const circleNode of circles) {
         const circleData = this.themeCircles.find(
@@ -57,9 +65,7 @@ export default {
     },
     onThemeCircleClicked(data) {
       const themeId = data.themeId;
-      this.$emit("theme-selected", themeId);
-
-      this.setThemeCircleColors();
+      this.selectTheme(themeId);
     },
     addThemeCircle(themeId, x, y, radius, col, opacity) {
       const svg = d3.select("svg");

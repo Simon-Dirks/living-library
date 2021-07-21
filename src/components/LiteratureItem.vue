@@ -4,6 +4,7 @@
       <ion-card-title>{{ literatureItem["Article name"] }}</ion-card-title>
       <br />
       <ion-chip
+        @click="selectTheme(themeId)"
         v-for="themeId in literatureItem['Theme.FINDINGS']"
         :key="themeId"
       >
@@ -42,7 +43,7 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonChip,
-  IonLabel
+  IonLabel,
 } from "@ionic/vue";
 
 export default {
@@ -54,10 +55,10 @@ export default {
     // IonCardSubtitle,
     IonCardContent,
     IonChip,
-    IonLabel
+    IonLabel,
   },
   props: ["literatureItem"],
-  inject: ["themeIsSelected", "getThemeTitle"],
+  inject: ["themeIsSelected", "getThemeTitle", "selectTheme"],
   name: "LiteratureItem",
 };
 </script>

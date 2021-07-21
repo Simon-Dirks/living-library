@@ -52,9 +52,7 @@ export default {
           }
           literatureItem[themeKey] = literatureItem[themeKey].split(";");
         }
-        // console.log(literatureItem);
       }
-      console.log(this.literatureData);
     },
 
     literatureItemIsVisible(literatureItem) {

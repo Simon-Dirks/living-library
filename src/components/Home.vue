@@ -8,7 +8,7 @@
   </ion-header>
   <ion-content>
     <div class="split themes-panel">
-      <theme-select @theme-selected="onThemeSelected"></theme-select>
+      <theme-select></theme-select>
     </div>
     <div class="split literature-panel">
       <literature-viewer></literature-viewer>
@@ -46,7 +46,7 @@ export default {
   },
   mounted() {},
   methods: {
-    onThemeSelected(themeId) {
+    selectTheme(themeId) {
       const themeIdIdx = this.selectedThemeIds.indexOf(themeId);
       var themeIsAlreadySelected = themeIdIdx !== -1;
       if (themeIsAlreadySelected) {
@@ -70,7 +70,8 @@ export default {
       selectedThemeIds: this.selectedThemeIds,
       themeIsSelected: this.themeIsSelected,
       getThemeTitle: this.getThemeTitle,
-      THEMES: this.THEMES,
+      selectTheme: this.selectTheme,
+      THEMES: this.THEMES
     };
   },
 };
@@ -79,7 +80,7 @@ export default {
 <style scoped>
 .split {
   margin-top: 50px;
-  height: 100%;
+  height: 100%; /* TODO: Subtract 50px */
   width: 50%;
   position: fixed;
   z-index: 1;
