@@ -12,7 +12,7 @@
         :key="themeId"
       >
         <ion-label color="secondary"
-          ><strong v-if="themeIsSelected(themeId)" style="color: white;">
+          ><strong v-if="themeIsSelected(themeId)" style="color: white">
             {{ getThemeTitle(themeId) }}</strong
           ><template v-else>{{ getThemeTitle(themeId) }}</template></ion-label
         >
@@ -31,6 +31,12 @@
       <p>
         <ion-icon class="ion-margin-end" name="book" />{{
           literatureItem["Journal"]
+        }}
+      </p>
+
+      <p>
+        <ion-icon class="ion-margin-end" name="calendar" />{{
+          literatureItem["year"]
         }}
       </p>
     </ion-card-content>

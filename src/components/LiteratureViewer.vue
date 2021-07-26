@@ -1,7 +1,6 @@
 <template>
   <ion-content>
     <h2>Literature ({{ shownLiteratureData.length }})</h2>
-
     <template
       v-for="literatureItem in shownLiteratureData"
       :key="literatureItem['Article name']"
@@ -24,6 +23,7 @@ export default {
     "getThemeTitle",
     "getIntersectionThemes",
     "THEMES",
+    "getTimeFilter",
   ],
   name: "LiteratureViewer",
   components: {
@@ -38,11 +38,20 @@ export default {
   },
   computed: {
     shownLiteratureData() {
+      let shownLiteratureData = this.literatureData;
+
+      shownLiteratureData = this.literatureData.filter(
+        (item) =>
+          !item.year ||
+          (item.year <= new Date(this.getTimeFilter().max).getFullYear() &&
+            item.year >= new Date(this.getTimeFilter().min).getFullYear())
+      );
+
       const noThemesSelected = this.selectedThemeIds.length === 0;
       if (noThemesSelected) {
-        return this.literatureData;
+        return shownLiteratureData;
       }
-      const shownLiteratureData = this.literatureData.filter(
+      shownLiteratureData = shownLiteratureData.filter(
         (item) => this.getNumSelectedThemesForLiteratureItem(item) > 0
       );
       shownLiteratureData.sort((firstItem, secondItem) => {
@@ -88,6 +97,11 @@ export default {
       const themeKeys = ["Theme.FINDINGS", "Theme.IMPLICATIONS"];
       for (const literatureItem of this.literatureData) {
         literatureItem["themes"] = [];
+        literatureItem["year"] = null;
+        if (literatureItem.Date) {
+          const itemYear = "20" + literatureItem.Date.replace(/\D/g, "");
+          literatureItem["year"] = parseInt(itemYear);
+        }
 
         for (const themeKey of themeKeys) {
           if (!literatureItem[themeKey] || literatureItem[themeKey] === "") {
@@ -113,6 +127,8 @@ export default {
           }
         }
       }
+
+      console.dir(this.literatureData);
     },
     getHighlevelThemeId(rawThemeId) {
       for (const [themeId, theme] of Object.entries(this.THEMES)) {

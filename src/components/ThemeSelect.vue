@@ -107,7 +107,13 @@ export default {
       deep: true,
     },
   },
-  inject: ["selectedThemeIds", "selectTheme", "getThemeTitle", "THEMES"],
+  inject: [
+    "selectedThemeIds",
+    "selectTheme",
+    "getThemeTitle",
+    "THEMES",
+    "updateTimeFilter",
+  ],
   methods: {
     // https://stackoverflow.com/questions/60304208/javascript-algorithm-to-generate-all-possible-unique-combinations-of-any-length
     getAllCombinations(array) {
@@ -151,25 +157,29 @@ export default {
         day: "numeric",
       });
     },
-  },
-  mounted() {
-    $(document).ready(() => {
+    initializeTimeslider() {
+      const startDate = this.dateToTimestamp(new Date(2020, 10, 1));
+      const endDate = this.dateToTimestamp(new Date());
       $("#timeslider").ionRangeSlider({
         skin: "round",
         type: "double",
         grid: true,
-        min: this.dateToTimestamp(new Date(2020, 10, 1)),
-        max: this.dateToTimestamp(new Date()),
-        from: this.dateToTimestamp(new Date(2020, 10, 8)),
-        to: this.dateToTimestamp(new Date()),
+        min: this.dateToTimestamp(startDate),
+        max: this.dateToTimestamp(endDate),
+        from: this.dateToTimestamp(startDate),
+        to: this.dateToTimestamp(endDate),
         prettify: this.timestampToDate,
-        onStart: function (data) {},
-        onChange: function (data) {
+        onStart: (data) => {
+          this.updateTimeFilter(startDate, endDate);
+        },
+        onChange: (data) => {
+          this.updateTimeFilter(data.from, data.to);
         },
         onFinish: function (data) {},
         onUpdate: function (data) {},
       });
-
+    },
+    initializeImageMap() {
       $("area").each((index, area) => {
         const themeId = $(area).attr("title");
         const themeTitle = this.getThemeTitle(themeId);
@@ -196,8 +206,12 @@ export default {
           mapKey: "name",
           listKey: "name",
         });
-      }, 100);
-    });
+      }, 250);
+    },
+  },
+  mounted() {
+    this.initializeTimeslider();
+    this.initializeImageMap();
   },
 };
 </script>

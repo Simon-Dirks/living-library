@@ -26,6 +26,8 @@ export default {
   data() {
     return {
       selectedThemeIds: [],
+      minTimeFilter: null,
+      maxTimeFilter: null,
       THEMES: THEMES,
     };
   },
@@ -39,8 +41,7 @@ export default {
     ThemeSelect,
     LiteratureViewer,
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     selectTheme(themeId) {
       const themeIdIdx = this.selectedThemeIds.indexOf(themeId);
@@ -99,6 +100,14 @@ export default {
         ? `rgba(${color}, ${opacity})`
         : `rgba(100, 100, 100, ${opacity})`;
     },
+    updateTimeFilter(min, max) {
+      this.minTimeFilter = min;
+      this.maxTimeFilter = max;
+      this.$forceUpdate();
+    },
+    getTimeFilter() {
+      return { min: this.minTimeFilter, max: this.maxTimeFilter };
+    },
   },
   provide() {
     return {
@@ -110,6 +119,8 @@ export default {
       getIntersectionThemes: this.getIntersectionThemes,
       selectTheme: this.selectTheme,
       THEMES: this.THEMES,
+      updateTimeFilter: this.updateTimeFilter,
+      getTimeFilter: this.getTimeFilter,
     };
   },
 };
