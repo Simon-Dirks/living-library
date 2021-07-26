@@ -1,10 +1,27 @@
 {
-    "them.AFF": { "title": "Affect", "color": "194, 0, 251" },
-    "them.TEC": { "title": "Teaching practice", "color": "236, 8, 104" },
-    "them.TPD": { "title": "Context of teaching", "color": "252, 47, 0" },
-    "them.AS": {
-        "title": "Academic achievement and assessment",
-        "color": "236, 125, 16"
+    "affect": {
+        "title": "Affect",
+        "color": "248, 205, 101",
+        "themes": ["them.AFF"]
     },
-    "them.EQU": { "title": "Equity", "color": "255, 188, 10" }
+    "teachingPractice": {
+        "title": "Teaching practice",
+        "color": "199, 99, 89",
+        "themes": ["them.TA", "them.GO"]
+    },
+    "contextTeaching": {
+        "title": "Context of teaching",
+        "color": "109, 157, 218",
+        "themes": ["them.ORG", "them.REL", "them.TPD"]
+    },
+    "academicAchievementAssessment": {
+        "title": "Academic achievement and assessment",
+        "color": "214, 187, 124",
+        "themes": ["them.AS"]
+    },
+    "equity": {
+        "title": "Equity",
+        "color": "122, 180, 99",
+        "themes": ["them.EQU"]
+    }
 }

@@ -8,7 +8,7 @@
         :style="{
           '--background': getThemeChipColor(themeId),
         }"
-        v-for="themeId in literatureItem['Theme.FINDINGS']"
+        v-for="themeId in literatureItem['themes']"
         :key="themeId"
       >
         <ion-label color="secondary"

@@ -23,6 +23,7 @@ export default {
     "themeIsSelected",
     "getThemeTitle",
     "getIntersectionThemes",
+    "THEMES",
   ],
   name: "LiteratureViewer",
   components: {
@@ -32,6 +33,7 @@ export default {
   data() {
     return {
       literatureData: [],
+      ignoredThemes: ["them.TEC", "them.OTH"],
     };
   },
   computed: {
@@ -56,7 +58,7 @@ export default {
   methods: {
     getNumSelectedThemesForLiteratureItem(literatureItem) {
       let numSelectedThemesForLiteratureItem = 0;
-      const literatureItemThemes = literatureItem["Theme.FINDINGS"];
+      const literatureItemThemes = literatureItem["themes"];
       for (const selectedThemeId of this.selectedThemeIds) {
         const selectedIntersectionThemes =
           this.getIntersectionThemes(selectedThemeId);
@@ -83,21 +85,43 @@ export default {
       this.literatureData = Papa.parse(rawLiteratureData, {
         header: true,
       }).data;
-      const themeKeys = [
-        "Theme.FINDINGS",
-        "Subtheme.FINDINGS",
-        "Theme.IMPLICATIONS",
-        "Subtheme.IMPLICATIONS",
-      ];
+      const themeKeys = ["Theme.FINDINGS", "Theme.IMPLICATIONS"];
       for (const literatureItem of this.literatureData) {
+        literatureItem["themes"] = [];
+
         for (const themeKey of themeKeys) {
           if (!literatureItem[themeKey] || literatureItem[themeKey] === "") {
-            literatureItem[themeKey] = [];
             continue;
           }
-          literatureItem[themeKey] = literatureItem[themeKey].split(";");
+
+          const literatureItemThemes = literatureItem[themeKey].split(";");
+          for (const literatureItemTheme of literatureItemThemes) {
+            if (
+              literatureItemTheme === "" ||
+              this.ignoredThemes.includes(literatureItemTheme)
+            ) {
+              continue;
+            }
+
+            const highlevelTheme =
+              this.getHighlevelThemeId(literatureItemTheme);
+            const themeNotYetSaved =
+              !literatureItem["themes"].includes(highlevelTheme);
+            if (themeNotYetSaved) {
+              literatureItem["themes"].push(highlevelTheme);
+            }
+          }
         }
       }
+    },
+    getHighlevelThemeId(rawThemeId) {
+      for (const [themeId, theme] of Object.entries(this.THEMES)) {
+        if (theme.themes.includes(rawThemeId)) {
+          return themeId;
+        }
+      }
+
+      return rawThemeId;
     },
   },
   mounted() {
