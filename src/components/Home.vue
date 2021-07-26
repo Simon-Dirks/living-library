@@ -39,7 +39,8 @@ export default {
     ThemeSelect,
     LiteratureViewer,
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     selectTheme(themeId) {
       const themeIdIdx = this.selectedThemeIds.indexOf(themeId);
