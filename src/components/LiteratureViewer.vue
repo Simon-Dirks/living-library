@@ -15,8 +15,10 @@ import LiteratureItem from "./LiteratureItem.vue";
 import rawLiteratureData from "@/assets/data/coded-articles-v2.csv";
 import Papa from "papaparse";
 import { IonContent } from "@ionic/vue";
+import { dateMixin } from "../mixins/dateMixin";
 
 export default {
+  mixins: [dateMixin],
   inject: [
     "selectedThemeIds",
     "themeIsSelected",
@@ -42,9 +44,9 @@ export default {
 
       shownLiteratureData = this.literatureData.filter(
         (item) =>
-          !item.year ||
-          (item.year <= new Date(this.getTimeFilter().max).getFullYear() &&
-            item.year >= new Date(this.getTimeFilter().min).getFullYear())
+          !item.date ||
+          (item.date <= new Date(this.getTimeFilter().max) &&
+            item.date >= new Date(this.getTimeFilter().min))
       );
 
       const noThemesSelected = this.selectedThemeIds.length === 0;
@@ -102,8 +104,17 @@ export default {
         literatureItem["themes"] = [];
         literatureItem["year"] = null;
         if (literatureItem.Date) {
-          const itemYear = "20" + literatureItem.Date.replace(/\D/g, "");
-          literatureItem["year"] = parseInt(itemYear);
+          let itemYear = literatureItem.Date.replace(/\D/g, "");
+          let itemMonth = literatureItem.Date.replace("date.", "").replace(
+            itemYear,
+            ""
+          );
+          const itemMonthStartsWithR = itemMonth[0].toLowerCase() === "r";
+          if (itemMonthStartsWithR) {
+            itemMonth = itemMonth.substring(1);
+          }
+          itemYear = "20" + itemYear;
+          literatureItem["date"] = new Date(itemMonth + " " + itemYear);
         }
 
         for (const themeKey of themeKeys) {

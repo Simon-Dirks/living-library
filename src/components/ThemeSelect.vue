@@ -83,9 +83,12 @@
 import $ from "jquery";
 import "imagemapster";
 import "ion-rangeslider";
+import { dateMixin } from "../mixins/dateMixin";
+import { utilsMixin } from "../mixins/utilsMixin";
 
 export default {
   name: "ThemeSelect",
+  mixins: [dateMixin, utilsMixin],
   computed: {
     numSelectedThemes() {
       return this.selectedThemeIds.length;
@@ -115,22 +118,6 @@ export default {
     "updateTimeFilter",
   ],
   methods: {
-    // https://stackoverflow.com/questions/60304208/javascript-algorithm-to-generate-all-possible-unique-combinations-of-any-length
-    getAllCombinations(array) {
-      function iter(temp, index) {
-        if (index >= array.length) {
-          result.push(temp);
-          return;
-        }
-
-        iter([...temp, array[index]], index + 1);
-        iter(temp, index + 1);
-      }
-
-      var result = [];
-      iter([], 0);
-      return result;
-    },
     getAllPossibleThemeIds() {
       let themeIdCombinations = this.getAllCombinations(
         Object.keys(this.THEMES)
@@ -145,20 +132,8 @@ export default {
         );
       return themeIdCombinations;
     },
-    dateToTimestamp(date) {
-      return date.valueOf();
-    },
-    timestampToDate(timestamp) {
-      var d = new Date(timestamp);
-
-      return d.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-    },
     initializeTimeslider() {
-      const startDate = this.dateToTimestamp(new Date(2020, 10, 1));
+      const startDate = this.dateToTimestamp(new Date(2020, 1, 1));
       const endDate = this.dateToTimestamp(new Date());
       $("#timeslider").ionRangeSlider({
         skin: "round",

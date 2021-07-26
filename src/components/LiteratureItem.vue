@@ -36,7 +36,7 @@
 
       <p>
         <ion-icon class="ion-margin-end" name="calendar" />{{
-          literatureItem["year"]
+          timestampToDate(literatureItem["date"])
         }}
       </p>
     </ion-card-content>
@@ -54,8 +54,10 @@ import {
   IonChip,
   IonLabel,
 } from "@ionic/vue";
+import { dateMixin } from "../mixins/dateMixin";
 
 export default {
+  mixins: [dateMixin],
   components: {
     IonIcon,
     IonCard,
