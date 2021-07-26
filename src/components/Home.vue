@@ -44,6 +44,7 @@ export default {
     selectTheme(themeId) {
       const themeIdIdx = this.selectedThemeIds.indexOf(themeId);
       var themeIsAlreadySelected = themeIdIdx !== -1;
+
       if (themeIsAlreadySelected) {
         this.selectedThemeIds.splice(themeIdIdx, 1);
       } else {
@@ -51,7 +52,20 @@ export default {
       }
     },
     themeIsSelected(themeId) {
-      return this.selectedThemeIds.indexOf(themeId) !== -1;
+      for (const selectedThemeId of this.selectedThemeIds) {
+        const intersectionThemeIds =
+          this.getIntersectionThemes(selectedThemeId);
+        if (intersectionThemeIds) {
+          for (const intersectionThemeId of intersectionThemeIds) {
+            if (themeId === intersectionThemeId) {
+              return true;
+            }
+          }
+        } else if (selectedThemeId === themeId) {
+          return true;
+        }
+      }
+      return false;
     },
     getThemeData(themeId) {
       if (Object.keys(this.THEMES).includes(themeId)) {
@@ -59,7 +73,23 @@ export default {
       }
       return null;
     },
+    getIntersectionThemes(themeId) {
+      if (themeId.includes("intersect")) {
+        let intersectionThemeIds = themeId.split("_");
+        intersectionThemeIds.shift();
+        return intersectionThemeIds;
+      }
+      return null;
+    },
     getThemeTitle(themeId) {
+      let intersectionThemes = this.getIntersectionThemes(themeId);
+      if (intersectionThemes) {
+        intersectionThemes = intersectionThemes.map(
+          (themeId) => this.getThemeData(themeId)?.title ?? themeId
+        );
+        return "Intersection of " + intersectionThemes.join(" & ");
+      }
+
       return this.getThemeData(themeId)?.title ?? themeId;
     },
     getThemeColor(themeId, opacity = 1) {
@@ -76,6 +106,7 @@ export default {
       getThemeData: this.getThemeData,
       getThemeTitle: this.getThemeTitle,
       getThemeColor: this.getThemeColor,
+      getIntersectionThemes: this.getIntersectionThemes,
       selectTheme: this.selectTheme,
       THEMES: this.THEMES,
     };
@@ -87,7 +118,7 @@ export default {
 .split {
   margin-top: 50px;
   height: 100%; /* TODO: Subtract 50px */
-  width: 50%;
+  width: 45%;
   position: fixed;
   z-index: 1;
   top: 0;

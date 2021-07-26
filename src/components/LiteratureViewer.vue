@@ -1,6 +1,6 @@
 <template>
   <ion-content>
-    <h2>Literature</h2>
+    <h2>Literature ({{ shownLiteratureData.length }})</h2>
 
     <template
       v-for="literatureItem in shownLiteratureData"
@@ -18,7 +18,12 @@ import Papa from "papaparse";
 import { IonContent } from "@ionic/vue";
 
 export default {
-  inject: ["selectedThemeIds", "themeIsSelected", "getThemeTitle"],
+  inject: [
+    "selectedThemeIds",
+    "themeIsSelected",
+    "getThemeTitle",
+    "getIntersectionThemes",
+  ],
   name: "LiteratureViewer",
   components: {
     IonContent,
@@ -50,9 +55,29 @@ export default {
   },
   methods: {
     getNumSelectedThemesForLiteratureItem(literatureItem) {
-      return literatureItem["Theme.FINDINGS"].filter((theme) =>
-        this.selectedThemeIds.includes(theme)
-      ).length;
+      let numSelectedThemesForLiteratureItem = 0;
+      const literatureItemThemes = literatureItem["Theme.FINDINGS"];
+      for (const selectedThemeId of this.selectedThemeIds) {
+        const selectedIntersectionThemes =
+          this.getIntersectionThemes(selectedThemeId);
+        if (selectedIntersectionThemes) {
+          const literatureItemMatchesIntersectionThemes =
+            selectedIntersectionThemes.every((themeId) =>
+              literatureItemThemes.includes(themeId)
+            );
+          if (literatureItemMatchesIntersectionThemes) {
+            numSelectedThemesForLiteratureItem++;
+          }
+        } else {
+          const literatureItemMatchesSelectedTheme =
+            literatureItemThemes.includes(selectedThemeId);
+          if (literatureItemMatchesSelectedTheme) {
+            numSelectedThemesForLiteratureItem++;
+          }
+        }
+      }
+
+      return numSelectedThemesForLiteratureItem;
     },
     loadLiteratureFromFile() {
       this.literatureData = Papa.parse(rawLiteratureData, {
