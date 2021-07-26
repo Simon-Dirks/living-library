@@ -6,9 +6,9 @@ import { addIcons } from 'ionicons';
 import { linkOutline, bulbOutline, bookOutline } from 'ionicons/icons';
 
 import '@ionic/core/css/padding.css'
+import 'ion-rangeslider/css/ion.rangeSlider.css'
 
 document.title = "Living Library [PROTOTYPE]";
-
 const app = createApp(App)
     .use(IonicVue)
     .use(router);

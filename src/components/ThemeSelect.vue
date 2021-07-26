@@ -5,24 +5,20 @@
       <strong>
         Selected theme<span v-if="numSelectedThemes > 1">s</span> </strong
       >:
-      <span
-      >
+      <span>
         {{ selectedThemeIds.map((t) => getThemeTitle(t)).join(", ") }}
       </span>
     </p>
-    <p v-else><em>No themes selected. Select a theme by clicking on an area in the image below.</em></p>
+    <p v-else>
+      <em
+        >No themes selected. Select a theme by clicking on an area in the image
+        below.</em
+      >
+    </p>
 
-    <!-- <ion-range
-      ref="timeslider"
-      dual-knobs="true"
-      min="1"
-      max="10"
-      step="1"
-      snaps="true"
-      pin="true"
-    ></ion-range> -->
+    <input type="text" id="timeslider" name="timeslider" value="" />
 
-    <div class="theme-select-blobs-container">
+    <div class="theme-select-blobs-container ion-margin-top">
       <img src="@/assets/img/blobs.png" usemap="#image-map" id="blobs-img" />
 
       <map name="image-map">
@@ -86,6 +82,7 @@
 <script>
 import $ from "jquery";
 import "imagemapster";
+import "ion-rangeslider";
 
 export default {
   name: "ThemeSelect",
@@ -142,11 +139,37 @@ export default {
         );
       return themeIdCombinations;
     },
+    dateToTimestamp(date) {
+      return date.valueOf();
+    },
+    timestampToDate(timestamp) {
+      var d = new Date(timestamp);
+
+      return d.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    },
   },
   mounted() {
-    // this.$refs.timeslider.value = { lower: 1, upper: 3 };
-
     $(document).ready(() => {
+      $("#timeslider").ionRangeSlider({
+        skin: "round",
+        type: "double",
+        grid: true,
+        min: this.dateToTimestamp(new Date(2020, 10, 1)),
+        max: this.dateToTimestamp(new Date()),
+        from: this.dateToTimestamp(new Date(2020, 10, 8)),
+        to: this.dateToTimestamp(new Date()),
+        prettify: this.timestampToDate,
+        onStart: function (data) {},
+        onChange: function (data) {
+        },
+        onFinish: function (data) {},
+        onUpdate: function (data) {},
+      });
+
       $("area").each((index, area) => {
         const themeId = $(area).attr("title");
         const themeTitle = this.getThemeTitle(themeId);
