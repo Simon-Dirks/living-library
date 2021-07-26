@@ -1,4 +1,8 @@
 <template>
+  <teleport to="head"
+    ><meta name="robots" content="noindex,nofollow" />
+  </teleport>
+
   <ion-app>
     <ion-router-outlet />
   </ion-app>
