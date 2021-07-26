@@ -55,6 +55,16 @@
       </map>
     </div>
 
+    <ion-range
+      ref="timeslider"
+      dual-knobs="true"
+      min="1"
+      max="10"
+      step="1"
+      snaps="true"
+      pin="true"
+    ></ion-range>
+
     <div class="theme-select-buttons-container ion-margin-top">
       <div
         class="theme-select-button-container"
@@ -130,6 +140,8 @@ export default {
     },
   },
   mounted() {
+    this.$refs.timeslider.value = { lower: 1, upper: 3 };
+
     $(document).ready(() => {
       $("area").each((index, area) => {
         const themeId = $(area).attr("title");
