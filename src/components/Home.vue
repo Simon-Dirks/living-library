@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-title size="large">
-        Main themes in the academic educational literature on the pandemic
+        [WORK IN PROGRESS] Main themes in the academic educational literature on the pandemic
       </ion-title>
     </ion-toolbar>
   </ion-header>
