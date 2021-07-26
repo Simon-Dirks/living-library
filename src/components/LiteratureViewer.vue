@@ -94,6 +94,9 @@ export default {
       this.literatureData = Papa.parse(rawLiteratureData, {
         header: true,
       }).data;
+      this.literatureData = this.literatureData.filter(
+        (item) => item["Article name"] && item["Article name"] !== ""
+      );
       const themeKeys = ["Theme.FINDINGS", "Theme.IMPLICATIONS"];
       for (const literatureItem of this.literatureData) {
         literatureItem["themes"] = [];
