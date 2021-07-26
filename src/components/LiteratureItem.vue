@@ -8,11 +8,11 @@
         :style="{
           '--background': getThemeChipColor(themeId),
         }"
-        v-for="themeId in literatureItem['Theme.FINDINGS']"
+        v-for="themeId in literatureItem['themes']"
         :key="themeId"
       >
         <ion-label color="secondary"
-          ><strong v-if="themeIsSelected(themeId)" style="color: white;">
+          ><strong v-if="themeIsSelected(themeId)" style="color: white">
             {{ getThemeTitle(themeId) }}</strong
           ><template v-else>{{ getThemeTitle(themeId) }}</template></ion-label
         >
@@ -33,6 +33,12 @@
           literatureItem["Journal"]
         }}
       </p>
+
+      <p>
+        <ion-icon class="ion-margin-end" name="calendar" />{{
+          timestampToDate(literatureItem["date"])
+        }}
+      </p>
     </ion-card-content>
   </ion-card>
 </template>
@@ -48,8 +54,10 @@ import {
   IonChip,
   IonLabel,
 } from "@ionic/vue";
+import { dateMixin } from "../mixins/dateMixin";
 
 export default {
+  mixins: [dateMixin],
   components: {
     IonIcon,
     IonCard,

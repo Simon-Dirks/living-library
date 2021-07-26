@@ -5,100 +5,195 @@
       <strong>
         Selected theme<span v-if="numSelectedThemes > 1">s</span> </strong
       >:
-      <span
-        class="ion-margin-end"
-        v-for="selectedThemeId in selectedThemeIds"
-        :key="selectedThemeId"
-      >
-        {{ getThemeTitle(selectedThemeId) }}
+      <span>
+        {{ selectedThemeIds.map((t) => getThemeTitle(t)).join(", ") }}
       </span>
     </p>
-    <p v-else><em>No themes selected.</em></p>
-    <svg width="100%" height="400px"></svg>
+    <p v-else>
+      <em
+        >No themes selected. Select a theme by clicking on an area in the image
+        below.</em
+      >
+    </p>
+
+    <input type="text" id="timeslider" name="timeslider" value="" />
+
+    <div class="theme-select-blobs-container ion-margin-top">
+      <img src="@/assets/img/blobs.png" usemap="#image-map" id="blobs-img" />
+
+      <map name="image-map">
+        <area
+          target=""
+          alt="equity"
+          title="equity"
+          href=""
+          coords="996,512,870,575,734,763,573,903,326,912,157,1131,263,1320,588,1396,814,1381,1004,1158,1026,874,1066,633"
+          shape="poly"
+        />
+        <area
+          target=""
+          alt="contextTeaching"
+          title="contextTeaching"
+          href=""
+          coords="1800,524,1715,503,1722,402,1548,420,1343,521,1192,633,1089,799,1116,892,1034,969,879,955,697,892,665,1125,736,1271,923,1387,1142,1408,1487,1397,1693,1215,1816,865"
+          shape="poly"
+        />
+        <area
+          target=""
+          alt="affect"
+          title="affect"
+          href=""
+          coords="177,1032,133,861,231,577,434,492,594,505,1038,889,967,1226,570,1249,263,1146"
+          shape="poly"
+        />
+        <area
+          target=""
+          alt="academicAchievementAssessment"
+          title="academicAchievementAssessment"
+          href=""
+          coords="1288,335,717,1,170,76,12,346,67,611,581,810,1053,897,1196,767,1294,513"
+          shape="poly"
+        />
+        <area
+          target=""
+          alt="teachingPractice"
+          title="teachingPractice"
+          href=""
+          coords="1718,190,1198,66,904,56,583,243,477,461,546,731,678,861,1036,916,1174,860,1248,701,1429,689,1675,595,1725,376"
+          shape="poly"
+        />
+      </map>
+    </div>
+
+    <div class="theme-select-buttons-container ion-margin-top" v-if="false">
+      <div
+        class="theme-select-button-container"
+        v-for="themeId in getAllPossibleThemeIds()"
+        :key="themeId"
+      >
+        <button @click="selectTheme(themeId)">
+          {{ getThemeTitle(themeId) }}
+        </button>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
-import * as d3 from "d3";
+import $ from "jquery";
+import "imagemapster";
+import "ion-rangeslider";
+import { dateMixin } from "../mixins/dateMixin";
+import { utilsMixin } from "../mixins/utilsMixin";
 
 export default {
   name: "ThemeSelect",
+  mixins: [dateMixin, utilsMixin],
   computed: {
     numSelectedThemes() {
       return this.selectedThemeIds.length;
     },
   },
   data() {
-    return {
-      themeCircles: [],
-    };
+    return {};
   },
   watch: {
     selectedThemeIds: {
-      handler: function (new_themes, prev_themes) {
-        console.log("Selected themes updated: ", new_themes);
-        this.updateThemeCircleColors();
+      handler: function (newThemes, prevThemes) {
+        console.log("Selected themes updated: ", newThemes);
+        $("area").each((index, area) => {
+          const themeId = $(area).attr("name");
+          const isSelected = newThemes.includes(themeId);
+          $(area).mapster("set", isSelected);
+        });
       },
       deep: true,
     },
   },
-  inject: ["selectedThemeIds", "selectTheme", "getThemeTitle", "THEMES"],
+  inject: [
+    "selectedThemeIds",
+    "selectTheme",
+    "getThemeTitle",
+    "THEMES",
+    "updateTimeFilter",
+  ],
   methods: {
-    updateThemeCircleColors() {
-      const circles = d3.selectAll(".theme-circle");
-      for (const circleNode of circles) {
-        const circleData = this.themeCircles.find(
-          (c) => c[0].themeId === circleNode.id
-        )[0];
-        let circleOpacity = circleData.opacity;
+    getAllPossibleThemeIds() {
+      let themeIdCombinations = this.getAllCombinations(
+        Object.keys(this.THEMES)
+      );
 
-        const circleIsSelected = this.selectedThemeIds.includes(circleNode.id);
-        if (circleIsSelected) {
-          circleOpacity += 0.5;
-        }
-
-        d3.select(circleNode).style(
-          "fill",
-          `rgba(${circleData.color}, ${circleOpacity})`
+      themeIdCombinations = themeIdCombinations
+        .filter((themeIds) => themeIds.length !== 0)
+        .map((themeIds) =>
+          themeIds.length === 1
+            ? themeIds[0]
+            : "intersect_" + themeIds.join("_")
         );
-      }
+      return themeIdCombinations;
     },
-    onThemeCircleClicked(data) {
-      const themeId = data.themeId;
-      this.selectTheme(themeId);
+    initializeTimeslider() {
+      const startDate = this.dateToTimestamp(new Date(2020, 1, 1));
+      const endDate = this.dateToTimestamp(new Date());
+      $("#timeslider").ionRangeSlider({
+        skin: "round",
+        type: "double",
+        grid: true,
+        min: this.dateToTimestamp(startDate),
+        max: this.dateToTimestamp(endDate),
+        from: this.dateToTimestamp(startDate),
+        to: this.dateToTimestamp(endDate),
+        prettify: this.timestampToDate,
+        onStart: (data) => {
+          this.updateTimeFilter(startDate, endDate);
+        },
+        onChange: (data) => {
+          this.updateTimeFilter(data.from, data.to);
+        },
+        onFinish: function (data) {},
+        onUpdate: function (data) {},
+      });
     },
-    addThemeCircle(themeId, x, y, radius, col, opacity) {
-      const svg = d3.select("svg");
-      const circle = svg
-        .append("circle")
-        .attr("id", themeId)
-        .attr("class", "theme-circle")
-        .attr("cx", x)
-        .attr("cy", y)
-        .attr("r", radius)
-        .data([{ themeId: themeId, color: col, opacity: opacity }])
-        .style("fill", `rgba(${col}, ${opacity})`)
-        .on("click", (d, data) => {
-          this.onThemeCircleClicked(data);
+    initializeImageMap() {
+      $("area").each((index, area) => {
+        const themeId = $(area).attr("title");
+        const themeTitle = this.getThemeTitle(themeId);
+        $(area)
+          .attr("title", themeTitle)
+          .attr("alt", themeTitle)
+          .attr("name", themeId);
+      });
+
+      setTimeout(() => {
+        $("img[usemap]").mapster({
+          stroke: true,
+          strokeWidth: 2.5,
+          strokeColor: "000000",
+          strokeOpacity: 0.3,
+          fill: true,
+          fillColor: "000000",
+          fillOpacity: 0.2,
+          onClick: (e) => {
+            const themeId = e.key;
+            this.selectTheme(themeId);
+            return false;
+          },
+          mapKey: "name",
+          listKey: "name",
         });
-
-      /* TODO: Add theme titles as texts */
-
-      this.themeCircles.push(circle.data());
-    },
-    initThemeCircles() {
-      const circleRadius = 50;
-      for (let i = 0; i < 5; i++) {
-        const themeId = Object.keys(this.THEMES)[i];
-
-        const x = i * 75 + circleRadius;
-        const color = this.THEMES[themeId].color;
-        this.addThemeCircle(themeId, x, circleRadius, circleRadius, color, 0.4);
-      }
+      }, 250);
     },
   },
   mounted() {
-    this.initThemeCircles();
+    this.initializeTimeslider();
+    this.initializeImageMap();
   },
 };
 </script>
+
+<style scoped>
+#blobs-img {
+  width: 100%;
+  max-width: 500px;
+}
+</style>
