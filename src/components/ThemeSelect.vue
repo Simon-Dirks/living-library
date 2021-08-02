@@ -29,11 +29,21 @@
             tooltip-placement="right"
             tooltip="always"
             v-on:change="onUpdateTimeFilter"
-          ></vue-slider>
+            v-on:drag-start="draggingTimeFilter = true"
+            v-on:drag-end="draggingTimeFilter = false"
+          >
+            <!-- <template v-slot:tooltip="{ value }">
+              <div class="custom-tooltip">{{ timestampToDate(value) }}</div>
+            </template> -->
+          </vue-slider>
         </div>
       </ion-col>
       <ion-col size="4">
-        <img src="@/assets/img/time-funnel.png" alt="" id="time-funnel-img" />
+        <img
+          src="@/assets/img/time-funnel.png"
+          alt="Time funnel"
+          id="time-funnel-img"
+        />
       </ion-col>
       <ion-col size="7">
         <div class="theme-select-blobs-container ion-margin-top">
@@ -109,7 +119,6 @@ import "imagemapster";
 import { dateMixin } from "../mixins/dateMixin";
 import { utilsMixin } from "../mixins/utilsMixin";
 import { IonGrid, IonRow, IonCol } from "@ionic/vue";
-import FUNNEL_SEGMENTS from "@/assets/data/funnelSegments.json";
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
 
@@ -131,9 +140,8 @@ export default {
         this.dateToTimestamp(new Date()),
       ],
       sliderFormatter: this.timestampToDate,
-      linePos: { fromX: null, fromY: null, toX: null, toY: null },
-      timeFilterForLine: { min: null, max: null },
-      funnelSegments: FUNNEL_SEGMENTS,
+      draggingTimeFilter: false,
+      linesState: "",
     };
   },
   watch: {
@@ -172,19 +180,8 @@ export default {
         );
       return themeIdCombinations;
     },
-    drawLine(x1, y1, x2, y2) {
+    async drawLine(x1, y1, x2, y2) {
       // https://newbedev.com/html-line-drawing-without-canvas-just-js
-
-      const newLinePos = { fromX: x1, fromY: y1, toX: x2, toY: y2 };
-      const lineIsUnchanged =
-        JSON.stringify(newLinePos) === JSON.stringify(this.linePos);
-      if (lineIsUnchanged) {
-        return;
-      }
-
-      $(".line").remove();
-      this.linePos = newLinePos;
-      this.timeFilterForLine = this.getTimeFilter();
 
       if (x2 < x1) {
         var tmp;
@@ -206,7 +203,7 @@ export default {
         degree +
         "deg); width: " +
         lineLength +
-        "px; height: 1px; background: black; position: absolute; top: " +
+        "px; height: 1px; background: rgba(0,0,0,0.3); position: absolute; top: " +
         y1 +
         "px; left: " +
         x1 +
@@ -214,44 +211,68 @@ export default {
       $("body").append(lineHtml);
       $(".line")
         .hide()
-        .fadeIn("slow", function () {});
+        .fadeIn(400, function () {});
     },
-    getLineTimeFunnelPos() {
-      const timeFunnelElem = document.querySelector("#time-funnel-img");
-      const timeFunnelBounds = timeFunnelElem.getBoundingClientRect();
+    getLineTimeFunnelPositions() {
+      const timesliderHandleElems = $(".vue-slider-dot");
+      const timesliderHandlePositions = [
+        timesliderHandleElems[0].getBoundingClientRect(),
+        timesliderHandleElems[1].getBoundingClientRect(),
+      ];
 
-      for (const funnelSegment of this.funnelSegments) {
-        const timeFilter = this.getTimeFilter();
-        if (timeFilter.max < funnelSegment.maxDate) {
-          return {
-            x:
-              timeFunnelBounds.left +
-              timeFunnelElem.clientWidth * funnelSegment.relativeOffsetX,
-            y:
-              timeFunnelBounds.top +
-              timeFunnelElem.clientHeight * funnelSegment.relativeOffsetY,
-          };
-        }
+      const timeFunnelBounds = document
+        .querySelector("#time-funnel-img")
+        .getBoundingClientRect();
+
+      const timeFunnelLinePositions = [];
+
+      for (const timesliderHandlePos of timesliderHandlePositions) {
+        const yValue = timesliderHandlePos.top;
+        const xOffset = (timeFunnelBounds.bottom - yValue) / 1.6;
+        const timeFunnelLinePos = {
+          x: timeFunnelBounds.right + 30 - xOffset,
+          y: yValue,
+        };
+        timeFunnelLinePositions.push(timeFunnelLinePos);
       }
 
-      return { x: timeFunnelBounds.left, y: timeFunnelBounds.top };
+      return timeFunnelLinePositions;
     },
     drawLineBetweenThemeSelectAndTimeFunnel() {
+      if (this.draggingTimeFilter) {
+        $(".line").remove();
+        return;
+      }
+
       const themeSelectElem = document.querySelector("#blobs-img");
       const themeSelectBounds = themeSelectElem.getBoundingClientRect();
 
-      const timeFunnelPos = this.getLineTimeFunnelPos();
+      const timeFunnelPositions = this.getLineTimeFunnelPositions();
 
-      this.drawLine(
-        themeSelectBounds.left,
-        themeSelectBounds.top + themeSelectElem.clientHeight / 2,
-        timeFunnelPos.x,
-        timeFunnelPos.y
-      );
+      const linesState =
+        JSON.stringify(timeFunnelPositions) + JSON.stringify(themeSelectBounds);
+      const linesAreUnchanged = linesState === this.linesState;
+      if (linesAreUnchanged) {
+        return;
+      }
+
+      this.linesState = linesState;
+
+      $(".line").remove();
+
+      for (const timeFunnelPos of timeFunnelPositions) {
+        this.drawLine(
+          themeSelectBounds.left,
+          themeSelectBounds.top + themeSelectElem.clientHeight / 2,
+          timeFunnelPos.x,
+          timeFunnelPos.y
+        );
+      }
     },
     onUpdateTimeFilter(data, handleIdx) {
       this.updateTimeFilter(data[0], data[1]);
     },
+    onEndDraggingTimeFilter(handleIdx) {},
     initializeImageMap() {
       $("area").each((index, area) => {
         const themeId = $(area).attr("title");
@@ -285,23 +306,26 @@ export default {
     initializeLineDrawing() {
       setInterval(() => {
         this.drawLineBetweenThemeSelectAndTimeFunnel();
-      }, 100);
+      }, 250);
     },
   },
   mounted() {
     this.updateTimeFilter(this.minDateTimeSlider, this.maxDateTimeSlider);
-
     this.initializeImageMap();
     this.initializeLineDrawing();
   },
 };
 </script>
 
-<style scoped>
+<style>
 #blobs-img {
   width: 100%;
 }
 #time-funnel-img {
   height: 300px;
+}
+.vue-slider-dot-tooltip-inner {
+  background-color: rgba(52, 152, 219, 0.75) !important;
+  border-color: rgb(52, 152, 219, 0.75) !important;
 }
 </style>
