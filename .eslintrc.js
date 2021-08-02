@@ -12,7 +12,7 @@ module.exports = {
         "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
         "no-unused-vars": "off",
         'prettier/prettier': [
-            'warning',
+            'warn',
             {
                 'endOfLine': 'auto',
             }
