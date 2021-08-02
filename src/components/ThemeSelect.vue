@@ -16,54 +16,69 @@
       >
     </p>
 
-    <input type="text" id="timeslider" name="timeslider" value="" />
-
-    <div class="theme-select-blobs-container ion-margin-top">
-      <img src="@/assets/img/blobs.png" usemap="#image-map" id="blobs-img" />
-
-      <map name="image-map">
-        <area
-          target=""
-          alt="equity"
-          title="equity"
-          href=""
-          coords="996,512,870,575,734,763,573,903,326,912,157,1131,263,1320,588,1396,814,1381,1004,1158,1026,874,1066,633"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt="contextTeaching"
-          title="contextTeaching"
-          href=""
-          coords="1800,524,1715,503,1722,402,1548,420,1343,521,1192,633,1089,799,1116,892,1034,969,879,955,697,892,665,1125,736,1271,923,1387,1142,1408,1487,1397,1693,1215,1816,865"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt="affect"
-          title="affect"
-          href=""
-          coords="177,1032,133,861,231,577,434,492,594,505,1038,889,967,1226,570,1249,263,1146"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt="academicAchievementAssessment"
-          title="academicAchievementAssessment"
-          href=""
-          coords="1288,335,717,1,170,76,12,346,67,611,581,810,1053,897,1196,767,1294,513"
-          shape="poly"
-        />
-        <area
-          target=""
-          alt="teachingPractice"
-          title="teachingPractice"
-          href=""
-          coords="1718,190,1198,66,904,56,583,243,477,461,546,731,678,861,1036,916,1174,860,1248,701,1429,689,1675,595,1725,376"
-          shape="poly"
-        />
-      </map>
+    <div class="timeslider-container">
+      <input type="text" id="timeslider" name="timeslider" value="" />
     </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="9">
+          <div class="theme-select-blobs-container ion-margin-top">
+            <img
+              src="@/assets/img/blobs.png"
+              usemap="#image-map"
+              id="blobs-img"
+            />
+
+            <map name="image-map">
+              <area
+                target=""
+                alt="equity"
+                title="equity"
+                href=""
+                coords="996,512,870,575,734,763,573,903,326,912,157,1131,263,1320,588,1396,814,1381,1004,1158,1026,874,1066,633"
+                shape="poly"
+              />
+              <area
+                target=""
+                alt="contextTeaching"
+                title="contextTeaching"
+                href=""
+                coords="1800,524,1715,503,1722,402,1548,420,1343,521,1192,633,1089,799,1116,892,1034,969,879,955,697,892,665,1125,736,1271,923,1387,1142,1408,1487,1397,1693,1215,1816,865"
+                shape="poly"
+              />
+              <area
+                target=""
+                alt="affect"
+                title="affect"
+                href=""
+                coords="177,1032,133,861,231,577,434,492,594,505,1038,889,967,1226,570,1249,263,1146"
+                shape="poly"
+              />
+              <area
+                target=""
+                alt="academicAchievementAssessment"
+                title="academicAchievementAssessment"
+                href=""
+                coords="1288,335,717,1,170,76,12,346,67,611,581,810,1053,897,1196,767,1294,513"
+                shape="poly"
+              />
+              <area
+                target=""
+                alt="teachingPractice"
+                title="teachingPractice"
+                href=""
+                coords="1718,190,1198,66,904,56,583,243,477,461,546,731,678,861,1036,916,1174,860,1248,701,1429,689,1675,595,1725,376"
+                shape="poly"
+              />
+            </map>
+          </div>
+        </ion-col>
+        <ion-col size="3">
+          <img src="@/assets/img/time-funnel.png" alt="" id="time-funnel-img" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
     <div class="theme-select-buttons-container ion-margin-top" v-if="false">
       <div
@@ -85,17 +100,24 @@ import "imagemapster";
 import "ion-rangeslider";
 import { dateMixin } from "../mixins/dateMixin";
 import { utilsMixin } from "../mixins/utilsMixin";
+import { IonGrid, IonRow, IonCol } from "@ionic/vue";
+import FUNNEL_SEGMENTS from "@/assets/data/funnelSegments.json";
 
 export default {
   name: "ThemeSelect",
   mixins: [dateMixin, utilsMixin],
+  components: [IonGrid, IonRow, IonCol],
   computed: {
     numSelectedThemes() {
       return this.selectedThemeIds.length;
     },
   },
   data() {
-    return {};
+    return {
+      linePos: { fromX: null, fromY: null, toX: null, toY: null },
+      timeFilterForLine: { min: null, max: null },
+      funnelSegments: FUNNEL_SEGMENTS,
+    };
   },
   watch: {
     selectedThemeIds: {
@@ -116,6 +138,7 @@ export default {
     "getThemeTitle",
     "THEMES",
     "updateTimeFilter",
+    "getTimeFilter",
   ],
   methods: {
     getAllPossibleThemeIds() {
@@ -131,6 +154,83 @@ export default {
             : "intersect_" + themeIds.join("_")
         );
       return themeIdCombinations;
+    },
+    drawLine(x1, y1, x2, y2) {
+      // https://newbedev.com/html-line-drawing-without-canvas-just-js
+
+      const newLinePos = { fromX: x1, fromY: y1, toX: x2, toY: y2 };
+      const lineIsUnchanged =
+        JSON.stringify(newLinePos) === JSON.stringify(this.linePos);
+      if (lineIsUnchanged) {
+        return;
+      }
+
+      $(".line").remove();
+      this.linePos = newLinePos;
+      this.timeFilterForLine = this.getTimeFilter();
+
+      if (x2 < x1) {
+        var tmp;
+        tmp = x2;
+        x2 = x1;
+        x1 = tmp;
+        tmp = y2;
+        y2 = y1;
+        y1 = tmp;
+      }
+
+      var lineLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      var m = (y2 - y1) / (x2 - x1);
+
+      var degree = (Math.atan(m) * 180) / Math.PI;
+
+      const lineHtml =
+        "<div class='line' style='transform-origin: top left; transform: rotate(" +
+        degree +
+        "deg); width: " +
+        lineLength +
+        "px; height: 1px; background: black; position: absolute; top: " +
+        y1 +
+        "px; left: " +
+        x1 +
+        "px;'></div>";
+      $("body").append(lineHtml);
+      $(".line")
+        .hide()
+        .fadeIn("slow", function () {});
+    },
+    getLineTimeFunnelPos() {
+      const timeFunnelElem = document.querySelector("#time-funnel-img");
+      const timeFunnelBounds = timeFunnelElem.getBoundingClientRect();
+
+      for (const funnelSegment of this.funnelSegments) {
+        const timeFilter = this.getTimeFilter();
+        if (timeFilter.max < funnelSegment.maxDate) {
+          return {
+            x:
+              timeFunnelBounds.left +
+              timeFunnelElem.clientWidth * funnelSegment.relativeOffsetX,
+            y:
+              timeFunnelBounds.top +
+              timeFunnelElem.clientHeight * funnelSegment.relativeOffsetY,
+          };
+        }
+      }
+
+      return { x: timeFunnelBounds.left, y: timeFunnelBounds.top };
+    },
+    drawLineBetweenThemeSelectAndTimeFunnel() {
+      const themeSelectElem = document.querySelector("#blobs-img");
+      const themeSelectBounds = themeSelectElem.getBoundingClientRect();
+
+      const timeFunnelPos = this.getLineTimeFunnelPos();
+
+      this.drawLine(
+        themeSelectBounds.right,
+        themeSelectBounds.top + themeSelectElem.clientHeight / 2,
+        timeFunnelPos.x,
+        timeFunnelPos.y
+      );
     },
     initializeTimeslider() {
       const startDate = this.dateToTimestamp(new Date(2020, 1, 1));
@@ -164,6 +264,7 @@ export default {
           .attr("name", themeId);
       });
 
+      // TODO: Wait for image to be fully loaded
       setTimeout(() => {
         $("img[usemap]").mapster({
           stroke: true,
@@ -181,19 +282,30 @@ export default {
           mapKey: "name",
           listKey: "name",
         });
-      }, 250);
+      }, 2000);
+    },
+    initializeLineDrawing() {
+      setInterval(() => {
+        this.drawLineBetweenThemeSelectAndTimeFunnel();
+      }, 100);
     },
   },
   mounted() {
     this.initializeTimeslider();
     this.initializeImageMap();
+    this.initializeLineDrawing();
   },
 };
 </script>
 
 <style scoped>
-#blobs-img {
+#blobs-img,
+#time-funnel-img {
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
+}
+
+.timeslider-container {
+  padding: 0 40px;
 }
 </style>

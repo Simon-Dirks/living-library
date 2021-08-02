@@ -26,8 +26,7 @@ export default {
   data() {
     return {
       selectedThemeIds: [],
-      minTimeFilter: null,
-      maxTimeFilter: null,
+      timeFilter: { min: null, max: null },
       THEMES: THEMES,
     };
   },
@@ -101,12 +100,11 @@ export default {
         : `rgba(100, 100, 100, ${opacity})`;
     },
     updateTimeFilter(min, max) {
-      this.minTimeFilter = min;
-      this.maxTimeFilter = max;
+      this.timeFilter = { min: min, max: max };
       this.$forceUpdate();
     },
     getTimeFilter() {
-      return { min: this.minTimeFilter, max: this.maxTimeFilter };
+      return this.timeFilter;
     },
   },
   provide() {
