@@ -1,112 +1,122 @@
 <template>
-  <section>
-    <h2>Themes</h2>
-    <p v-if="numSelectedThemes > 0">
-      <strong>
-        Selected theme<span v-if="numSelectedThemes > 1">s</span> </strong
-      >:
-      <span>
-        {{ selectedThemeIds.map((t) => getThemeTitle(t)).join(", ") }}
-      </span>
-    </p>
-    <p v-else>
-      <em
-        >No themes selected. Select a theme by clicking on an area in the image
-        below.</em
-      >
-    </p>
+  <h2>Themes</h2>
+  <p v-if="numSelectedThemes > 0">
+    <strong> Selected theme<span v-if="numSelectedThemes > 1">s</span> </strong
+    >:
+    <span>
+      {{ selectedThemeIds.map((t) => getThemeTitle(t)).join(", ") }}
+    </span>
+  </p>
+  <p v-else>
+    <em
+      >No themes selected. Select a theme by clicking on an area in the image
+      below.</em
+    >
+  </p>
 
-    <div class="timeslider-container">
-      <input type="text" id="timeslider" name="timeslider" value="" />
-    </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="1">
+        <div class="timeslider-container">
+          <vue-slider
+            v-model="sliderValue"
+            direction="ttb"
+            height="300px"
+            :min="minDateTimeSlider"
+            :max="maxDateTimeSlider"
+            :enable-cross="false"
+            :tooltip-formatter="sliderFormatter"
+            tooltip-placement="right"
+            tooltip="always"
+            v-on:change="onUpdateTimeFilter"
+          ></vue-slider>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <img src="@/assets/img/time-funnel.png" alt="" id="time-funnel-img" />
+      </ion-col>
+      <ion-col size="7">
+        <div class="theme-select-blobs-container ion-margin-top">
+          <img
+            src="@/assets/img/blobs.png"
+            usemap="#image-map"
+            id="blobs-img"
+          />
 
-    <ion-grid>
-      <ion-row>
-        <ion-col size="9">
-          <div class="theme-select-blobs-container ion-margin-top">
-            <img
-              src="@/assets/img/blobs.png"
-              usemap="#image-map"
-              id="blobs-img"
+          <map name="image-map">
+            <area
+              target=""
+              alt="equity"
+              title="equity"
+              href=""
+              coords="996,512,870,575,734,763,573,903,326,912,157,1131,263,1320,588,1396,814,1381,1004,1158,1026,874,1066,633"
+              shape="poly"
             />
+            <area
+              target=""
+              alt="contextTeaching"
+              title="contextTeaching"
+              href=""
+              coords="1800,524,1715,503,1722,402,1548,420,1343,521,1192,633,1089,799,1116,892,1034,969,879,955,697,892,665,1125,736,1271,923,1387,1142,1408,1487,1397,1693,1215,1816,865"
+              shape="poly"
+            />
+            <area
+              target=""
+              alt="affect"
+              title="affect"
+              href=""
+              coords="177,1032,133,861,231,577,434,492,594,505,1038,889,967,1226,570,1249,263,1146"
+              shape="poly"
+            />
+            <area
+              target=""
+              alt="academicAchievementAssessment"
+              title="academicAchievementAssessment"
+              href=""
+              coords="1288,335,717,1,170,76,12,346,67,611,581,810,1053,897,1196,767,1294,513"
+              shape="poly"
+            />
+            <area
+              target=""
+              alt="teachingPractice"
+              title="teachingPractice"
+              href=""
+              coords="1718,190,1198,66,904,56,583,243,477,461,546,731,678,861,1036,916,1174,860,1248,701,1429,689,1675,595,1725,376"
+              shape="poly"
+            />
+          </map>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-            <map name="image-map">
-              <area
-                target=""
-                alt="equity"
-                title="equity"
-                href=""
-                coords="996,512,870,575,734,763,573,903,326,912,157,1131,263,1320,588,1396,814,1381,1004,1158,1026,874,1066,633"
-                shape="poly"
-              />
-              <area
-                target=""
-                alt="contextTeaching"
-                title="contextTeaching"
-                href=""
-                coords="1800,524,1715,503,1722,402,1548,420,1343,521,1192,633,1089,799,1116,892,1034,969,879,955,697,892,665,1125,736,1271,923,1387,1142,1408,1487,1397,1693,1215,1816,865"
-                shape="poly"
-              />
-              <area
-                target=""
-                alt="affect"
-                title="affect"
-                href=""
-                coords="177,1032,133,861,231,577,434,492,594,505,1038,889,967,1226,570,1249,263,1146"
-                shape="poly"
-              />
-              <area
-                target=""
-                alt="academicAchievementAssessment"
-                title="academicAchievementAssessment"
-                href=""
-                coords="1288,335,717,1,170,76,12,346,67,611,581,810,1053,897,1196,767,1294,513"
-                shape="poly"
-              />
-              <area
-                target=""
-                alt="teachingPractice"
-                title="teachingPractice"
-                href=""
-                coords="1718,190,1198,66,904,56,583,243,477,461,546,731,678,861,1036,916,1174,860,1248,701,1429,689,1675,595,1725,376"
-                shape="poly"
-              />
-            </map>
-          </div>
-        </ion-col>
-        <ion-col size="3">
-          <img src="@/assets/img/time-funnel.png" alt="" id="time-funnel-img" />
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <div class="theme-select-buttons-container ion-margin-top" v-if="false">
-      <div
-        class="theme-select-button-container"
-        v-for="themeId in getAllPossibleThemeIds()"
-        :key="themeId"
-      >
-        <button @click="selectTheme(themeId)">
-          {{ getThemeTitle(themeId) }}
-        </button>
-      </div>
+  <div class="theme-select-buttons-container ion-margin-top" v-if="false">
+    <div
+      class="theme-select-button-container"
+      v-for="themeId in getAllPossibleThemeIds()"
+      :key="themeId"
+    >
+      <button @click="selectTheme(themeId)">
+        {{ getThemeTitle(themeId) }}
+      </button>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import $ from "jquery";
 import "imagemapster";
-import "ion-rangeslider";
 import { dateMixin } from "../mixins/dateMixin";
 import { utilsMixin } from "../mixins/utilsMixin";
 import { IonGrid, IonRow, IonCol } from "@ionic/vue";
 import FUNNEL_SEGMENTS from "@/assets/data/funnelSegments.json";
+import VueSlider from "vue-slider-component";
+import "vue-slider-component/theme/default.css";
 
 export default {
   name: "ThemeSelect",
   mixins: [dateMixin, utilsMixin],
-  components: [IonGrid, IonRow, IonCol],
+  components: { IonGrid, IonRow, IonCol, VueSlider },
   computed: {
     numSelectedThemes() {
       return this.selectedThemeIds.length;
@@ -114,6 +124,13 @@ export default {
   },
   data() {
     return {
+      minDateTimeSlider: this.dateToTimestamp(new Date(2020, 1, 1)),
+      maxDateTimeSlider: this.dateToTimestamp(new Date()),
+      sliderValue: [
+        this.dateToTimestamp(new Date(2020, 1, 1)),
+        this.dateToTimestamp(new Date()),
+      ],
+      sliderFormatter: this.timestampToDate,
       linePos: { fromX: null, fromY: null, toX: null, toY: null },
       timeFilterForLine: { min: null, max: null },
       funnelSegments: FUNNEL_SEGMENTS,
@@ -226,33 +243,14 @@ export default {
       const timeFunnelPos = this.getLineTimeFunnelPos();
 
       this.drawLine(
-        themeSelectBounds.right,
+        themeSelectBounds.left,
         themeSelectBounds.top + themeSelectElem.clientHeight / 2,
         timeFunnelPos.x,
         timeFunnelPos.y
       );
     },
-    initializeTimeslider() {
-      const startDate = this.dateToTimestamp(new Date(2020, 1, 1));
-      const endDate = this.dateToTimestamp(new Date());
-      $("#timeslider").ionRangeSlider({
-        skin: "round",
-        type: "double",
-        grid: true,
-        min: this.dateToTimestamp(startDate),
-        max: this.dateToTimestamp(endDate),
-        from: this.dateToTimestamp(startDate),
-        to: this.dateToTimestamp(endDate),
-        prettify: this.timestampToDate,
-        onStart: (data) => {
-          this.updateTimeFilter(startDate, endDate);
-        },
-        onChange: (data) => {
-          this.updateTimeFilter(data.from, data.to);
-        },
-        onFinish: function (data) {},
-        onUpdate: function (data) {},
-      });
+    onUpdateTimeFilter(data, handleIdx) {
+      this.updateTimeFilter(data[0], data[1]);
     },
     initializeImageMap() {
       $("area").each((index, area) => {
@@ -291,7 +289,8 @@ export default {
     },
   },
   mounted() {
-    this.initializeTimeslider();
+    this.updateTimeFilter(this.minDateTimeSlider, this.maxDateTimeSlider);
+
     this.initializeImageMap();
     this.initializeLineDrawing();
   },
@@ -299,13 +298,10 @@ export default {
 </script>
 
 <style scoped>
-#blobs-img,
-#time-funnel-img {
+#blobs-img {
   width: 100%;
-  max-width: 400px;
 }
-
-.timeslider-container {
-  padding: 0 40px;
+#time-funnel-img {
+  height: 300px;
 }
 </style>
