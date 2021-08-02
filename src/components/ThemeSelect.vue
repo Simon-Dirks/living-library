@@ -1,26 +1,13 @@
 <template>
-  <h2>Themes</h2>
-  <p v-if="numSelectedThemes > 0">
-    <strong> Selected theme<span v-if="numSelectedThemes > 1">s</span> </strong
-    >:
-    <span>
-      {{ selectedThemeIds.map((t) => getThemeTitle(t)).join(", ") }}
-    </span>
-  </p>
-  <p v-else>
-    <em
-      >No themes selected. Select a theme by clicking on an area in the image
-      below.</em
-    >
-  </p>
-
-  <ion-grid>
+  <ion-grid class="ion-margin-top">
     <ion-row>
       <ion-col size="1">
         <div class="timeslider-container">
+          <h3 id="timeslider-caption">Flow of time &#8594;</h3>
+
           <vue-slider
             v-model="sliderValue"
-            direction="ttb"
+            direction="btt"
             height="300px"
             :min="minDateTimeSlider"
             :max="maxDateTimeSlider"
@@ -95,6 +82,10 @@
               shape="poly"
             />
           </map>
+
+          <p class="theme-select-annotation-text">
+            <em>THIS IS A CROSS-SECTION</em>
+          </p>
         </div>
       </ion-col>
     </ion-row>
@@ -126,11 +117,7 @@ export default {
   name: "ThemeSelect",
   mixins: [dateMixin, utilsMixin],
   components: { IonGrid, IonRow, IonCol, VueSlider },
-  computed: {
-    numSelectedThemes() {
-      return this.selectedThemeIds.length;
-    },
-  },
+  computed: {},
   data() {
     return {
       minDateTimeSlider: this.dateToTimestamp(new Date(2020, 1, 1)),
@@ -327,5 +314,21 @@ export default {
 .vue-slider-dot-tooltip-inner {
   background-color: rgba(52, 152, 219, 0.75) !important;
   border-color: rgb(52, 152, 219, 0.75) !important;
+}
+.timeslider-container {
+  padding-left: 10px;
+}
+#timeslider-caption {
+  position: absolute;
+  top: 175px;
+  left: 5px;
+  transform-origin: 0;
+  transform: rotate(-90deg);
+  width: 300px;
+  font-size: 1em;
+}
+.theme-select-annotation-text {
+  text-align: center;
+  font-size: 0.7em;
 }
 </style>

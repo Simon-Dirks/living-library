@@ -1,6 +1,21 @@
 <template>
   <ion-content>
     <h2>Literature ({{ shownLiteratureData.length }})</h2>
+    
+    <p v-if="numSelectedThemes > 0">
+      <strong>
+        Selected theme<span v-if="numSelectedThemes > 1">s</span> </strong
+      >:
+      <span>
+        {{ selectedThemeIds.map((t) => getThemeTitle(t)).join(", ") }}
+      </span>
+    </p>
+    <p v-else class="ion-padding-end">
+      <em
+        >No themes selected. Select a theme by clicking on an area in the image
+        on the left.</em
+      >
+    </p>
     <template
       v-for="literatureItem in shownLiteratureData"
       :key="literatureItem['Article name']"
@@ -39,6 +54,9 @@ export default {
     };
   },
   computed: {
+    numSelectedThemes() {
+      return this.selectedThemeIds.length;
+    },
     shownLiteratureData() {
       let shownLiteratureData = this.literatureData;
 
