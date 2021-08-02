@@ -2,8 +2,16 @@
   <ion-header>
     <ion-toolbar>
       <ion-title size="large">
-        [WORK IN PROGRESS] Main themes in the academic educational literature on the pandemic
+        [WORK IN PROGRESS] Main themes in the academic educational literature on
+        the pandemic
       </ion-title>
+
+      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
+      <ion-buttons slot="end">
+        <ion-button @click="openMoreInfoModal">
+          <ion-icon name="information-circle" />
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content>
@@ -20,7 +28,14 @@
 import THEMES from "@/assets/data/themes.json";
 import LiteratureViewer from "./LiteratureViewer.vue";
 import ThemeSelect from "./ThemeSelect.vue";
-import { IonToolbar, IonContent, IonTitle, IonHeader } from "@ionic/vue";
+import {
+  modalController,
+  IonToolbar,
+  IonContent,
+  IonTitle,
+  IonHeader,
+} from "@ionic/vue";
+import InformationPopup from "./InformationPopup.vue";
 
 export default {
   data() {
@@ -42,6 +57,15 @@ export default {
   },
   mounted() {},
   methods: {
+    async openMoreInfoModal() {
+      const modal = await modalController.create({
+        component: InformationPopup,
+        componentProps: {},
+      });
+
+      await modal.present();
+      const modalResponse = await modal.onDidDismiss();
+    },
     selectTheme(themeId) {
       const themeIdIdx = this.selectedThemeIds.indexOf(themeId);
       var themeIsAlreadySelected = themeIdIdx !== -1;

@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from './router';
 import { IonicVue } from '@ionic/vue';
 import { addIcons } from 'ionicons';
-import { linkOutline, bulbOutline, bookOutline, calendarOutline } from 'ionicons/icons';
+import { linkOutline, bulbOutline, bookOutline, calendarOutline, informationCircleOutline, arrowBackOutline } from 'ionicons/icons';
 
 import '@ionic/core/css/padding.css'
 
@@ -17,6 +17,8 @@ router.isReady().then(() => {
         'link': linkOutline,
         'book': bookOutline,
         'bulb': bulbOutline,
+        'information-circle': informationCircleOutline,
+        'arrow-back': arrowBackOutline,
         'calendar': calendarOutline
     });
 
