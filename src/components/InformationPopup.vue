@@ -31,7 +31,6 @@
       Molestiae, sapiente?
     </p>
   </div>
-  
 </template>
 
 <script>

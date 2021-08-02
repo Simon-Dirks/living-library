@@ -1,7 +1,7 @@
 <template>
   <ion-content>
     <h2>Literature ({{ shownLiteratureData.length }})</h2>
-    
+
     <p v-if="numSelectedThemes > 0">
       <strong>
         Selected theme<span v-if="numSelectedThemes > 1">s</span> </strong

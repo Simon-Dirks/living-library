@@ -72,7 +72,7 @@ export default {
     getThemeChipColor(themeId) {
       return this.themeIsSelected(themeId)
         ? this.getThemeColor(themeId)
-        : this.getThemeColor(themeId, 0.1);
+        : this.getThemeColor(themeId, 0.3);
     },
   },
   props: ["literatureItem"],

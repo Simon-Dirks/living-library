@@ -1,7 +1,7 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <ion-title size="large">
+      <ion-title>
         [WORK IN PROGRESS] Main themes in the academic educational literature on
         the pandemic
       </ion-title>
@@ -15,12 +15,16 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <div class="split themes-panel">
-      <theme-select></theme-select>
-    </div>
-    <div class="split literature-panel">
-      <literature-viewer></literature-viewer>
-    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <theme-select></theme-select>
+        </ion-col>
+        <ion-col>
+          <literature-viewer></literature-viewer>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-content>
 </template>
 
@@ -166,5 +170,9 @@ export default {
 
 .literature-panel {
   right: 0;
+}
+
+ion-grid, ion-row {
+  height: 100%;
 }
 </style>
