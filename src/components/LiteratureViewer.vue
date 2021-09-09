@@ -27,7 +27,7 @@
 
 <script>
 import LiteratureItem from "./LiteratureItem.vue";
-import rawLiteratureData from "@/assets/data/coded-articles-v2.csv";
+import rawLiteratureData from "@/assets/data/coded-articles.csv";
 import Papa from "papaparse";
 import { IonContent } from "@ionic/vue";
 import { dateMixin } from "../mixins/dateMixin";
@@ -143,6 +143,9 @@ export default {
           }
           itemYear = "20" + itemYear;
           literatureItem["date"] = new Date(itemMonth + " " + itemYear);
+          literatureItem["dateOfCoding"] = new Date(
+            literatureItem["dateOfCoding"]
+          );
         }
 
         for (const themeKey of themeKeys) {
