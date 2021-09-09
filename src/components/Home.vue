@@ -10,6 +10,7 @@
       <ion-buttons slot="end">
         <ion-button @click="openMoreInfoModal">
           <ion-icon name="information-circle" />
+          <span class="ion-margin-start">About this project</span>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -172,7 +173,8 @@ export default {
   right: 0;
 }
 
-ion-grid, ion-row {
+ion-grid,
+ion-row {
   height: 100%;
 }
 </style>
