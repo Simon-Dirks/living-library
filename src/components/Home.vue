@@ -8,9 +8,9 @@
 
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <ion-buttons slot="end">
-        <ion-button @click="openMoreInfoModal">
+        <ion-button @click="openMoreInfoModal" id="about-popup-btn">
           <ion-icon name="information-circle" />
-          <span class="ion-margin-start">About this project</span>
+          <span class="ion-margin-start">About the living library</span>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -176,5 +176,10 @@ export default {
 ion-grid,
 ion-row {
   height: 100%;
+}
+
+#about-popup-btn {
+  --background: #3498db;
+  --color: white;
 }
 </style>
