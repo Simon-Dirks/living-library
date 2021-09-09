@@ -287,30 +287,37 @@ export default {
             updatedCoords.push(coordInt + this.IMAGEAREAOFFSET.yOffset);
           }
         }
-        console.log("First:", $(area).attr("coords"));
         $(area).attr("coords", updatedCoords.join(","));
-        console.log("Then:", $(area).attr("coords"));
       });
 
-      // TODO: Wait for image to be fully loaded
-      setTimeout(() => {
-        $("img[usemap]").mapster({
-          stroke: true,
-          strokeWidth: 2.5,
-          strokeColor: "000000",
-          strokeOpacity: 0.3,
-          fill: true,
-          fillColor: "000000",
-          fillOpacity: 0.2,
-          onClick: (e) => {
-            const themeId = e.key;
-            this.selectTheme(themeId);
-            return false;
-          },
-          mapKey: "name",
-          listKey: "name",
+      const imageToMap = $("img[usemap]");
+      imageToMap
+        .one("load", () => {
+          // TODO: Replace dirty fix for initializing map at the right moment
+          setTimeout(() => {
+            imageToMap.mapster({
+              stroke: true,
+              strokeWidth: 2.5,
+              strokeColor: "000000",
+              strokeOpacity: 0.3,
+              fill: true,
+              fillColor: "000000",
+              fillOpacity: 0.2,
+              onClick: (e) => {
+                const themeId = e.key;
+                this.selectTheme(themeId);
+                return false;
+              },
+              mapKey: "name",
+              listKey: "name",
+            });
+          }, 1000);
+        })
+        .each(function () {
+          if (this.complete) {
+            $(this).trigger("load"); // For jQuery >= 3.0
+          }
         });
-      }, 2000);
     },
     initializeLineDrawing() {
       setInterval(() => {
