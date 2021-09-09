@@ -27,7 +27,7 @@
       </ion-col>
       <ion-col size="6">
         <img
-          src="@/assets/img/time-funnel.png"
+          src="@/assets/img/time-funnel_v2.png"
           alt="Time funnel"
           id="time-funnel-img"
         />
@@ -36,7 +36,7 @@
       <ion-col size="5">
         <div class="theme-select-blobs-container ion-margin-top">
           <img
-            src="@/assets/img/blobs.png"
+            src="@/assets/img/blobs_v4.png"
             usemap="#image-map"
             id="blobs-img"
           />
@@ -125,6 +125,7 @@ export default {
   data() {
     return {
       LINECOLOR: "rgba(52, 152, 219, 0.7)",
+      IMAGEAREAOFFSET: { xOffset: 110, yOffset: 110 },
       minDateTimeSlider: this.dateToTimestamp(new Date(2020, 1, 1)),
       maxDateTimeSlider: this.dateToTimestamp(new Date()),
       sliderValue: [
@@ -195,7 +196,7 @@ export default {
         degree +
         "deg); width: " +
         lineLength +
-        `px; height: 1px; background: ${this.LINECOLOR}; position: absolute; top: ` +
+        `px; height: 2px; background: ${this.LINECOLOR}; position: absolute; top: ` +
         y1 +
         "px; left: " +
         x1 +
@@ -274,6 +275,21 @@ export default {
           .attr("title", themeTitle)
           .attr("alt", themeTitle)
           .attr("name", themeId);
+
+        const areaCoords = $(area).attr("coords").split(",");
+        const updatedCoords = [];
+        for (const [coordIdx, coord] of areaCoords.entries()) {
+          const isXCoordinate = coordIdx % 2 === 0;
+          const coordInt = parseInt(coord);
+          if (isXCoordinate) {
+            updatedCoords.push(coordInt + this.IMAGEAREAOFFSET.xOffset);
+          } else {
+            updatedCoords.push(coordInt + this.IMAGEAREAOFFSET.yOffset);
+          }
+        }
+        console.log("First:", $(area).attr("coords"));
+        $(area).attr("coords", updatedCoords.join(","));
+        console.log("Then:", $(area).attr("coords"));
       });
 
       // TODO: Wait for image to be fully loaded
