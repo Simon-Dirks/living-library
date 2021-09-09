@@ -36,7 +36,7 @@
       <ion-col size="5">
         <div class="theme-select-blobs-container ion-margin-top">
           <img
-            src="@/assets/img/blobs_v4.png"
+            src="@/assets/img/blobs_v5.png"
             usemap="#image-map"
             id="blobs-img"
           />
