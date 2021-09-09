@@ -1,27 +1,45 @@
 {
-    "affect": {
-        "title": "Affect",
-        "color": "248, 228, 84",
-        "themes": ["them.AFF"]
-    },
-    "teachingPractice": {
-        "title": "Teaching practice",
-        "color": "52, 115, 221",
-        "themes": ["them.TA", "them.GO"]
-    },
-    "contextTeaching": {
-        "title": "Context of teaching",
-        "color": "224, 65, 76",
-        "themes": ["them.ORG", "them.REL", "them.TPD"]
-    },
-    "academicAchievementAssessment": {
-        "title": "Academic achievement and assessment",
-        "color": "81, 192, 111",
-        "themes": ["them.AS"]
-    },
-    "equity": {
-        "title": "Equity",
-        "color": "189, 140, 8",
-        "themes": ["them.EQU"]
-    }
+  "affect": {
+    "title": "Affect",
+    "color": "248, 228, 84",
+    "themes": [
+      "them.AFF"
+    ],
+    "description": "Elements referring to internal states of teachers, students, managers, parents, and caregivers. For example: motivation, engagement, distress, and stress-related symptoms."
+  },
+  "teachingPractice": {
+    "title": "Teaching practice",
+    "color": "52, 115, 221",
+    "themes": [
+      "them.TA",
+      "them.GO"
+    ],
+    "description": "Elements relating directly to the teaching process, e.g., online pedagogy and general or online teaching values. Note that assessment is considered together with achievement."
+  },
+  "contextTeaching": {
+    "title": "Context of teaching",
+    "color": "224, 65, 76",
+    "themes": [
+      "them.ORG",
+      "them.REL",
+      "them.TPD"
+    ],
+    "description": "Elements relating to the context within which the teaching is taking place, e.g., the universities, schools, or other organizational structures."
+  },
+  "academicAchievementAssessment": {
+    "title": "Academic achievement and assessment",
+    "color": "81, 192, 111",
+    "themes": [
+      "them.AS"
+    ],
+    "description": "Elements relating to the actual performance of students and the forms of assessment being used."
+  },
+  "equity": {
+    "title": "Equity",
+    "color": "189, 140, 8",
+    "themes": [
+      "them.EQU"
+    ],
+    "description": "Elements relating to diversity and vulnerable student groups."
+  }
 }

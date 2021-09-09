@@ -16,6 +16,13 @@
             {{ getThemeTitle(themeId) }}</strong
           ><template v-else>{{ getThemeTitle(themeId) }}</template></ion-label
         >
+        <ion-icon
+          name="help-circle"
+          @click.stop="openThemeInfoPopup(themeId)"
+          :style="{
+            color: themeIsSelected(themeId) ? 'white' : 'darkslategrey',
+          }"
+        ></ion-icon>
       </ion-chip>
     </ion-card-header>
     <ion-card-content>
@@ -53,8 +60,10 @@ import {
   IonCardContent,
   IonChip,
   IonLabel,
+  modalController,
 } from "@ionic/vue";
 import { dateMixin } from "../mixins/dateMixin";
+import ThemeInfoPopup from "@/components/ThemeInfoPopup";
 
 export default {
   mixins: [dateMixin],
@@ -74,9 +83,24 @@ export default {
         ? this.getThemeColor(themeId)
         : this.getThemeColor(themeId, 0.3);
     },
+    async openThemeInfoPopup(themeId) {
+      const modal = await modalController.create({
+        component: ThemeInfoPopup,
+        componentProps: { themeData: this.getThemeData(themeId) },
+      });
+
+      await modal.present();
+      const modalResponse = await modal.onDidDismiss();
+    },
   },
   props: ["literatureItem"],
-  inject: ["themeIsSelected", "getThemeTitle", "getThemeColor", "selectTheme"],
+  inject: [
+    "themeIsSelected",
+    "getThemeTitle",
+    "getThemeColor",
+    "selectTheme",
+    "getThemeData",
+  ],
   name: "LiteratureItem",
 };
 </script>
