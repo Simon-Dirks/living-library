@@ -1,7 +1,7 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <img src="@/assets/img/logo.jpg" height="40" id="logo-img" />
+      <img src="@/assets/img/logo.png" height="40" id="logo-img" />
 
       <ion-title>
         [WORK IN PROGRESS] Main themes in the academic educational literature on
@@ -159,6 +159,7 @@ export default {
 #logo-img {
   float: left;
   margin-left: 10px;
+  border-radius: 5px;
 }
 ion-title {
   margin-top: 7px;
