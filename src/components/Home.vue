@@ -1,6 +1,8 @@
 <template>
   <ion-header>
     <ion-toolbar>
+      <img src="@/assets/img/logo.jpg" height="40" id="logo-img" />
+
       <ion-title>
         [WORK IN PROGRESS] Main themes in the academic educational literature on
         the pandemic
@@ -154,6 +156,14 @@ export default {
 </script>
 
 <style scoped>
+#logo-img {
+  float: left;
+  margin-left: 10px;
+}
+ion-title {
+  margin-top: 7px;
+}
+
 .split {
   margin-top: 50px;
   height: 100%; /* TODO: Subtract 50px */
