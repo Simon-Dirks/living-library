@@ -1,7 +1,7 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <ion-title>Living Library</ion-title>
+      <ion-title>About the Living Library</ion-title>
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <ion-buttons slot="start">
         <ion-button @click="closeModal">
@@ -12,6 +12,7 @@
   </ion-header>
 
   <div class="ion-padding">
+    <h2>Title</h2>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt soluta
       aspernatur odit repellendus aliquam ad quasi, dignissimos ipsam itaque
@@ -53,5 +54,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
