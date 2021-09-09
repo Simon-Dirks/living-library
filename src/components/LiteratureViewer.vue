@@ -71,9 +71,19 @@ export default {
       if (noThemesSelected) {
         return shownLiteratureData;
       }
+
+      // Show literature tagged with (at least) one of the selected themes
+      // shownLiteratureData = shownLiteratureData.filter(
+      //   (item) => this.getNumSelectedThemesForLiteratureItem(item) > 0
+      // );
+
+      // Show literature tagged with ALL of the selected themes
       shownLiteratureData = shownLiteratureData.filter(
-        (item) => this.getNumSelectedThemesForLiteratureItem(item) > 0
+        (item) =>
+          this.getNumSelectedThemesForLiteratureItem(item) ===
+          this.selectedThemeIds.length
       );
+
       shownLiteratureData.sort((firstItem, secondItem) => {
         return (
           this.getNumSelectedThemesForLiteratureItem(secondItem) -
@@ -178,5 +188,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
