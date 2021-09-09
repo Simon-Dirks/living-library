@@ -202,9 +202,9 @@ export default {
         x1 +
         "px;'></div>";
       $("body").append(lineHtml);
-      $(".line")
-        .hide()
-        .fadeIn(400, function () {});
+      // $(".line")
+      //   .hide()
+      //   .fadeIn(400, function () {});
     },
     getLineTimeFunnelPositions() {
       const timesliderHandleElems = $(".vue-slider-dot");
@@ -233,10 +233,10 @@ export default {
     },
     drawLineBetweenThemeSelectAndTimeFunnel() {
       const lineElems = $(".line");
-      if (this.draggingTimeFilter) {
-        lineElems.remove();
-        return;
-      }
+      // if (this.draggingTimeFilter) {
+      //   lineElems.remove();
+      //   return;
+      // }
 
       const themeSelectElem = document.querySelector("#blobs-img");
       const themeSelectBounds = themeSelectElem.getBoundingClientRect();
