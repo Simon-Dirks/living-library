@@ -6,12 +6,12 @@
     },
     "teachingPractice": {
         "title": "Teaching practice",
-        "color": "224, 65, 76",
+        "color": "52, 115, 221",
         "themes": ["them.TA", "them.GO"]
     },
     "contextTeaching": {
         "title": "Context of teaching",
-        "color": "52, 115, 221",
+        "color": "224, 65, 76",
         "themes": ["them.ORG", "them.REL", "them.TPD"]
     },
     "academicAchievementAssessment": {
