@@ -1,7 +1,7 @@
 <template>
-  <ion-grid class="ion-margin-top">
+  <ion-grid class="ion-no-padding">
     <ion-row>
-      <ion-col size="1">
+      <ion-col size="1" class="ion-margin-top">
         <div class="timeslider-container">
           <h3 id="timeslider-caption">Flow of time &#8594;</h3>
 
@@ -25,7 +25,7 @@
           </vue-slider>
         </div>
       </ion-col>
-      <ion-col size="6">
+      <ion-col size="6" class="ion-margin-top">
         <img
           src="@/assets/img/time-funnel_v2.png"
           alt="Time funnel"
@@ -34,6 +34,7 @@
       </ion-col>
       <!--      <ion-col size="1"></ion-col>-->
       <ion-col size="5">
+        <h2>Interactive cross section</h2>
         <div class="theme-select-blobs-container ion-margin-top">
           <img
             src="@/assets/img/blobs_v5.png"
@@ -87,7 +88,13 @@
           <p class="theme-select-annotation-text">
             <em
               >Cross-section showing intertwined conversation themes running
-              through top 50 Clarivate journals</em
+              through top 50 Clarivate journals during selected timestamp.</em
+            >
+          </p>
+          <p class="theme-select-annotation-text ion-margin-top">
+            <strong class="ion-margin-top"
+              >Hover over the cross section above to make a thematic selection
+              of the literature.</strong
             >
           </p>
         </div>
@@ -365,11 +372,13 @@ export default {
 .theme-select-annotation-text {
   text-align: center;
   font-size: 0.85em;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .theme-select-blobs-container {
   position: absolute;
-  top: 0;
+  top: 30px;
   right: 0;
   width: 100%;
 }

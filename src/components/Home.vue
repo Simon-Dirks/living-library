@@ -1,7 +1,7 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <img src="@/assets/img/logo/logo_v3.png" height="40" id="logo-img" />
+      <img src="@/assets/img/logo/logo_v4.png" height="40" id="logo-img" />
 
       <ion-title>
         [WORK IN PROGRESS] Main themes in the academic educational literature on
