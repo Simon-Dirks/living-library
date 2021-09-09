@@ -315,7 +315,7 @@ export default {
     initializeLineDrawing() {
       setInterval(() => {
         this.drawLineBetweenThemeSelectAndTimeFunnel();
-      }, 250);
+      }, 25);
     },
   },
   mounted() {
