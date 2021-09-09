@@ -41,6 +41,12 @@ import {
   IonContent,
   IonTitle,
   IonHeader,
+  IonIcon,
+  IonButtons,
+  IonButton,
+  IonCol,
+  IonRow,
+  IonGrid,
 } from "@ionic/vue";
 import InformationPopup from "./InformationPopup.vue";
 
@@ -59,6 +65,12 @@ export default {
     IonContent,
     IonTitle,
     IonHeader,
+    IonIcon,
+    IonButtons,
+    IonButton,
+    IonCol,
+    IonRow,
+    IonGrid,
     ThemeSelect,
     LiteratureViewer,
   },
