@@ -34,7 +34,7 @@
       </ion-col>
       <!--      <ion-col size="1"></ion-col>-->
       <ion-col size="5">
-        <h2>Interactive cross section</h2>
+        <h2 class="theme-select-title">Interactive cross-section</h2>
         <div class="theme-select-blobs-container ion-margin-top">
           <img
             src="@/assets/img/blobs_v5.png"
@@ -93,7 +93,7 @@
           </p>
           <p class="theme-select-annotation-text ion-margin-top">
             <strong class="ion-margin-top"
-              >Hover over the cross section above to make a thematic selection
+              >Hover over the cross-section above to make a thematic selection
               of the literature.</strong
             >
           </p>
@@ -373,13 +373,17 @@ export default {
   text-align: center;
   font-size: 0.85em;
   width: 80%;
-  margin: 0 auto;
+  margin: 10px auto 0;
 }
 
 .theme-select-blobs-container {
   position: absolute;
-  top: 30px;
+  top: 40px;
   right: 0;
   width: 100%;
+}
+
+.theme-select-title {
+  text-align: center;
 }
 </style>

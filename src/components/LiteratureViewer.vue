@@ -1,6 +1,8 @@
 <template>
-  <ion-content>
-    <h2>Literature ({{ shownLiteratureData.length }})</h2>
+  <ion-content class="literature-section-content">
+    <h2 class="literature-section-title">
+      Literature ({{ shownLiteratureData.length }})
+    </h2>
 
     <template
       v-for="literatureItem in shownLiteratureData"
@@ -177,4 +179,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.literature-section-title {
+  margin-left: 8px;
+}
+</style>

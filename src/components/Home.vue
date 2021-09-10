@@ -1,12 +1,13 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <img src="@/assets/img/logo/logo_v4.png" height="40" id="logo-img" />
+      <img src="@/assets/img/logo/logo_v5.png" height="40" id="logo-img" />
 
       <ion-title>
-        [WORK IN PROGRESS] Main themes in the academic educational literature on
-        the pandemic
+        <strong class="ion-margin-end">LIVING LIBRARY</strong> Navigate an
+        up-to-date library of educational literature on the pandemic
       </ion-title>
+      <!--      Main themes in the academic educational literature on the pandemic-->
 
       <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <ion-buttons slot="end">
@@ -23,7 +24,7 @@
         <ion-col>
           <theme-select></theme-select>
         </ion-col>
-        <ion-col>
+        <ion-col class="literature-viewer-column">
           <literature-viewer></literature-viewer>
         </ion-col>
       </ion-row>
@@ -204,5 +205,9 @@ ion-row {
 #about-popup-btn {
   --background: #3498db;
   --color: white;
+}
+
+.literature-viewer-column {
+  padding-left: 50px;
 }
 </style>

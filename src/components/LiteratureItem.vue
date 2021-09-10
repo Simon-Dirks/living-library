@@ -17,7 +17,7 @@
           ><template v-else>{{ getThemeTitle(themeId) }}</template></ion-label
         >
         <ion-icon
-          name="help-circle"
+          name="information-circle"
           @click.stop="openThemeInfoPopup(themeId)"
           :style="{
             color: themeIsSelected(themeId) ? 'white' : 'darkslategrey',
