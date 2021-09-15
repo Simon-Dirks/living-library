@@ -102,17 +102,18 @@
     </ion-row>
   </ion-grid>
 
-  <div class="theme-select-buttons-container ion-margin-top" v-if="false">
-    <div
-      class="theme-select-button-container"
-      v-for="themeId in getAllPossibleThemeIds()"
-      :key="themeId"
-    >
-      <button @click="selectTheme(themeId)">
-        {{ getThemeTitle(themeId) }}
-      </button>
-    </div>
-  </div>
+  <!--  TODO: Remove-->
+  <!--  <div class="theme-select-buttons-container ion-margin-top" v-if="false">-->
+  <!--    <div-->
+  <!--      class="theme-select-button-container"-->
+  <!--      v-for="themeId in getAllPossibleThemeIds()"-->
+  <!--      :key="themeId"-->
+  <!--    >-->
+  <!--      <button @click="selectTheme(themeId)">-->
+  <!--        {{ getThemeTitle(themeId) }}-->
+  <!--      </button>-->
+  <!--    </div>-->
+  <!--  </div>-->
 </template>
 
 <script>
@@ -123,12 +124,17 @@ import { utilsMixin } from "../mixins/utilsMixin";
 import { IonGrid, IonRow, IonCol } from "@ionic/vue";
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
+import { themeMixin } from "@/mixins/themeMixin";
 
 export default {
   name: "ThemeSelect",
-  mixins: [dateMixin, utilsMixin],
+  mixins: [dateMixin, utilsMixin, themeMixin],
   components: { IonGrid, IonRow, IonCol, VueSlider },
-  computed: {},
+  computed: {
+    selectedThemeIdsStore() {
+      return this.$store.state.selectedThemeIds;
+    },
+  },
   data() {
     return {
       LINECOLOR: "rgba(52, 152, 219, 0.7)",
@@ -145,7 +151,7 @@ export default {
     };
   },
   watch: {
-    selectedThemeIds: {
+    selectedThemeIdsStore: {
       handler: function (newThemes, prevThemes) {
         console.log("Selected themes updated: ", newThemes);
         $("area").each((index, area) => {
@@ -157,29 +163,23 @@ export default {
       deep: true,
     },
   },
-  inject: [
-    "selectedThemeIds",
-    "selectTheme",
-    "getThemeTitle",
-    "THEMES",
-    "updateTimeFilter",
-    "getTimeFilter",
-  ],
+  inject: ["updateTimeFilter", "getTimeFilter"],
   methods: {
-    getAllPossibleThemeIds() {
-      let themeIdCombinations = this.getAllCombinations(
-        Object.keys(this.THEMES)
-      );
-
-      themeIdCombinations = themeIdCombinations
-        .filter((themeIds) => themeIds.length !== 0)
-        .map((themeIds) =>
-          themeIds.length === 1
-            ? themeIds[0]
-            : "intersect_" + themeIds.join("_")
-        );
-      return themeIdCombinations;
-    },
+    // TODO: Remove function
+    // getAllPossibleThemeIds() {
+    //   let themeIdCombinations = this.getAllCombinations(
+    //     Object.keys(this.themes)
+    //   );
+    //
+    //   themeIdCombinations = themeIdCombinations
+    //     .filter((themeIds) => themeIds.length !== 0)
+    //     .map((themeIds) =>
+    //       themeIds.length === 1
+    //         ? themeIds[0]
+    //         : "intersect_" + themeIds.join("_")
+    //     );
+    //   return themeIdCombinations;
+    // },
     async drawLine(x1, y1, x2, y2) {
       // https://newbedev.com/html-line-drawing-without-canvas-just-js
 
@@ -322,7 +322,7 @@ export default {
         })
         .each(function () {
           if (this.complete) {
-            $(this).trigger("load"); // For jQuery >= 3.0
+            $(this).trigger("load");
           }
         });
     },

@@ -14,8 +14,9 @@
         <ion-label color="secondary"
           ><strong v-if="themeIsSelected(themeId)" style="color: white">
             {{ getThemeTitle(themeId) }}</strong
-          ><template v-else>{{ getThemeTitle(themeId) }}</template></ion-label
-        >
+          >
+          <template v-else>{{ getThemeTitle(themeId) }}</template>
+        </ion-label>
         <ion-icon
           name="information-circle"
           @click.stop="openThemeInfoPopup(themeId)"
@@ -27,8 +28,8 @@
     </ion-card-header>
     <ion-card-content>
       <p>
-        <a :href="literatureItem['Article Link']" target="_blank"
-          ><ion-icon class="ion-margin-end" name="link" />
+        <a :href="literatureItem['Article Link']" target="_blank">
+          <ion-icon class="ion-margin-end" name="link" />
           <span v-if="literatureItem.Authors">
             {{ literatureItem.Authors }}</span
           ><span v-else>Article link</span>
@@ -36,15 +37,13 @@
       </p>
 
       <p>
-        <ion-icon class="ion-margin-end" name="book" />{{
-          literatureItem["Journal"]
-        }}
+        <ion-icon class="ion-margin-end" name="book" />
+        {{ literatureItem["Journal"] }}
       </p>
 
       <p>
-        <ion-icon class="ion-margin-end" name="calendar" />{{
-          timestampToDate(literatureItem["date"])
-        }}
+        <ion-icon class="ion-margin-end" name="calendar" />
+        {{ timestampToDate(literatureItem["date"]) }}
       </p>
     </ion-card-content>
   </ion-card>
@@ -62,11 +61,12 @@ import {
   IonLabel,
   modalController,
 } from "@ionic/vue";
-import { dateMixin } from "../mixins/dateMixin";
+import { dateMixin } from "@/mixins/dateMixin";
 import ThemeInfoPopup from "@/components/ThemeInfoPopup";
+import { themeMixin } from "@/mixins/themeMixin";
 
 export default {
-  mixins: [dateMixin],
+  mixins: [dateMixin, themeMixin],
   components: {
     IonIcon,
     IonCard,
@@ -94,13 +94,7 @@ export default {
     },
   },
   props: ["literatureItem"],
-  inject: [
-    "themeIsSelected",
-    "getThemeTitle",
-    "getThemeColor",
-    "selectTheme",
-    "getThemeData",
-  ],
+  inject: [],
   name: "LiteratureItem",
 };
 </script>
