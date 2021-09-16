@@ -1,10 +1,12 @@
+import Config from "@/config.js";
+
 export const themeMixin = {
   data() {
     return {};
   },
   computed: {
     themes() {
-      return this.$store.state.THEMES;
+      return Config.THEMES;
     },
   },
   created() {},

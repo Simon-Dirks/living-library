@@ -1,9 +1,8 @@
 import Papa from "papaparse";
-import rawLiteratureData from "@/assets/data/coded-articles.csv";
+import rawLiteratureData from "@/assets/data/coded-articles_v2.csv";
 import { themeMixin } from "@/mixins/themeMixin";
+import Config from "@/config.js";
 
-const IGNORED_THEMES = ["them.TEC", "them.OTH"];
-const CSV_THEME_KEYS = ["Theme.FINDINGS", "Theme.IMPLICATIONS"];
 let literatureData = [];
 
 export const literatureMixin = {
@@ -75,7 +74,7 @@ export const literatureMixin = {
           );
         }
 
-        for (const themeKey of CSV_THEME_KEYS) {
+        for (const themeKey of Config.CSV_THEME_KEYS) {
           if (!literatureItem[themeKey] || literatureItem[themeKey] === "") {
             // console.warn(
             //   "Could not find themes for article:",
@@ -87,7 +86,8 @@ export const literatureMixin = {
           const literatureItemThemes = literatureItem[themeKey].split(";");
           for (const literatureItemTheme of literatureItemThemes) {
             const hasValidTheme = literatureItemTheme !== "";
-            const isIgnoredTheme = IGNORED_THEMES.includes(literatureItemTheme);
+            const isIgnoredTheme =
+              Config.IGNORED_THEMES.includes(literatureItemTheme);
             if (!hasValidTheme || isIgnoredTheme) {
               continue;
             }

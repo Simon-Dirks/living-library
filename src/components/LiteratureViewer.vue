@@ -17,10 +17,9 @@
 import LiteratureItem from "./LiteratureItem.vue";
 import { IonContent } from "@ionic/vue";
 import { literatureMixin } from "@/mixins/literatureMixin";
-import { themeMixin } from "@/mixins/themeMixin";
 
 export default {
-  mixins: [literatureMixin, themeMixin],
+  mixins: [literatureMixin],
   inject: ["getTimeFilter"],
   name: "LiteratureViewer",
   components: {

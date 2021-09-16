@@ -28,7 +28,7 @@
     </ion-card-header>
     <ion-card-content>
       <p>
-        <a :href="literatureItem['Article Link']" target="_blank">
+        <a :href="literatureItem[config.ARTICLE_LINK_KEY]" target="_blank">
           <ion-icon class="ion-margin-end" name="link" />
           <span v-if="literatureItem.Authors">
             {{ literatureItem.Authors }}</span
@@ -64,6 +64,7 @@ import {
 import { dateMixin } from "@/mixins/dateMixin";
 import ThemeInfoPopup from "@/components/ThemeInfoPopup";
 import { themeMixin } from "@/mixins/themeMixin";
+import Config from "@/config.js";
 
 export default {
   mixins: [dateMixin, themeMixin],
@@ -76,6 +77,11 @@ export default {
     IonCardContent,
     IonChip,
     IonLabel,
+  },
+  data() {
+    return {
+      config: Config,
+    };
   },
   methods: {
     getThemeChipColor(themeId) {

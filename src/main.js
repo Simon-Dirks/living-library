@@ -15,7 +15,6 @@ import {
 } from "ionicons/icons";
 
 import "@ionic/core/css/padding.css";
-import THEMES from "@/assets/data/themes.json";
 
 document.title = "Living Library [PROTOTYPE]";
 
@@ -23,7 +22,6 @@ const store = createStore({
   state() {
     return {
       selectedThemeIds: [],
-      THEMES: THEMES,
     };
   },
   mutations: {
@@ -40,6 +38,7 @@ const store = createStore({
       console.log("Selected themes:", state.selectedThemeIds);
     },
   },
+  getters: {},
 });
 
 const app = createApp(App).use(IonicVue).use(router);
