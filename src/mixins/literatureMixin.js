@@ -58,7 +58,9 @@ export const literatureMixin = {
         header: true,
       }).data;
       literatureData = literatureData.filter(
-        (item) => item["Article name"] && item["Article name"] !== ""
+        (item) =>
+          item[Config.CSV_KEYS.ARTICLE_NAME] &&
+          item[Config.CSV_KEYS.ARTICLE_NAME] !== ""
       );
 
       for (const literatureItem of literatureData) {
@@ -66,15 +68,15 @@ export const literatureMixin = {
         literatureItem["themes"] = [];
         literatureItem["year"] = null;
 
-        if (literatureItem.Date) {
+        if (literatureItem[Config.CSV_KEYS.DATE]) {
           literatureItem["date"] = getDateFromLiteratureItem(literatureItem);
 
           literatureItem["dateOfCoding"] = new Date(
-            literatureItem["dateOfCoding"]
+            literatureItem[Config.CSV_KEYS.DATE_OF_CODING]
           );
         }
 
-        for (const themeKey of Config.CSV_THEME_KEYS) {
+        for (const themeKey of Config.CSV_KEYS.THEMES) {
           if (!literatureItem[themeKey] || literatureItem[themeKey] === "") {
             // console.warn(
             //   "Could not find themes for article:",
@@ -134,11 +136,10 @@ export const literatureMixin = {
 };
 
 function getDateFromLiteratureItem(literatureItem) {
-  let itemYear = literatureItem.Date.replace(/\D/g, "");
-  let itemMonth = literatureItem.Date.replace("date.", "").replace(
-    itemYear,
-    ""
-  );
+  let itemYear = literatureItem[Config.CSV_KEYS.DATE].replace(/\D/g, "");
+  let itemMonth = literatureItem[Config.CSV_KEYS.DATE]
+    .replace("date.", "")
+    .replace(itemYear, "");
   const itemMonthStartsWithR = itemMonth[0].toLowerCase() === "r";
   if (itemMonthStartsWithR) {
     itemMonth = itemMonth.substring(1);

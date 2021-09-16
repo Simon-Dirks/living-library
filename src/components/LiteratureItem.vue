@@ -28,7 +28,7 @@
     </ion-card-header>
     <ion-card-content>
       <p>
-        <a :href="literatureItem[config.ARTICLE_LINK_KEY]" target="_blank">
+        <a :href="literatureItem[config.CSV_KEYS.ARTICLE_LINK]" target="_blank">
           <ion-icon class="ion-margin-end" name="link" />
           <span v-if="literatureItem.Authors">
             {{ literatureItem.Authors }}</span
