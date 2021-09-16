@@ -17,11 +17,26 @@
 </template>
 
 <script>
-import { IonButton, IonHeader, IonTitle, modalController } from "@ionic/vue";
+import {
+  IonButton,
+  IonButtons,
+  IonHeader,
+  IonIcon,
+  IonTitle,
+  IonToolbar,
+  modalController,
+} from "@ionic/vue";
 
 export default {
   name: "ThemeInfoPopup",
-  components: {},
+  components: {
+    IonButton,
+    IonTitle,
+    IonToolbar,
+    IonButtons,
+    IonHeader,
+    IonIcon,
+  },
   props: ["themeData"],
   methods: {
     closeModal() {
