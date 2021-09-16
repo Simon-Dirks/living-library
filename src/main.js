@@ -13,7 +13,8 @@ import {
   arrowBackOutline,
   helpCircleOutline,
 } from "ionicons/icons";
-
+import Config from "@/config.js";
+import { initializeApp } from "firebase/app";
 import "@ionic/core/css/padding.css";
 
 document.title = "Living Library [PROTOTYPE]";
@@ -43,6 +44,8 @@ const store = createStore({
 
 const app = createApp(App).use(IonicVue).use(router);
 app.use(store);
+
+initializeApp(Config.FIREBASE_CONFIG);
 
 router.isReady().then(() => {
   addIcons({

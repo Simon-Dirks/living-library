@@ -1,23 +1,21 @@
 import Papa from "papaparse";
-import rawLiteratureData from "@/assets/data/coded-articles_v2.csv";
 import { themeMixin } from "@/mixins/themeMixin";
 import Config from "@/config.js";
-
-let literatureData = [];
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 export const literatureMixin = {
   mixins: [themeMixin],
   data() {
-    return {};
+    return { literatureData: [], loadingLiteratureData: false };
   },
   created() {
     this.$_literatureMixin_loadFromFile();
   },
   computed: {
     shownLiteratureData() {
-      let shownLiteratureData = literatureData;
+      let shownLiteratureData = this.literatureData;
 
-      shownLiteratureData = literatureData.filter(
+      shownLiteratureData = this.literatureData.filter(
         (item) =>
           !item.date ||
           (item.date <= new Date(this.getTimeFilter().max) &&
@@ -52,18 +50,23 @@ export const literatureMixin = {
     },
   },
   methods: {
-    $_literatureMixin_loadFromFile() {
+    async $_literatureMixin_loadFromFile() {
+      this.loadingLiteratureData = true;
+
       console.log("Loading literature from file...");
-      literatureData = Papa.parse(rawLiteratureData, {
+      const codedArticlesBlob = await getCodedArticlesCsvFile();
+      const codedArticlesPlainText = await codedArticlesBlob.text();
+      this.literatureData = Papa.parse(codedArticlesPlainText, {
         header: true,
       }).data;
-      literatureData = literatureData.filter(
+
+      this.literatureData = this.literatureData.filter(
         (item) =>
           item[Config.CSV_KEYS.ARTICLE_NAME] &&
           item[Config.CSV_KEYS.ARTICLE_NAME] !== ""
       );
 
-      for (const literatureItem of literatureData) {
+      for (const literatureItem of this.literatureData) {
         // console.log("Parsing", literatureItem["Article name"]);
         literatureItem["themes"] = [];
         literatureItem["year"] = null;
@@ -71,9 +74,9 @@ export const literatureMixin = {
         if (literatureItem[Config.CSV_KEYS.DATE]) {
           literatureItem["date"] = getDateFromLiteratureItem(literatureItem);
 
-          literatureItem["dateOfCoding"] = new Date(
-            literatureItem[Config.CSV_KEYS.DATE_OF_CODING]
-          );
+          // literatureItem[Config.CSV_KEYS.DATE_OF_CODING] = new Date(
+          //   literatureItem[Config.CSV_KEYS.DATE_OF_CODING]
+          // );
         }
 
         for (const themeKey of Config.CSV_KEYS.THEMES) {
@@ -105,7 +108,8 @@ export const literatureMixin = {
       }
 
       console.log("Literature loaded!");
-      // console.dir(literatureData);
+
+      this.loadingLiteratureData = false;
     },
     $_literatureMixin_getNumSelectedThemesForItem(literatureItem) {
       let numSelectedThemesForLiteratureItem = 0;
@@ -146,4 +150,35 @@ function getDateFromLiteratureItem(literatureItem) {
   }
   itemYear = "20" + itemYear;
   return new Date(itemMonth + " " + itemYear);
+}
+
+async function getCodedArticlesCsvFile() {
+  const storage = getStorage();
+  const codedArticlesStorageRef = ref(
+    storage,
+    Config.STORAGE_URL + Config.ARTICLES_CSV_FILENAME
+  );
+  const url = await getDownloadURL(codedArticlesStorageRef).catch((error) => {
+    return Promise.reject(error);
+  });
+
+  console.log("Downloading coded articles file...", url);
+
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+      console.log("Downloaded coded articles file!");
+      return resolve(blob);
+    };
+    xhr.onerror = function () {
+      reject({
+        status: this.status,
+        statusText: xhr.statusText,
+      });
+    };
+    xhr.open("GET", url);
+    xhr.send();
+  });
 }

@@ -3,7 +3,7 @@
     <h2 class="literature-section-title">
       Literature ({{ shownLiteratureData.length }})
     </h2>
-
+    <p v-if="loadingLiteratureData"><em>Loading articles...</em></p>
     <template
       v-for="literatureItem in shownLiteratureData"
       :key="literatureItem['Article name']"
