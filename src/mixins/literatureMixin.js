@@ -2,23 +2,23 @@ import Papa from "papaparse";
 import rawLiteratureData from "@/assets/data/coded-articles.csv";
 import { themeMixin } from "@/mixins/themeMixin";
 
+const IGNORED_THEMES = ["them.TEC", "them.OTH"];
+const CSV_THEME_KEYS = ["Theme.FINDINGS", "Theme.IMPLICATIONS"];
+let literatureData = [];
+
 export const literatureMixin = {
   mixins: [themeMixin],
   data() {
-    return {
-      literatureData: [],
-      ignoredThemes: ["them.TEC", "them.OTH"],
-      THEME_KEYS: ["Theme.FINDINGS", "Theme.IMPLICATIONS"],
-    };
+    return {};
   },
   created() {
-    this.loadLiteratureFromFile();
+    this.$_literatureMixin_loadFromFile();
   },
   computed: {
     shownLiteratureData() {
-      let shownLiteratureData = this.literatureData;
+      let shownLiteratureData = literatureData;
 
-      shownLiteratureData = this.literatureData.filter(
+      shownLiteratureData = literatureData.filter(
         (item) =>
           !item.date ||
           (item.date <= new Date(this.getTimeFilter().max) &&
@@ -38,14 +38,14 @@ export const literatureMixin = {
       // Show literature tagged with ALL of the selected themes
       shownLiteratureData = shownLiteratureData.filter(
         (item) =>
-          this.getNumSelectedThemesForLiteratureItem(item) ===
+          this.$_literatureMixin_getNumSelectedThemesForItem(item) ===
           this.getSelectedThemeIds().length
       );
 
       shownLiteratureData.sort((firstItem, secondItem) => {
         return (
-          this.getNumSelectedThemesForLiteratureItem(secondItem) -
-          this.getNumSelectedThemesForLiteratureItem(firstItem)
+          this.$_literatureMixin_getNumSelectedThemesForItem(secondItem) -
+          this.$_literatureMixin_getNumSelectedThemesForItem(firstItem)
         );
       });
 
@@ -53,31 +53,29 @@ export const literatureMixin = {
     },
   },
   methods: {
-    loadLiteratureFromFile() {
+    $_literatureMixin_loadFromFile() {
       console.log("Loading literature from file...");
-      this.literatureData = Papa.parse(rawLiteratureData, {
+      literatureData = Papa.parse(rawLiteratureData, {
         header: true,
       }).data;
-
-      this.literatureData = this.literatureData.filter(
+      literatureData = literatureData.filter(
         (item) => item["Article name"] && item["Article name"] !== ""
       );
 
-      for (const literatureItem of this.literatureData) {
+      for (const literatureItem of literatureData) {
         // console.log("Parsing", literatureItem["Article name"]);
         literatureItem["themes"] = [];
         literatureItem["year"] = null;
 
         if (literatureItem.Date) {
-          literatureItem["date"] =
-            this.getDateFromLiteratureItem(literatureItem);
+          literatureItem["date"] = getDateFromLiteratureItem(literatureItem);
 
           literatureItem["dateOfCoding"] = new Date(
             literatureItem["dateOfCoding"]
           );
         }
 
-        for (const themeKey of this.THEME_KEYS) {
+        for (const themeKey of CSV_THEME_KEYS) {
           if (!literatureItem[themeKey] || literatureItem[themeKey] === "") {
             // console.warn(
             //   "Could not find themes for article:",
@@ -89,12 +87,10 @@ export const literatureMixin = {
           const literatureItemThemes = literatureItem[themeKey].split(";");
           for (const literatureItemTheme of literatureItemThemes) {
             const hasValidTheme = literatureItemTheme !== "";
-            const isIgnoredTheme =
-              this.ignoredThemes.includes(literatureItemTheme);
+            const isIgnoredTheme = IGNORED_THEMES.includes(literatureItemTheme);
             if (!hasValidTheme || isIgnoredTheme) {
               continue;
             }
-
             const highlevelTheme =
               this.getHighlevelThemeId(literatureItemTheme);
             const themeNotYetSaved =
@@ -107,22 +103,9 @@ export const literatureMixin = {
       }
 
       console.log("Literature loaded!");
-      // console.dir(this.literatureData);
+      // console.dir(literatureData);
     },
-    getDateFromLiteratureItem(literatureItem) {
-      let itemYear = literatureItem.Date.replace(/\D/g, "");
-      let itemMonth = literatureItem.Date.replace("date.", "").replace(
-        itemYear,
-        ""
-      );
-      const itemMonthStartsWithR = itemMonth[0].toLowerCase() === "r";
-      if (itemMonthStartsWithR) {
-        itemMonth = itemMonth.substring(1);
-      }
-      itemYear = "20" + itemYear;
-      return new Date(itemMonth + " " + itemYear);
-    },
-    getNumSelectedThemesForLiteratureItem(literatureItem) {
+    $_literatureMixin_getNumSelectedThemesForItem(literatureItem) {
       let numSelectedThemesForLiteratureItem = 0;
       const literatureItemThemes = literatureItem["themes"];
       for (const selectedThemeId of this.getSelectedThemeIds()) {
@@ -149,3 +132,17 @@ export const literatureMixin = {
     },
   },
 };
+
+function getDateFromLiteratureItem(literatureItem) {
+  let itemYear = literatureItem.Date.replace(/\D/g, "");
+  let itemMonth = literatureItem.Date.replace("date.", "").replace(
+    itemYear,
+    ""
+  );
+  const itemMonthStartsWithR = itemMonth[0].toLowerCase() === "r";
+  if (itemMonthStartsWithR) {
+    itemMonth = itemMonth.substring(1);
+  }
+  itemYear = "20" + itemYear;
+  return new Date(itemMonth + " " + itemYear);
+}
