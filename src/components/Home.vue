@@ -4,8 +4,11 @@
       <img src="@/assets/img/logo/logo_v5.png" height="40" id="logo-img" />
 
       <ion-title>
-        <strong class="ion-margin-end">LIVING LIBRARY</strong> Navigate an
-        up-to-date library of educational literature on the pandemic
+        <strong class="ion-margin-end"
+          ><span v-if="config.DEBUG_MODE">[DEBUG MODE]</span
+          ><span v-else>LIVING LIBRARY</span></strong
+        >
+        Navigate an up-to-date library of educational literature on the pandemic
       </ion-title>
       <!--      Main themes in the academic educational literature on the pandemic-->
 
@@ -49,11 +52,13 @@ import {
   IonGrid,
 } from "@ionic/vue";
 import InformationPopup from "./InformationPopup.vue";
+import Config from "@/config.js";
 
 export default {
   data() {
     return {
       timeFilter: { min: null, max: null },
+      config: Config,
     };
   },
   name: "Home",

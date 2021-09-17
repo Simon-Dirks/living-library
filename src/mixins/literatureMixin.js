@@ -2,6 +2,7 @@ import Papa from "papaparse";
 import { themeMixin } from "@/mixins/themeMixin";
 import Config from "@/config.js";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import fileLiteratureData from "@/assets/data/coded-articles.csv";
 
 export const literatureMixin = {
   mixins: [themeMixin],
@@ -9,7 +10,7 @@ export const literatureMixin = {
     return { literatureData: [], loadingLiteratureData: false };
   },
   created() {
-    this.$_literatureMixin_loadFromFile();
+    this.$_literatureMixin_loadLiterature();
   },
   computed: {
     shownLiteratureData() {
@@ -50,13 +51,12 @@ export const literatureMixin = {
     },
   },
   methods: {
-    async $_literatureMixin_loadFromFile() {
+    async $_literatureMixin_loadLiterature() {
       this.loadingLiteratureData = true;
 
-      console.log("Loading literature from file...");
-      const codedArticlesBlob = await getCodedArticlesCsvFile();
-      const codedArticlesPlainText = await codedArticlesBlob.text();
-      this.literatureData = Papa.parse(codedArticlesPlainText, {
+      console.log("Loading literature...");
+      const codedArticles = await getCodedArticlesCsvFile();
+      this.literatureData = Papa.parse(codedArticles, {
         header: true,
       }).data;
 
@@ -153,6 +153,10 @@ function getDateFromLiteratureItem(literatureItem) {
 }
 
 async function getCodedArticlesCsvFile() {
+  if (Config.DEBUG_MODE) {
+    return Promise.resolve(fileLiteratureData);
+  }
+
   const storage = getStorage();
   const codedArticlesStorageRef = ref(
     storage,
@@ -167,10 +171,11 @@ async function getCodedArticlesCsvFile() {
   return new Promise(function (resolve, reject) {
     const xhr = new XMLHttpRequest();
     xhr.responseType = "blob";
-    xhr.onload = (event) => {
+    xhr.onload = async (event) => {
       const blob = xhr.response;
       console.log("Downloaded coded articles file!");
-      return resolve(blob);
+      const blobText = await blob.text();
+      return resolve(blobText);
     };
     xhr.onerror = function () {
       reject({
