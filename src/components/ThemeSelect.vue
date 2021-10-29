@@ -27,17 +27,18 @@
       </ion-col>
       <ion-col size="6" class="ion-margin-top">
         <img
-          src="@/assets/img/time-funnel_v2.png"
+          src="@/assets/img/time-funnel_v3.png"
           alt="Time funnel"
           id="time-funnel-img"
         />
       </ion-col>
       <!--      <ion-col size="1"></ion-col>-->
       <ion-col size="5">
-        <h2 class="theme-select-title">Interactive cross-section</h2>
+        <h2 class="theme-select-title">Explore the themes</h2>
+        <p>By clicking on the color map</p>
         <div class="theme-select-blobs-container ion-margin-top">
           <img
-            src="@/assets/img/blobs_v5.png"
+            src="@/assets/img/blobs_v7.png"
             usemap="#image-map"
             id="blobs-img"
           />
@@ -91,12 +92,12 @@
               through top 50 Clarivate journals during selected timestamp.</em
             >
           </p>
-          <p class="theme-select-annotation-text ion-margin-top">
-            <strong class="ion-margin-top"
-              >Hover over the cross-section above to make a thematic selection
-              of the literature.</strong
-            >
-          </p>
+<!--          <p class="theme-select-annotation-text ion-margin-top">-->
+<!--            <strong class="ion-margin-top"-->
+<!--              >Hover over the colored sections above to make a thematic selection-->
+<!--              of the literature.</strong-->
+<!--            >-->
+<!--          </p>-->
         </div>
       </ion-col>
     </ion-row>
@@ -137,7 +138,7 @@ export default {
   },
   data() {
     return {
-      LINECOLOR: "rgba(52, 152, 219, 0.7)",
+      LINECOLOR: "rgba(0, 0, 0, 0.45)",
       IMAGEAREAOFFSET: { xOffset: 110, yOffset: 110 },
       minDateTimeSlider: this.dateToTimestamp(new Date(2020, 1, 1)),
       maxDateTimeSlider: this.dateToTimestamp(new Date()),
@@ -385,5 +386,6 @@ export default {
 
 .theme-select-title {
   text-align: center;
+  margin-bottom: 0;
 }
 </style>
