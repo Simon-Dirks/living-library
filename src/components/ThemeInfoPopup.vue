@@ -12,7 +12,8 @@
   </ion-header>
 
   <div class="ion-padding">
-    <p v-html="themeData.description"></p>
+    <p v-if="themeReasoning" v-html="themeReasoning"></p>
+    <p v-else v-html="themeData.description"></p>
   </div>
 </template>
 
@@ -30,7 +31,7 @@ import {
 export default {
   name: "ThemeInfoPopup",
   components: {},
-  props: ["themeData"],
+  props: ["themeData", "themeReasoning"],
   methods: {
     closeModal() {
       modalController.dismiss();

@@ -20,6 +20,7 @@
           >
           <template v-else>{{ getThemeTitle(themeId) }}</template>
         </ion-label>
+
         <ion-icon
           name="information-circle"
           @click.stop="openThemeInfoPopup(themeId)"
@@ -78,9 +79,14 @@ export default {
         : this.getThemeColor(themeId, 0.3);
     },
     async openThemeInfoPopup(themeId) {
+      const themeReasoning =
+        this.literatureItem[this.getThemeReasoningKey(themeId)];
       const modal = await modalController.create({
         component: ThemeInfoPopup,
-        componentProps: { themeData: this.getThemeData(themeId) },
+        componentProps: {
+          themeData: this.getThemeData(themeId),
+          themeReasoning: themeReasoning,
+        },
       });
 
       await modal.present();

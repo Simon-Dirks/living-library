@@ -48,6 +48,9 @@ export const themeMixin = {
       }
       return null;
     },
+    getThemeReasoningKey(themeId) {
+      return this.getThemeData(themeId)["reasoningKey"];
+    },
     // TODO: Remove intersection support if it remains unused
     getIntersectionThemes(themeId) {
       if (themeId.includes("intersect")) {

@@ -12,9 +12,6 @@ export default {
     DATE_OF_CODING: "Date of coding",
     AUTHORS: "Authors",
     JOURNAL: "Journal",
-    IS_REFLECTION: "Reflection",
-    IS_REVIEW: "Review",
-    IS_RESEARCH: "Research",
   },
   CSV_FILTER_KEYS: {
     Reflections: "Reflection",
