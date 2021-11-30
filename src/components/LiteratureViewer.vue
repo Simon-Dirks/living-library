@@ -1,39 +1,61 @@
 <template>
   <ion-content class="literature-section-content">
-    <h2 class="literature-section-title">
-      Literature ({{ shownLiteratureData.length }})
-    </h2>
+    <div class="literature-filter-container">
+      <h2 class="literature-section-title ion-padding-top">
+        Literature ({{ literatureMixin_shown.length }})
+      </h2>
+
+      <literature-filter
+        :onEducationFilterClicked="onEducationFilterClicked"
+        :onLiteratureFilterClicked="onLiteratureFilterClicked"
+      ></literature-filter>
+    </div>
+
     <p v-if="loadingLiteratureData">
-      <ion-spinner></ion-spinner><em>Loading articles...</em>
+      <ion-spinner></ion-spinner>
+      <em>Loading articles...</em>
     </p>
-    <template
-      v-for="literatureItem in shownLiteratureData"
-      :key="literatureItem['Article name']"
-    >
-      <literature-item :literatureItem="literatureItem"></literature-item>
-    </template>
+
+    <div class="literature-item-container">
+      <template
+        v-for="literatureItem in literatureMixin_shown"
+        :key="literatureItem['Article name']"
+      >
+        <literature-item :literatureItem="literatureItem"></literature-item>
+      </template>
+    </div>
   </ion-content>
 </template>
 
 <script>
 import LiteratureItem from "./LiteratureItem.vue";
-import { IonContent, IonSpinner } from "@ionic/vue";
 import { literatureMixin } from "@/mixins/literatureMixin";
+
+import Config from "@/config.js";
+import LiteratureFilter from "@/components/LiteratureFilter";
 
 export default {
   mixins: [literatureMixin],
   inject: ["getTimeFilter"],
   name: "LiteratureViewer",
   components: {
-    IonContent,
-    IonSpinner,
     LiteratureItem,
+    LiteratureFilter,
   },
   data() {
-    return {};
+    return { config: Config };
   },
   computed: {},
-  methods: {},
+  methods: {
+    onEducationFilterClicked(filterKey, event) {
+      const showThisKey = event.target.checked;
+      this.literatureMixin_toggleEducationFilter(filterKey, showThisKey);
+    },
+    onLiteratureFilterClicked(filterKey, event) {
+      const showThisKey = event.target.checked;
+      this.literatureMixin_toggleFilter(filterKey, showThisKey);
+    },
+  },
   mounted() {},
 };
 </script>
@@ -41,10 +63,19 @@ export default {
 <style scoped>
 .literature-section-title {
   margin-left: 8px;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 ion-spinner {
   margin-right: 10px;
   top: 8px;
+}
+
+.literature-filter-container {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 9999;
 }
 </style>

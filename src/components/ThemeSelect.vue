@@ -125,7 +125,6 @@ import $ from "jquery";
 import "imagemapster";
 import { dateMixin } from "../mixins/dateMixin";
 import { utilsMixin } from "../mixins/utilsMixin";
-import { IonGrid, IonRow, IonCol } from "@ionic/vue";
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
 import { themeMixin } from "@/mixins/themeMixin";
@@ -133,7 +132,7 @@ import { themeMixin } from "@/mixins/themeMixin";
 export default {
   name: "ThemeSelect",
   mixins: [dateMixin, utilsMixin, themeMixin],
-  components: { IonGrid, IonRow, IonCol, VueSlider },
+  components: { VueSlider },
   computed: {
     selectedThemeIdsStore() {
       return this.$store.state.selectedThemeIds;
@@ -142,7 +141,7 @@ export default {
   data() {
     return {
       LINECOLOR: "rgba(0, 0, 0, 0.45)",
-      IMAGEAREAOFFSET: { xOffset: 110, yOffset: 110 },
+      IMAGEAREAOFFSET: { xOffset: 0, yOffset: 0 },
       minDateTimeSlider: this.dateToTimestamp(new Date(2020, 1, 1)),
       maxDateTimeSlider: this.dateToTimestamp(new Date()),
       sliderValue: [

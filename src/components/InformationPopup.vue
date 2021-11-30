@@ -48,17 +48,11 @@
 </template>
 
 <script>
-import {
-  modalController,
-  IonContent,
-  IonButton,
-  IonHeader,
-  IonTitle,
-} from "@ionic/vue";
+import { modalController } from "@ionic/vue";
 
 export default {
   name: "InformationPopup",
-  components: { IonButton, IonHeader, IonTitle },
+  components: {},
   methods: {
     closeModal() {
       modalController.dismiss();

@@ -7,13 +7,17 @@ import fileLiteratureData from "@/assets/data/coded-articles.csv";
 export const literatureMixin = {
   mixins: [themeMixin],
   data() {
-    return { literatureData: [], loadingLiteratureData: false };
-  },
-  created() {
-    this.$_literatureMixin_loadLiterature();
+    return {
+      literatureData: [],
+      loadingLiteratureData: false,
+      shownKeys: new Set(Object.values(Config.CSV_FILTER_KEYS)),
+      shownEducationKeys: new Set(
+        Object.values(Config.CSV_EDUCATION_FILTER_KEYS)
+      ),
+    };
   },
   computed: {
-    shownLiteratureData() {
+    literatureMixin_shown() {
       let shownLiteratureData = this.literatureData;
 
       shownLiteratureData = this.literatureData.filter(
@@ -22,6 +26,27 @@ export const literatureMixin = {
           (item.date <= new Date(this.getTimeFilter().max) &&
             item.date >= new Date(this.getTimeFilter().min))
       );
+
+      shownLiteratureData = shownLiteratureData.filter((item) => {
+        for (const shownKey of this.shownKeys) {
+          const itemShouldBeShown = item[shownKey];
+          if (itemShouldBeShown) {
+            return true;
+          }
+        }
+        return false;
+      });
+
+      // TODO: Refactor redundant/duplicated code
+      shownLiteratureData = shownLiteratureData.filter((item) => {
+        for (const shownKey of this.shownEducationKeys) {
+          const itemShouldBeShown = item[shownKey];
+          if (itemShouldBeShown) {
+            return true;
+          }
+        }
+        return false;
+      });
 
       const noThemesSelected = this.getSelectedThemeIds().length === 0;
       if (noThemesSelected) {
@@ -50,7 +75,31 @@ export const literatureMixin = {
       return shownLiteratureData;
     },
   },
+  created() {
+    this.$_literatureMixin_loadLiterature();
+  },
   methods: {
+    literatureMixin_toggleFilter(filterKey, showThisKey) {
+      if (showThisKey) {
+        this.shownKeys.add(filterKey);
+      } else {
+        this.shownKeys.delete(filterKey);
+      }
+
+      console.log("LIT FILTER:", this.shownKeys);
+    },
+
+    // TODO: Refactor duplicated code
+    literatureMixin_toggleEducationFilter(filterKey, showThisKey) {
+      if (showThisKey) {
+        this.shownEducationKeys.add(filterKey);
+      } else {
+        this.shownEducationKeys.delete(filterKey);
+      }
+
+      console.log("EDUCATION FILTER:", this.shownEducationKeys);
+    },
+
     async $_literatureMixin_loadLiterature() {
       this.loadingLiteratureData = true;
 
@@ -58,6 +107,7 @@ export const literatureMixin = {
       const codedArticles = await getCodedArticlesCsvFile();
       this.literatureData = Papa.parse(codedArticles, {
         header: true,
+        dynamicTyping: true,
       }).data;
 
       this.literatureData = this.literatureData.filter(
@@ -107,7 +157,7 @@ export const literatureMixin = {
         }
       }
 
-      console.log("Literature loaded!");
+      console.log("Literature loaded!", this.literatureData);
 
       this.loadingLiteratureData = false;
     },

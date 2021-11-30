@@ -12,6 +12,18 @@ export default {
     DATE_OF_CODING: "Date of coding",
     AUTHORS: "Authors",
     JOURNAL: "Journal",
+    IS_REFLECTION: "Reflection",
+    IS_REVIEW: "Review",
+    IS_RESEARCH: "Research",
+  },
+  CSV_FILTER_KEYS: {
+    Reflections: "Reflection",
+    Reviews: "Review",
+    Research: "Research",
+  },
+  CSV_EDUCATION_FILTER_KEYS: {
+    "Secondary Education": "SecondaryEducation",
+    "Higher Education": "HigherEducation",
   },
   STORAGE_URL: "gs://eduvision-living-library.appspot.com/",
   ARTICLES_CSV_FILENAME: "coded-articles.csv",
@@ -23,5 +35,5 @@ export default {
     messagingSenderId: "226974366663",
     appId: "1:226974366663:web:37f8256e1a11bf3e83b7e2",
   },
-  DEBUG_MODE: false,
+  DEBUG_MODE: true,
 };

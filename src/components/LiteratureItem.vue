@@ -57,17 +57,7 @@
 </template>
 
 <script>
-import {
-  IonIcon,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
-  IonChip,
-  IonLabel,
-  modalController,
-} from "@ionic/vue";
+import { modalController } from "@ionic/vue";
 import { dateMixin } from "@/mixins/dateMixin";
 import ThemeInfoPopup from "@/components/ThemeInfoPopup";
 import { themeMixin } from "@/mixins/themeMixin";
@@ -75,16 +65,7 @@ import Config from "@/config.js";
 
 export default {
   mixins: [dateMixin, themeMixin],
-  components: {
-    IonIcon,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
-    IonChip,
-    IonLabel,
-  },
+  components: {},
   data() {
     return {
       config: Config,

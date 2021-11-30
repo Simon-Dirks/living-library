@@ -29,14 +29,7 @@ import {
 
 export default {
   name: "ThemeInfoPopup",
-  components: {
-    IonButton,
-    IonTitle,
-    IonToolbar,
-    IonButtons,
-    IonHeader,
-    IonIcon,
-  },
+  components: {},
   props: ["themeData"],
   methods: {
     closeModal() {

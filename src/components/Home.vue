@@ -38,19 +38,7 @@
 <script>
 import LiteratureViewer from "./LiteratureViewer.vue";
 import ThemeSelect from "./ThemeSelect.vue";
-import {
-  modalController,
-  IonToolbar,
-  IonContent,
-  IonTitle,
-  IonHeader,
-  IonIcon,
-  IonButtons,
-  IonButton,
-  IonCol,
-  IonRow,
-  IonGrid,
-} from "@ionic/vue";
+import { modalController } from "@ionic/vue";
 import InformationPopup from "./InformationPopup.vue";
 import Config from "@/config.js";
 
@@ -64,16 +52,6 @@ export default {
   name: "Home",
   inheritAttrs: false,
   components: {
-    IonToolbar,
-    IonContent,
-    IonTitle,
-    IonHeader,
-    IonIcon,
-    IonButtons,
-    IonButton,
-    IonCol,
-    IonRow,
-    IonGrid,
     ThemeSelect,
     LiteratureViewer,
   },
@@ -118,6 +96,10 @@ ion-title {
 ion-grid,
 ion-row {
   height: 100%;
+}
+
+ion-grid {
+  padding: 0;
 }
 
 #about-popup-btn {
