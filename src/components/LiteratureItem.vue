@@ -42,12 +42,17 @@
 
       <p>
         <ion-icon class="ion-margin-end" name="book" />
-        {{ literatureItem[config.CSV_KEYS.JOURNAL] }}
+        <span>{{ literatureItem[config.CSV_KEYS.JOURNAL] }}</span>
       </p>
 
       <p>
         <ion-icon class="ion-margin-end" name="calendar" />
-        {{ timestampToDate(literatureItem["date"]) }}
+        <span>{{ timestampToDate(literatureItem["date"]) }}</span>
+      </p>
+
+      <p v-if="literatureItem[config.CSV_KEYS.COUNTRY]">
+        <ion-icon class="ion-margin-end" name="globe" />
+        <span>{{ literatureItem[config.CSV_KEYS.COUNTRY] }}</span>
       </p>
 
       <!--      <p>-->

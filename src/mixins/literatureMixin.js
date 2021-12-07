@@ -129,6 +129,13 @@ export const literatureMixin = {
           // );
         }
 
+        const countryConductedRaw = literatureItem[Config.CSV_KEYS.COUNTRY];
+        if (countryConductedRaw) {
+          literatureItem[Config.CSV_KEYS.COUNTRY] = countryConductedRaw
+            .split(";")
+            .join(", ");
+        }
+
         for (const themeKey of Config.CSV_KEYS.THEMES) {
           if (!literatureItem[themeKey] || literatureItem[themeKey] === "") {
             // console.warn(

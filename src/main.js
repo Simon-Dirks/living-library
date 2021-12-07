@@ -35,6 +35,7 @@ import {
   informationCircleOutline,
   arrowBackOutline,
   helpCircleOutline,
+  globeOutline,
 } from "ionicons/icons";
 import Config from "@/config.js";
 import { initializeApp } from "firebase/app";
@@ -79,6 +80,7 @@ router.isReady().then(() => {
     "arrow-back": arrowBackOutline,
     calendar: calendarOutline,
     "help-circle": helpCircleOutline,
+    globe: globeOutline,
   });
 
   app.mount("#app");

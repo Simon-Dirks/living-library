@@ -12,6 +12,7 @@ export default {
     DATE_OF_CODING: "Date of coding",
     AUTHORS: "Authors",
     JOURNAL: "Journal",
+    COUNTRY: "country_conducted",
   },
   CSV_FILTER_KEYS: {
     Reflections: "Reflection",
@@ -19,8 +20,8 @@ export default {
     Research: "Research",
   },
   CSV_EDUCATION_FILTER_KEYS: {
-    "Secondary Education": "SecondaryEducation",
-    "Higher Education": "HigherEducation",
+    Secondary: "SecondaryEducation",
+    Higher: "HigherEducation",
   },
   STORAGE_URL: "gs://eduvision-living-library.appspot.com/",
   ARTICLES_CSV_FILENAME: "coded-articles.csv",
