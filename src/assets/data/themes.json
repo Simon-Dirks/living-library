@@ -5,7 +5,7 @@
     "themes": [
       "them.AFF"
     ],
-    "description": "<h4>We give articles the label \"Affect\" when they contain...</h4><p>... elements referring to the psychological-social phenomena of teachers, students, managers, parents and caregivers.</p><p>For example: motivation, engagement, distress and stress-related symptoms.</p><p>Sample extracts from articles:</p><ul style=\"padding-left: 30px\"><li>“Our findings show that parents, as proxy educators, experience heightened levels of mental health distress when their child struggles to adapt to a distance learning pedagogy” (<a href=\"https://journals.sagepub.com/doi/full/10.3102/0013189X20978806\" target=\"_blank\">Davis et al., 2021</a>, p. 62)</li><li>“…given that disembodiment and loss of community and belonging emerged as the most pressing concerns amongst both students and faculty academics” (<a href=\"https://www.tandfonline.com/doi/full/10.1080/03075079.2020.1859681\" target=\"_blank\">Eringfeld, 2020</a>, p. 155)</li></ul>",
+    "description": "<h4>We give articles the label \"Affect\" when they contain...</h4><em>Elements referring to the psychological-social phenomena of teachers, students, managers, parents and caregivers.</em><p>For example: motivation, engagement, distress and stress-related symptoms.</p>\n\n<p>Example of extract from article: <br></p><ul><li>“Our findings show that parents, as proxy educators, experience heightened levels of mental health distress when their child struggles to adapt to a distance learning pedagogy” (<a href=\"https://journals.sagepub.com/doi/full/10.3102/0013189X20978806\" target=\"_blank\">Davis et al., 2021, p. 62</a>)</li><li>“…given that disembodiment and loss of community and belonging emerged as the most pressing concerns amongst both students and faculty academics” (<a href=\"https://www.tandfonline.com/doi/full/10.1080/03075079.2020.1859681\" target=\"blank\">Eringfeld, 2020, p. 155</a>)</li></ul>",
     "reasoningKey": "affect_reasoning"
   },
   "teachingPractice": {
@@ -15,7 +15,7 @@
       "them.TA",
       "them.GO"
     ],
-    "description": "Elements relating directly to the teaching process, e.g., online pedagogy and general or online teaching values. Note that assessment is considered together with achievement.",
+    "description": "<h4>We give articles the label \"Teaching practice\" when they contain...</h4><em>Elements relating directly to the teaching process, (innovative) teaching strategies, curriculum, societal and educational goals.</em>\n\n<p>For example: online pedagogy, curriculum adaptations and general or online teaching values. Note that assessments is considered together with achievement.</p>\n\n<p>Example of extract from article: </p><ul><li>“Undergraduates did not deem online learning as a most satisfactory instructional approach since they more positively evaluated teachers and course contents than the online videos” (<a href=\"https://link.springer.com/article/10.1186/s41239-021-00252-3\" target=\"_blank\">Yu, 2021, p. 12</a>) </li><li>“Unsurprisingly, there were numerous examples of the use of technology both to mediate student teachers’ academic learning and provide opportunities for teaching experiences” (<a href=\"https://www.tandfonline.com/doi/full/10.1080/02619768.2020.1821186\" target=\"_blank\">Ellis et al., 2020, p. 566</a>) </li></ul>",
     "reasoningKey": "teachingPractice_reasoning"
   },
   "contextTeaching": {
@@ -26,7 +26,7 @@
       "them.REL",
       "them.TPD"
     ],
-    "description": "Elements relating to the context within which the teaching is taking place, e.g., the universities, schools, or other organizational structures.",
+    "description": "<h4>We give articles the label \"Context of teaching\" when they contain...</h4><em>Elements relating to the context within which the teaching is taking place.</em>\n\n<p>For example: the organisations involved, boundary crossing with outside disciplines and/or communities and teacher professional development.</p>\n\n<p>Example of extract from article: </p><ul><li>“Priority was given to technical matters such as teaching and learning arrangements that ranged from the basic issue of Internet access to skills upgrading for online teaching tools” (<a href=\"https://www.tandfonline.com/doi/full/10.1080/03075079.2020.1859685\" target=\"_blank\">Jung et al., 2021, p. 114</a>) </li><li>“The university also staged an ongoing series of webinars and offered on-demand troubleshooting services via instant messages and individual online clinic sessions, whereby students could access real-time responses about any issues and concerns they had” (<a href=\"https://www.tandfonline.com/doi/full/10.1080/03075079.2020.1859685\" target=\"_blank\">Jung et al., 2021, p. 114</a>) </li></ul>",
     "reasoningKey": "contextOfTeaching_reasoning"
   },
   "academicAchievementAssessment": {
@@ -35,7 +35,7 @@
     "themes": [
       "them.AS"
     ],
-    "description": "Elements relating to the actual performance of students and the forms of assessment being used.",
+    "description": "<h4>We give articles the label \"Academic achievement and assessment\" when they contain...</h4><em>Elements relating to the actual performance of students and the forms of assessment being used.</em>\n\n<p>For example: performance in terms of learning outcomes and/or test results and challenges related to the design of assessment at a distance.</p>\n\n<p>Example of extract from article:</p>\n\n<ul><li>“However, the postgraduates, with stronger self-regulation, might have been more resistant to the external disturbances and could keep their learning behaviors under control. They thus preferred the online learning method to the traditional method, resulting in higher learning outcomes than the undergraduates” (<a href=\"https://link.springer.com/article/10.1186/s41239-021-00252-3\" target=\"_blank\">Yu, 2021, p. 12</a>)</li>\n    <li>“Once students have experienced online examinations, there is a preference for this format due to its ease of use. The literature reported student performance did not have significant difference in final examination scores across online and using online examinations. Once students have experienced online examinations, there is a preference for this format due to its ease of traditional examination modalities. Student anxiety decreased once they had used the online examination software.” (<a href=\"https://www.sciencedirect.com/science/article/abs/pii/S0360131520302220\" target=\"_blank\">Butler-Henderson &amp; Crawford, 2020, p. 9</a>)</li></ul>",
     "reasoningKey": "academicAchievementAssessment_reasoning"
   },
   "equity": {
@@ -44,7 +44,7 @@
     "themes": [
       "them.EQU"
     ],
-    "description": "Elements relating to diversity and vulnerable student groups.",
+    "description": "<h4>We give articles the label \"Equity\" when they contain...</h4><em>Elements relating to equity, diversity and inclusion of vulnerable student groups.</em><p>For example: differential access to resources and high quality education, risks of digital divide and social and racial justice. </p>\n\n<p>Example of extract from article:</p>\n\n<ul><li>“Finally, we demonstrated that differential access to technology and remote instruction during the COVID-19 school closures could widen school SES achievement gaps” (<a href=\"https://journals.sagepub.com/doi/full/10.3102/0013189X20965918\" target=\"_blank\">Kuhfeld et al., 2020, p. 560</a>) </li><li>“The Awards and Subsidies Department paid immediate attention to the students in financial difficulty due to the epidemic or the online teaching arrangements” (<a href=\"\nhttps://www.tandfonline.com/doi/full/10.1080/03075079.2020.1859687\" target=\"_blank\">Yang &amp; Huang, 2020, p.126</a>)</li></ul>",
     "reasoningKey": "equity_reasoning"
   }
 }
