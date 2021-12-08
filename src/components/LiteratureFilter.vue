@@ -6,7 +6,7 @@
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-col size="2">
+          <ion-col size="3">
             <h2>Research type</h2>
           </ion-col>
           <ion-col
@@ -24,7 +24,7 @@
         </ion-row>
 
         <ion-row>
-          <ion-col size="2">
+          <ion-col size="3">
             <h2>Education level</h2>
           </ion-col>
           <ion-col
