@@ -2,12 +2,12 @@
   <ion-content class="literature-section-content">
     <div class="literature-filter-container">
       <h2 class="literature-section-title ion-padding-top">
-        Literature ({{ literatureMixin_shown.length }})
+        Literature ({{ shownLiterature.length }})
       </h2>
 
       <literature-filter
-        :onEducationFilterClicked="onEducationFilterClicked"
-        :onLiteratureFilterClicked="onLiteratureFilterClicked"
+        :onEducationTypeFilterClicked="onEducationTypeFilterClicked"
+        :onResearchTypeFilterClicked="onResearchTypeFilterClicked"
       ></literature-filter>
     </div>
 
@@ -18,7 +18,7 @@
 
     <div class="literature-item-container">
       <template
-        v-for="literatureItem in literatureMixin_shown"
+        v-for="literatureItem in shownLiterature"
         :key="literatureItem['Article name']"
       >
         <literature-item :literatureItem="literatureItem"></literature-item>
@@ -29,14 +29,13 @@
 
 <script>
 import LiteratureItem from "./LiteratureItem.vue";
-import { literatureMixin } from "@/mixins/literatureMixin";
 
 import Config from "@/config.js";
 import LiteratureFilter from "@/components/LiteratureFilter";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-  mixins: [literatureMixin],
-  inject: ["getTimeFilter"],
+  mixins: [],
   name: "LiteratureViewer",
   components: {
     LiteratureItem,
@@ -45,15 +44,31 @@ export default {
   data() {
     return { config: Config };
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      shownLiterature: "literature/getShownLiterature",
+      loadingLiteratureData: "literature/getLoadingLiteratureData",
+    }),
+  },
   methods: {
-    onEducationFilterClicked(filterKey, event) {
+    ...mapActions({
+      updateResearchTypeFilter: "literature/updateResearchTypeFilter",
+      updateEducationTypeFilter: "literature/updateEducationTypeFilter",
+      loadLiteratureData: "literature/loadLiteratureData",
+    }),
+    onEducationTypeFilterClicked(educationTypeKey, event) {
       const showThisKey = event.target.checked;
-      this.literatureMixin_toggleEducationFilter(filterKey, showThisKey);
+      this.updateEducationTypeFilter({
+        educationTypeKey,
+        showEducationType: showThisKey,
+      });
     },
-    onLiteratureFilterClicked(filterKey, event) {
+    onResearchTypeFilterClicked(researchTypeKey, event) {
       const showThisKey = event.target.checked;
-      this.literatureMixin_toggleFilter(filterKey, showThisKey);
+      this.updateResearchTypeFilter({
+        researchTypeKey,
+        showResearchType: showThisKey,
+      });
     },
   },
   mounted() {},

@@ -1,8 +1,5 @@
 <template>
   <ion-card>
-    <!--    <ion-card-header>-->
-    <!--      <ion-card-title>Research type</ion-card-title>-->
-    <!--    </ion-card-header>-->
     <ion-card-content>
       <ion-grid>
         <ion-row>
@@ -16,7 +13,7 @@
             :key="filterKey"
             class="checkbox-container"
           >
-            <ion-item @click="onLiteratureFilterClicked(filterKey, $event)">
+            <ion-item @click="onResearchTypeFilterClicked(filterKey, $event)">
               <ion-label>{{ filterTitle }}</ion-label>
               <ion-checkbox checked slot="start"></ion-checkbox>
             </ion-item>
@@ -34,7 +31,7 @@
             :key="filterKey"
             class="checkbox-container"
           >
-            <ion-item @click="onEducationFilterClicked(filterKey, $event)">
+            <ion-item @click="onEducationTypeFilterClicked(filterKey, $event)">
               <ion-label>{{ filterTitle }}</ion-label>
               <ion-checkbox checked slot="start"></ion-checkbox>
             </ion-item>
@@ -47,10 +44,8 @@
 
 <script>
 import Config from "@/config";
-import { literatureMixin } from "@/mixins/literatureMixin";
 
 export default {
-  mixins: [literatureMixin],
   components: {},
   data() {
     return {
@@ -58,8 +53,8 @@ export default {
     };
   },
   props: {
-    onEducationFilterClicked: { type: Function },
-    onLiteratureFilterClicked: { type: Function },
+    onEducationTypeFilterClicked: { type: Function },
+    onResearchTypeFilterClicked: { type: Function },
   },
   methods: {},
 };

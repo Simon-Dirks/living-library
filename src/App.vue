@@ -31,17 +31,4 @@ body {
   height: 100%;
   margin: 0;
 }
-
-/* https://hospodarets.com/highlight_element_with_page_fading */
-body.highlight-is-active {
-  pointer-events: none;
-}
-
-.highlight {
-  box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.8);
-  position: relative;
-  z-index: 9999;
-  pointer-events: auto;
-  transition: all 0.5s ease;
-}
 </style>

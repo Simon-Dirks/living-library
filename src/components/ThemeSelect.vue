@@ -44,6 +44,7 @@
             src="@/assets/img/blobs_v7.png"
             usemap="#image-map"
             id="blobs-img"
+            alt="Theme select image"
           />
 
           <map name="image-map">
@@ -59,7 +60,7 @@
               target=""
               alt="teachingPractice"
               title="teachingPractice"
-              href="teachingPractice"
+              href=""
               coords="74,841,92,799,120,759,159,721,206,686,256,654,313,628,372,606,431,589,494,576,550,570,605,565,655,562,707,563,763,563,820,568,881,576,933,587,987,603,1043,620,1087,643,1132,673,1168,714,1191,749,1203,792,1200,834,1191,875,1171,911,1146,946,1105,972,1055,996,1005,1015,957,1024,914,1034,871,1047,825,1063,780,1080,742,1094,704,1118,677,1144,659,1179,650,1217,656,1253,671,1290,690,1317,721,1349,755,1374,798,1390,838,1396,882,1400,923,1398,976,1390,1019,1381,1063,1368,1097,1353,1124,1338,1111,1358,1097,1385,1071,1416,1047,1439,1019,1466,987,1493,958,1517,917,1544,871,1565,817,1584,745,1598,672,1602,610,1598,551,1587,485,1570,424,1547,370,1520,329,1490,286,1457,254,1423,213,1375,182,1325,157,1279,127,1218,105,1155,89,1107,76,1037,65,983,62,942,63,889"
               shape="poly"
             />
@@ -95,48 +96,29 @@
               through top 50 Clarivate journals during selected timestamp.</em
             >
           </p>
-          <!--          <p class="theme-select-annotation-text ion-margin-top">-->
-          <!--            <strong class="ion-margin-top"-->
-          <!--              >Hover over the colored sections above to make a thematic selection-->
-          <!--              of the literature.</strong-->
-          <!--            >-->
-          <!--          </p>-->
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <!--  TODO: Remove-->
-  <!--  <div class="theme-select-buttons-container ion-margin-top" v-if="false">-->
-  <!--    <div-->
-  <!--      class="theme-select-button-container"-->
-  <!--      v-for="themeId in getAllPossibleThemeIds()"-->
-  <!--      :key="themeId"-->
-  <!--    >-->
-  <!--      <button @click="selectTheme(themeId)">-->
-  <!--        {{ getThemeTitle(themeId) }}-->
-  <!--      </button>-->
-  <!--    </div>-->
-  <!--  </div>-->
 </template>
 
 <script>
 import $ from "jquery";
 import "imagemapster";
-import { dateMixin } from "../mixins/dateMixin";
-import { utilsMixin } from "../mixins/utilsMixin";
+import { dateMixin } from "@/mixins/dateMixin";
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/default.css";
-import { themeMixin } from "@/mixins/themeMixin";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "ThemeSelect",
-  mixins: [dateMixin, utilsMixin, themeMixin],
+  mixins: [dateMixin],
   components: { VueSlider },
   computed: {
-    selectedThemeIdsStore() {
-      return this.$store.state.selectedThemeIds;
-    },
+    ...mapGetters({
+      getThemeTitle: "themes/getThemeTitle",
+      selectedThemeIds: "themes/getSelectedThemeIds",
+    }),
   },
   data() {
     return {
@@ -154,9 +136,8 @@ export default {
     };
   },
   watch: {
-    selectedThemeIdsStore: {
+    selectedThemeIds: {
       handler: function (newThemes, prevThemes) {
-        console.log("Selected themes updated: ", newThemes);
         $("area").each((index, area) => {
           const themeId = $(area).attr("name");
           const isSelected = newThemes.includes(themeId);
@@ -166,23 +147,12 @@ export default {
       deep: true,
     },
   },
-  inject: ["updateTimeFilter", "getTimeFilter"],
   methods: {
-    // TODO: Remove function
-    // getAllPossibleThemeIds() {
-    //   let themeIdCombinations = this.getAllCombinations(
-    //     Object.keys(this.themes)
-    //   );
-    //
-    //   themeIdCombinations = themeIdCombinations
-    //     .filter((themeIds) => themeIds.length !== 0)
-    //     .map((themeIds) =>
-    //       themeIds.length === 1
-    //         ? themeIds[0]
-    //         : "intersect_" + themeIds.join("_")
-    //     );
-    //   return themeIdCombinations;
-    // },
+    ...mapMutations({
+      toggleTheme: "themes/toggleTheme",
+      updateTimeFilter: "timeFilter/update",
+    }),
+    // TODO: Move line drawing logic outside component
     async drawLine(x1, y1, x2, y2) {
       // https://newbedev.com/html-line-drawing-without-canvas-just-js
 
@@ -274,7 +244,7 @@ export default {
       }
     },
     onUpdateTimeFilter(data, handleIdx) {
-      this.updateTimeFilter(data[0], data[1]);
+      this.updateTimeFilter({ min: data[0], max: data[1] });
     },
     onEndDraggingTimeFilter(handleIdx) {},
     initializeImageMap() {
@@ -315,7 +285,7 @@ export default {
               fillOpacity: 0.2,
               onClick: (e) => {
                 const themeId = e.key;
-                this.selectTheme(themeId);
+                this.toggleTheme(themeId);
                 return false;
               },
               mapKey: "name",
@@ -336,7 +306,10 @@ export default {
     },
   },
   mounted() {
-    this.updateTimeFilter(this.minDateTimeSlider, this.maxDateTimeSlider);
+    this.updateTimeFilter({
+      min: this.minDateTimeSlider,
+      max: this.maxDateTimeSlider,
+    });
     this.initializeImageMap();
     this.initializeLineDrawing();
   },

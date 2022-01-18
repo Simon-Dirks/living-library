@@ -7,7 +7,7 @@
       </ion-card-subtitle>
       <br />
       <ion-chip
-        @click="selectTheme(themeId)"
+        @click="toggleTheme(themeId)"
         :style="{
           '--background': getThemeChipColor(themeId),
         }"
@@ -15,7 +15,7 @@
         :key="themeId"
       >
         <ion-label color="secondary"
-          ><strong v-if="themeIsSelected(themeId)" style="color: white">
+          ><strong v-if="isThemeSelected(themeId)" style="color: white">
             {{ getThemeTitle(themeId) }}</strong
           >
           <template v-else>{{ getThemeTitle(themeId) }}</template>
@@ -25,7 +25,7 @@
           name="information-circle"
           @click.stop="openThemeInfoPopup(themeId)"
           :style="{
-            color: themeIsSelected(themeId) ? 'white' : 'darkslategrey',
+            color: isThemeSelected(themeId) ? 'white' : 'darkslategrey',
           }"
         ></ion-icon>
       </ion-chip>
@@ -66,23 +66,31 @@
 import { modalController } from "@ionic/vue";
 import { dateMixin } from "@/mixins/dateMixin";
 import ThemeInfoPopup from "@/components/ThemeInfoPopup";
-import { themeMixin } from "@/mixins/themeMixin";
 import Config from "@/config.js";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
-  mixins: [dateMixin, themeMixin],
+  mixins: [dateMixin],
   components: {},
   data() {
     return {
       config: Config,
     };
   },
+  computed: {
+    ...mapGetters({
+      isThemeSelected: "themes/isThemeSelected",
+      getThemeReasoningKey: "themes/getThemeReasoningKey",
+      getThemeTitle: "themes/getThemeTitle",
+      getThemeColor: "themes/getThemeColor",
+      getThemeData: "themes/getThemeData",
+      getThemeChipColor: "themes/getThemeChipColor",
+    }),
+  },
   methods: {
-    getThemeChipColor(themeId) {
-      return this.themeIsSelected(themeId)
-        ? this.getThemeColor(themeId)
-        : this.getThemeColor(themeId, 0.3);
-    },
+    ...mapMutations({
+      toggleTheme: "themes/toggleTheme",
+    }),
     async openThemeInfoPopup(themeId) {
       const themeReasoning =
         this.literatureItem[this.getThemeReasoningKey(themeId)];
@@ -95,7 +103,7 @@ export default {
       });
 
       await modal.present();
-      const modalResponse = await modal.onDidDismiss();
+      await modal.onDidDismiss();
     },
   },
   props: ["literatureItem"],

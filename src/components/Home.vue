@@ -1,7 +1,12 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <img src="@/assets/img/logo/logo_v5.png" height="40" id="logo-img" />
+      <img
+        src="@/assets/img/logo/logo_v5.png"
+        height="40"
+        id="logo-img"
+        alt="CARE logo"
+      />
 
       <ion-title>
         <strong class="ion-margin-end"
@@ -10,9 +15,7 @@
         >
         Navigate an up-to-date library of educational literature on the pandemic
       </ion-title>
-      <!--      Main themes in the academic educational literature on the pandemic-->
 
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <ion-buttons slot="end">
         <ion-button @click="openMoreInfoModal" id="about-popup-btn">
           <ion-icon name="information-circle" />
@@ -41,11 +44,11 @@ import ThemeSelect from "./ThemeSelect.vue";
 import { modalController } from "@ionic/vue";
 import InformationPopup from "./InformationPopup.vue";
 import Config from "@/config.js";
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      timeFilter: { min: null, max: null },
       config: Config,
     };
   },
@@ -55,8 +58,13 @@ export default {
     ThemeSelect,
     LiteratureViewer,
   },
-  mounted() {},
+  mounted() {
+    this.loadLiteratureData();
+  },
   methods: {
+    ...mapActions({
+      loadLiteratureData: "literature/loadLiteratureData",
+    }),
     async openMoreInfoModal() {
       const modal = await modalController.create({
         component: InformationPopup,
@@ -66,19 +74,6 @@ export default {
       await modal.present();
       const modalResponse = await modal.onDidDismiss();
     },
-    updateTimeFilter(min, max) {
-      this.timeFilter = { min: min, max: max };
-      this.$forceUpdate();
-    },
-    getTimeFilter() {
-      return this.timeFilter;
-    },
-  },
-  provide() {
-    return {
-      updateTimeFilter: this.updateTimeFilter,
-      getTimeFilter: this.getTimeFilter,
-    };
   },
 };
 </script>
@@ -89,6 +84,7 @@ export default {
   margin-left: 10px;
   border-radius: 5px;
 }
+
 ion-title {
   margin-top: 7px;
 }

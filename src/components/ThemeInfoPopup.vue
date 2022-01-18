@@ -2,7 +2,6 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>{{ themeData.title }}</ion-title>
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <ion-buttons slot="start">
         <ion-button @click="closeModal">
           <ion-icon name="arrow-back" />
@@ -18,15 +17,7 @@
 </template>
 
 <script>
-import {
-  IonButton,
-  IonButtons,
-  IonHeader,
-  IonIcon,
-  IonTitle,
-  IonToolbar,
-  modalController,
-} from "@ionic/vue";
+import { modalController } from "@ionic/vue";
 
 export default {
   name: "ThemeInfoPopup",

@@ -2,7 +2,6 @@
   <ion-header class="information-modal-header">
     <ion-toolbar>
       <ion-title>About the Living Library</ion-title>
-      <!-- eslint-disable-next-line vue/no-deprecated-slot-attribute -->
       <ion-buttons slot="start">
         <ion-button @click="closeModal">
           <ion-icon name="arrow-back" />
