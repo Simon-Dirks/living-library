@@ -10,6 +10,7 @@ export default {
     ARTICLE_NAME: "Article name",
     DATE: "Date",
     DATE_OF_CODING: "Date of coding",
+    CODED_BY: "coded_by",
     AUTHORS: "Authors",
     JOURNAL: "Journal",
     COUNTRY: "country_conducted",

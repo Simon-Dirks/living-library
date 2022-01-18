@@ -56,8 +56,20 @@
       </p>
 
       <!--      <p>-->
-      <!--        Date of coding: {{ literatureItem[config.CSV_KEYS.DATE_OF_CODING] }}-->
+      <!--        <ion-icon class="ion-margin-end" name="calendar" />-->
+      <!--        <span>Date of coding: {{ literatureItem[config.CSV_KEYS.DATE_OF_CODING] }}</span>-->
       <!--      </p>-->
+
+      <p v-if="literatureItem[config.CSV_KEYS.CODED_BY]">
+        <small>
+          <em
+            >Coded by: {{ literatureItem[config.CSV_KEYS.CODED_BY] }}
+            <span v-if="literatureItem[config.CSV_KEYS.DATE_OF_CODING]">
+              ({{ literatureItem[config.CSV_KEYS.DATE_OF_CODING] }})
+            </span>
+          </em>
+        </small>
+      </p>
     </ion-card-content>
   </ion-card>
 </template>
