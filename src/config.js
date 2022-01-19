@@ -24,15 +24,17 @@ export default {
     Secondary: "SecondaryEducation",
     Higher: "HigherEducation",
   },
-  STORAGE_URL: "gs://eduvision-living-library.appspot.com/",
-  ARTICLES_CSV_FILENAME: "coded-articles.csv",
-  FIREBASE_CONFIG: {
-    apiKey: "AIzaSyAuoxV0p_Z8Xe8B85okZff4Xf3lAol501o",
-    authDomain: "eduvision-living-library.firebaseapp.com",
-    projectId: "eduvision-living-library",
-    storageBucket: "eduvision-living-library.appspot.com",
-    messagingSenderId: "226974366663",
-    appId: "1:226974366663:web:37f8256e1a11bf3e83b7e2",
-  },
+  // STORAGE_URL: "gs://eduvision-living-library.appspot.com/",
+  // ARTICLES_CSV_FILENAME: "coded-articles.csv",
+  // FIREBASE_CONFIG: {
+  //   apiKey: "AIzaSyAuoxV0p_Z8Xe8B85okZff4Xf3lAol501o",
+  //   authDomain: "eduvision-living-library.firebaseapp.com",
+  //   projectId: "eduvision-living-library",
+  //   storageBucket: "eduvision-living-library.appspot.com",
+  //   messagingSenderId: "226974366663",
+  //   appId: "1:226974366663:web:37f8256e1a11bf3e83b7e2",
+  // },
+  CSV_URL:
+    "https://docs.google.com/spreadsheets/u/0/d/1mQYw67fH-_uWqw7u5q9b2fs3_ZVx1UoHUfoOigqBCck/gviz/tq?tqx=out:csv&tq=select+*",
   DEBUG_MODE: false,
 };

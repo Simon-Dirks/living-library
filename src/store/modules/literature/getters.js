@@ -27,41 +27,6 @@ export default {
     itemYear = "20" + itemYear;
     return new Date(itemMonth + " " + itemYear);
   },
-  getCodedArticlesCsvFile: async (state) => {
-    if (Config.DEBUG_MODE) {
-      return Promise.resolve(fileLiteratureData);
-    }
-
-    const storage = getStorage();
-    const codedArticlesStorageRef = ref(
-      storage,
-      Config.STORAGE_URL + Config.ARTICLES_CSV_FILENAME
-    );
-    const url = await getDownloadURL(codedArticlesStorageRef).catch((error) => {
-      return Promise.reject(error);
-    });
-
-    console.log("Downloading coded articles file...", url);
-
-    return new Promise(function (resolve, reject) {
-      const xhr = new XMLHttpRequest();
-      xhr.responseType = "blob";
-      xhr.onload = async (event) => {
-        const blob = xhr.response;
-        console.log("Downloaded coded articles file!");
-        const blobText = await blob.text();
-        return resolve(blobText);
-      };
-      xhr.onerror = function () {
-        reject({
-          status: this.status,
-          statusText: xhr.statusText,
-        });
-      };
-      xhr.open("GET", url);
-      xhr.send();
-    });
-  },
   getNumSelectedThemesForLitItem:
     (state, getters, rootState, rootGetters) => (litItem) => {
       let numSelectedThemesForLitItem = 0;
