@@ -77,9 +77,9 @@
 <script>
 import { modalController } from "@ionic/vue";
 import { dateMixin } from "@/mixins/dateMixin";
-import ThemeInfoPopup from "@/components/ThemeInfoPopup";
 import Config from "@/config.js";
 import { mapGetters, mapMutations } from "vuex";
+import ThemeInfoPopup from "@/components/popups/ThemeInfoPopup";
 
 export default {
   mixins: [dateMixin],

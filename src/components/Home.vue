@@ -42,9 +42,9 @@
 import LiteratureViewer from "./LiteratureViewer.vue";
 import ThemeSelect from "./ThemeSelect.vue";
 import { modalController } from "@ionic/vue";
-import InformationPopup from "./InformationPopup.vue";
 import Config from "@/config.js";
 import { mapActions } from "vuex";
+import InformationPopup from "@/components/popups/InformationPopup";
 
 export default {
   data() {
