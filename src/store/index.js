@@ -2,12 +2,16 @@ import { createStore } from "vuex";
 import themeModule from "@/store/modules/themes";
 import literatureModule from "@/store/modules/literature";
 import timeFilterModule from "@/store/modules/time-filter";
+import lineDrawingModule from "@/store/modules/line-drawing";
+import imageMapModule from "@/store/modules/image-map";
 
 const store = createStore({
   modules: {
     themes: themeModule,
     literature: literatureModule,
     timeFilter: timeFilterModule,
+    lineDrawing: lineDrawingModule,
+    imageMap: imageMapModule,
   },
   state() {
     return {};

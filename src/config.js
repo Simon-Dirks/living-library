@@ -36,5 +36,7 @@ export default {
   // },
   CSV_URL:
     "https://docs.google.com/spreadsheets/u/0/d/1mQYw67fH-_uWqw7u5q9b2fs3_ZVx1UoHUfoOigqBCck/gviz/tq?tqx=out:csv&tq=select+*",
+  LINE_COLOR: "rgba(0, 0, 0, 0.45)",
+  IMAGEAREAOFFSET: { xOffset: 0, yOffset: 0 },
   DEBUG_MODE: false,
 };

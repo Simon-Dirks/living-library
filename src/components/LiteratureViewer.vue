@@ -17,10 +17,7 @@
     </p>
 
     <div class="literature-item-container">
-      <template
-        v-for="literatureItem in shownLiterature"
-        :key="literatureItem['Article name']"
-      >
+      <template v-for="(literatureItem, idx) in shownLiterature" :key="idx">
         <literature-item :literatureItem="literatureItem"></literature-item>
       </template>
     </div>

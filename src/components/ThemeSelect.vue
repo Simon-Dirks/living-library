@@ -2,28 +2,7 @@
   <ion-grid class="ion-no-padding">
     <ion-row>
       <ion-col size="1" class="ion-margin-top">
-        <div class="timeslider-container">
-          <h3 id="timeslider-caption">Flow of time &#8594;</h3>
-
-          <vue-slider
-            v-model="sliderValue"
-            direction="btt"
-            height="80vh"
-            :min="minDateTimeSlider"
-            :max="maxDateTimeSlider"
-            :enable-cross="false"
-            :tooltip-formatter="sliderFormatter"
-            tooltip-placement="right"
-            tooltip="always"
-            v-on:change="onUpdateTimeFilter"
-            v-on:drag-start="draggingTimeFilter = true"
-            v-on:drag-end="draggingTimeFilter = false"
-          >
-            <!-- <template v-slot:tooltip="{ value }">
-              <div class="custom-tooltip">{{ timestampToDate(value) }}</div>
-            </template> -->
-          </vue-slider>
-        </div>
+        <time-filter></time-filter>
       </ion-col>
       <ion-col size="5" class="ion-margin-top">
         <img
@@ -32,7 +11,6 @@
           id="time-funnel-img"
         />
       </ion-col>
-      <!--      <ion-col size="1"></ion-col>-->
       <ion-col size="6">
         <div class="theme-select-title">
           <h2>Explore the themes</h2>
@@ -105,15 +83,15 @@
 <script>
 import $ from "jquery";
 import "imagemapster";
-import { dateMixin } from "@/mixins/dateMixin";
-import VueSlider from "vue-slider-component";
-import "vue-slider-component/theme/default.css";
 import { mapGetters, mapMutations } from "vuex";
+import { lineDrawingMixin } from "@/mixins/lineDrawingMixin";
+import { imageMapMixin } from "@/mixins/imageMapMixin";
+import TimeFilter from "@/components/TimeFilter";
 
 export default {
   name: "ThemeSelect",
-  mixins: [dateMixin],
-  components: { VueSlider },
+  mixins: [lineDrawingMixin, imageMapMixin],
+  components: { TimeFilter },
   computed: {
     ...mapGetters({
       getThemeTitle: "themes/getThemeTitle",
@@ -121,19 +99,7 @@ export default {
     }),
   },
   data() {
-    return {
-      LINECOLOR: "rgba(0, 0, 0, 0.45)",
-      IMAGEAREAOFFSET: { xOffset: 0, yOffset: 0 },
-      minDateTimeSlider: this.dateToTimestamp(new Date(2020, 1, 1)),
-      maxDateTimeSlider: this.dateToTimestamp(new Date()),
-      sliderValue: [
-        this.dateToTimestamp(new Date(2020, 1, 1)),
-        this.dateToTimestamp(new Date()),
-      ],
-      sliderFormatter: this.timestampToDate,
-      draggingTimeFilter: false,
-      linesState: "",
-    };
+    return {};
   },
   watch: {
     selectedThemeIds: {
@@ -150,166 +116,16 @@ export default {
   methods: {
     ...mapMutations({
       toggleTheme: "themes/toggleTheme",
-      updateTimeFilter: "timeFilter/update",
     }),
-    // TODO: Move line drawing logic outside component
-    async drawLine(x1, y1, x2, y2) {
-      // https://newbedev.com/html-line-drawing-without-canvas-just-js
-
-      if (x2 < x1) {
-        var tmp;
-        tmp = x2;
-        x2 = x1;
-        x1 = tmp;
-        tmp = y2;
-        y2 = y1;
-        y1 = tmp;
-      }
-
-      var lineLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-      var m = (y2 - y1) / (x2 - x1);
-
-      var degree = (Math.atan(m) * 180) / Math.PI;
-
-      const lineHtml =
-        "<div class='line' style='transform-origin: top left; transform: rotate(" +
-        degree +
-        "deg); width: " +
-        lineLength +
-        `px; height: 2px; background: ${this.LINECOLOR}; position: absolute; top: ` +
-        y1 +
-        "px; left: " +
-        x1 +
-        "px;'></div>";
-      $("body").append(lineHtml);
-      // $(".line")
-      //   .hide()
-      //   .fadeIn(400, function () {});
-    },
-    getLineTimeFunnelPositions() {
-      const timesliderHandleElems = $(".vue-slider-dot");
-      const timesliderHandlePositions = [
-        timesliderHandleElems[0].getBoundingClientRect(),
-        timesliderHandleElems[1].getBoundingClientRect(),
-      ];
-
-      const timeFunnelBounds = document
-        .querySelector("#time-funnel-img")
-        .getBoundingClientRect();
-
-      const timeFunnelLinePositions = [];
-
-      for (const timesliderHandlePos of timesliderHandlePositions) {
-        const yValue = timesliderHandlePos.top;
-        const xOffset = (timeFunnelBounds.bottom - yValue) / 3.15;
-        const timeFunnelLinePos = {
-          x: timeFunnelBounds.right + 40 - xOffset,
-          y: yValue,
-        };
-        timeFunnelLinePositions.push(timeFunnelLinePos);
-      }
-
-      return timeFunnelLinePositions;
-    },
-    drawLineBetweenThemeSelectAndTimeFunnel() {
-      const lineElems = $(".line");
-      // if (this.draggingTimeFilter) {
-      //   lineElems.remove();
-      //   return;
-      // }
-
-      const themeSelectElem = document.querySelector("#blobs-img");
-      const themeSelectBounds = themeSelectElem.getBoundingClientRect();
-
-      const timeFunnelPositions = this.getLineTimeFunnelPositions();
-
-      const linesState =
-        JSON.stringify(timeFunnelPositions) + JSON.stringify(themeSelectBounds);
-      const linesAreUnchanged = linesState === this.linesState;
-      if (linesAreUnchanged) {
-        return;
-      }
-
-      this.linesState = linesState;
-
-      lineElems.remove();
-
-      for (const timeFunnelPos of timeFunnelPositions) {
-        this.drawLine(
-          themeSelectBounds.left - 10,
-          themeSelectBounds.top + themeSelectElem.clientHeight / 2,
-          timeFunnelPos.x,
-          timeFunnelPos.y
-        );
-      }
-    },
-    onUpdateTimeFilter(data, handleIdx) {
-      this.updateTimeFilter({ min: data[0], max: data[1] });
-    },
-    onEndDraggingTimeFilter(handleIdx) {},
-    initializeImageMap() {
-      $("area").each((index, area) => {
-        const themeId = $(area).attr("title");
-        const themeTitle = this.getThemeTitle(themeId);
-        $(area)
-          .attr("title", themeTitle)
-          .attr("alt", themeTitle)
-          .attr("name", themeId);
-
-        const areaCoords = $(area).attr("coords").split(",");
-        const updatedCoords = [];
-        for (const [coordIdx, coord] of areaCoords.entries()) {
-          const isXCoordinate = coordIdx % 2 === 0;
-          const coordInt = parseInt(coord);
-          if (isXCoordinate) {
-            updatedCoords.push(coordInt + this.IMAGEAREAOFFSET.xOffset);
-          } else {
-            updatedCoords.push(coordInt + this.IMAGEAREAOFFSET.yOffset);
-          }
-        }
-        $(area).attr("coords", updatedCoords.join(","));
-      });
-
-      const imageToMap = $("img[usemap]");
-      imageToMap
-        .one("load", () => {
-          // TODO: Replace dirty fix for initializing map at the right moment
-          setTimeout(() => {
-            imageToMap.mapster({
-              stroke: true,
-              strokeWidth: 2.5,
-              strokeColor: "000000",
-              strokeOpacity: 0.3,
-              fill: true,
-              fillColor: "000000",
-              fillOpacity: 0.2,
-              onClick: (e) => {
-                const themeId = e.key;
-                this.toggleTheme(themeId);
-                return false;
-              },
-              mapKey: "name",
-              listKey: "name",
-            });
-          }, 1000);
-        })
-        .each(function () {
-          if (this.complete) {
-            $(this).trigger("load");
-          }
-        });
-    },
     initializeLineDrawing() {
       setInterval(() => {
-        this.drawLineBetweenThemeSelectAndTimeFunnel();
+        this.$store.dispatch(
+          "lineDrawing/drawLineBetweenThemeSelectAndTimeFunnel"
+        );
       }, 25);
     },
   },
   mounted() {
-    this.updateTimeFilter({
-      min: this.minDateTimeSlider,
-      max: this.maxDateTimeSlider,
-    });
     this.initializeImageMap();
     this.initializeLineDrawing();
   },
@@ -324,25 +140,6 @@ export default {
 #time-funnel-img {
   height: 80vh;
   max-width: 100%;
-}
-
-.vue-slider-dot-tooltip-inner {
-  background-color: rgba(52, 152, 219, 0.75) !important;
-  border-color: rgba(52, 152, 219, 0.75) !important;
-}
-
-.timeslider-container {
-  padding-left: 10px;
-}
-
-#timeslider-caption {
-  position: absolute;
-  top: 40vh;
-  left: 5px;
-  transform-origin: 0;
-  transform: rotate(-90deg);
-  width: 300px;
-  font-size: 1em;
 }
 
 .theme-select-annotation-text {
