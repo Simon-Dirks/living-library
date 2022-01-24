@@ -15,9 +15,8 @@
 
     <h3>The human face of academia</h3>
     <p>
-      The Living Library is an interactive platform made to help you orient
-      yourself in the academic literature that speaks about the pandemic in the
-      educational field. While other search tools that have been created to date
+      The Living Library is an interactive platform made to help you orient yourself in the academic literature speaking
+      about education in connection with the pandemic. While other search tools that have been created to date
       are run by algorithms and aim to be comprehensive, extracting and
       visualising quantitative data, the Living Library takes a complementary
       approach: it invites you to get to know a sampled part of the literature
@@ -62,8 +61,8 @@
         to adapt to a distance learning pedagogy” (<a
           href="https://journals.sagepub.com/doi/full/10.3102/0013189X20978806"
           target="_blank"
-          >Davis et al., 2021</a
-        >, p. 62)
+      >Davis et al., 2021</a
+      >, p. 62)
       </li>
       <li>
         “…given that disembodiment and loss of community and belonging emerged
@@ -71,8 +70,8 @@
         academics” (<a
           href="https://www.tandfonline.com/doi/full/10.1080/03075079.2020.1859681"
           target="_blank"
-          >Eringfeld, 2020</a
-        >, p. 155)
+      >Eringfeld, 2020</a
+      >, p. 155)
       </li>
     </ul>
 
@@ -115,8 +114,8 @@ export default {
   methods: {
     closeModal() {
       modalController.dismiss();
-    },
-  },
+    }
+  }
 };
 </script>
 
