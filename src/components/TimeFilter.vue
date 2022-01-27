@@ -2,7 +2,6 @@
   <div class="timeslider-container">
     <h3 id="timeslider-caption">Flow of time &#8594;</h3>
 
-    <!-- TODO: Use "data" here to allow for snapping -->
     <vue-slider
       v-model="sliderValue"
       direction="btt"
@@ -16,6 +15,8 @@
       :hideLabel="true"
       tooltip-placement="right"
       tooltip="always"
+      @drag-start="onStartDraggingTimeFilter"
+      @drag-end="onStopDraggingTimeFilter"
       v-on:change="onSliderChange($event)"
     >
     </vue-slider>
@@ -38,13 +39,13 @@ export default {
       maxDateUnixTimeSlider: this.getMaxSliderValue(),
       sliderValue: [moment("2020-01-01").unix(), this.getMaxSliderValue()],
       sliderFormatter: (unix) => moment.unix(unix).format("MMMM YYYY"),
-      draggingTimeFilter: false,
-      applyFilterInterval: null,
     };
   },
   methods: {
     ...mapMutations({
       updateTimeFilter: "timeFilter/update",
+      onStartDraggingTimeFilter: "timeFilter/onStartDraggingTimeFilter",
+      onStopDraggingTimeFilter: "timeFilter/onStopDraggingTimeFilter",
     }),
     onSliderChange(event) {
       this.updateTimeFilter({

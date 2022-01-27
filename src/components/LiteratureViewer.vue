@@ -95,6 +95,9 @@ export default {
       filteredLiterature: "literature/getFilteredLiterature",
       loadingLiteratureData: "literature/getLoadingLiteratureData",
     }),
+    isDraggingTimeFilter() {
+      return this.$store.getters["timeFilter/isDragging"];
+    },
     paginationInfo: function () {
       return this.paginator.build(
         this.filteredLiterature.length,
@@ -106,10 +109,15 @@ export default {
         return [];
       }
 
-      return this.filteredLiterature.slice(
+      const literatureOnCurrentPage = this.filteredLiterature.slice(
         this.paginationInfo.first_result,
         this.paginationInfo.last_result
       );
+      const shownLiterature = literatureOnCurrentPage;
+      // const shownLiterature = this.isDraggingTimeFilter
+      //   ? []
+      //   : literatureOnCurrentPage;
+      return shownLiterature;
     },
   },
   watch: {
