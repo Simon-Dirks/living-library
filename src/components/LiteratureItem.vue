@@ -47,7 +47,9 @@
 
       <p>
         <ion-icon class="ion-margin-end" name="calendar" />
-        <span>{{ timestampToDate(literatureItem["date"]) }}</span>
+        <span>{{
+          moment(literatureItem["date"]).format("MMMM DD, YYYY")
+        }}</span>
       </p>
 
       <p v-if="literatureItem[config.CSV_KEYS.COUNTRY]">
@@ -76,17 +78,18 @@
 
 <script>
 import { modalController } from "@ionic/vue";
-import { dateMixin } from "@/mixins/dateMixin";
 import Config from "@/config.js";
 import { mapGetters, mapMutations } from "vuex";
 import ThemeInfoPopup from "@/components/popups/ThemeInfoPopup";
+import moment from "moment";
 
 export default {
-  mixins: [dateMixin],
+  mixins: [],
   components: {},
   data() {
     return {
       config: Config,
+      moment: moment,
     };
   },
   computed: {

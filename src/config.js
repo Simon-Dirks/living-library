@@ -38,6 +38,6 @@ export default {
     "https://docs.google.com/spreadsheets/u/0/d/1mQYw67fH-_uWqw7u5q9b2fs3_ZVx1UoHUfoOigqBCck/gviz/tq?tqx=out:csv&tq=select+*",
   LINE_COLOR: "rgba(0, 0, 0, 0.45)",
   IMAGEAREAOFFSET: { xOffset: 0, yOffset: 0 },
-  NUM_LIT_ITEMS_PER_PAGE: 35,
+  NUM_LIT_ITEMS_PER_PAGE: 9999,
   DEBUG_MODE: false,
 };

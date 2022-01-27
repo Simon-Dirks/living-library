@@ -1,6 +1,7 @@
 import Config from "@/config";
 import fileLiteratureData from "@/assets/data/coded-articles.csv";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import moment from "moment";
 
 export default {
   getLoadingLiteratureData: (state) => {
@@ -51,10 +52,9 @@ export default {
       if (invalidTimeFilter) {
         return true;
       }
-
-      return (
-        litItem.date <= new Date(timeFilter.max) &&
-        litItem.date >= new Date(timeFilter.min)
+      return moment(litItem.date).isBetween(
+        moment.unix(timeFilter.min),
+        moment.unix(timeFilter.max)
       );
     },
   isLitItemShownByFilters: (state, getters) => (litItem) => {

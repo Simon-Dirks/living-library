@@ -2,23 +2,22 @@
   <div class="timeslider-container">
     <h3 id="timeslider-caption">Flow of time &#8594;</h3>
 
+    <!-- TODO: Use "data" here to allow for snapping -->
     <vue-slider
       v-model="sliderValue"
       direction="btt"
       height="80vh"
-      :min="minDateTimeSlider"
-      :max="maxDateTimeSlider"
+      :max="maxDateUnixTimeSlider"
+      :min="minDateUnixTimeSlider"
+      :marks="getMonthMarkers(minDateUnixTimeSlider, maxDateUnixTimeSlider)"
       :enable-cross="false"
       :tooltip-formatter="sliderFormatter"
+      :adsorb="true"
+      :hideLabel="true"
       tooltip-placement="right"
       tooltip="always"
-      v-on:change="updateTimeFilter({ min: $event[0], max: $event[1] })"
-      v-on:drag-start="draggingTimeFilter = true"
-      v-on:drag-end="draggingTimeFilter = false"
+      v-on:change="onSliderChange($event)"
     >
-      <!-- <template v-slot:tooltip="{ value }">
-        <div class="custom-tooltip">{{ timestampToDate(value) }}</div>
-      </template> -->
     </vue-slider>
   </div>
 </template>
@@ -26,34 +25,61 @@
 <script>
 import VueSlider from "vue-slider-component";
 import { mapMutations } from "vuex";
-import { dateMixin } from "@/mixins/dateMixin";
 import "vue-slider-component/theme/default.css";
+import moment from "moment";
 
 export default {
   name: "TimeFilter",
-  mixins: [dateMixin],
+  mixins: [],
   components: { VueSlider },
   data() {
     return {
-      minDateTimeSlider: this.dateToTimestamp(new Date(2020, 1, 1)),
-      maxDateTimeSlider: this.dateToTimestamp(new Date()),
-      sliderValue: [
-        this.dateToTimestamp(new Date(2020, 1, 1)),
-        this.dateToTimestamp(new Date()),
-      ],
-      sliderFormatter: this.timestampToDate,
+      minDateUnixTimeSlider: moment("2020-01-01").unix(),
+      maxDateUnixTimeSlider: this.getMaxSliderValue(),
+      sliderValue: [moment("2020-01-01").unix(), this.getMaxSliderValue()],
+      sliderFormatter: (unix) => moment.unix(unix).format("MMMM YYYY"),
       draggingTimeFilter: false,
+      applyFilterInterval: null,
     };
   },
   methods: {
     ...mapMutations({
       updateTimeFilter: "timeFilter/update",
     }),
+    onSliderChange(event) {
+      this.updateTimeFilter({
+        min: this.sliderValue[0],
+        max: this.sliderValue[1],
+      });
+    },
+    getMonthMarkers(startDateUnix, endDateUnix) {
+      startDateUnix = moment.unix(startDateUnix);
+      endDateUnix = moment.unix(endDateUnix);
+
+      const markers = [];
+
+      if (endDateUnix.isBefore(startDateUnix)) {
+        throw "End date must be greater than start date.";
+      }
+
+      while (startDateUnix.isBefore(endDateUnix)) {
+        markers.push(startDateUnix.unix());
+        startDateUnix.add(1, "month");
+      }
+      return markers;
+    },
+    getMaxSliderValue() {
+      return moment()
+        .add(1, "months")
+        .set("date", 1)
+        .set({ hour: 0, minute: 0, second: 0 })
+        .unix();
+    },
   },
   mounted() {
     this.updateTimeFilter({
-      min: this.minDateTimeSlider,
-      max: this.maxDateTimeSlider,
+      min: this.minDateUnixTimeSlider,
+      max: this.maxDateUnixTimeSlider,
     });
   },
 };
