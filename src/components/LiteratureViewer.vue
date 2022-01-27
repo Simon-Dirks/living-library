@@ -1,9 +1,13 @@
 <template>
-  <ion-content class="literature-section-content">
+  <ion-content class="literature-section-content" :scroll-events="true">
     <div class="literature-filter-container">
       <h2 class="literature-section-title ion-padding-top">
-        Literature ({{ shownLiterature.length }})
+        Literature ({{ filteredLiterature.length }})
       </h2>
+      <!--      <p class="literature-section-title ion-no-margin">-->
+      <!--        Page {{ paginationInfo.current_page }} /-->
+      <!--        {{ paginationInfo.total_pages }}-->
+      <!--      </p>-->
 
       <literature-filter
         :onEducationTypeFilterClicked="onEducationTypeFilterClicked"
@@ -21,6 +25,43 @@
         <literature-item :literatureItem="literatureItem"></literature-item>
       </template>
     </div>
+
+    <div class="pagination-container" v-if="paginationInfo.total_pages > 1">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              @click="onPreviousPage"
+              :disabled="!paginationInfo.has_previous_page"
+              class="button-prev-page"
+            >
+              <ion-icon name="caret-back"></ion-icon>
+              Previous
+            </ion-button>
+          </ion-col>
+
+          <ion-col>
+            <p class="current-page-text">
+              <em
+                >Current page: {{ currentPage }} /
+                {{ paginationInfo.total_pages }}</em
+              >
+            </p>
+          </ion-col>
+
+          <ion-col>
+            <ion-button
+              @click="onNextPage"
+              :disabled="!paginationInfo.has_next_page"
+              class="button-next-page"
+            >
+              Next
+              <ion-icon name="caret-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-content>
 </template>
 
@@ -31,6 +72,9 @@ import Config from "@/config.js";
 import LiteratureFilter from "@/components/LiteratureFilter";
 import { mapActions, mapGetters } from "vuex";
 
+const Paginator = require("paginator");
+
+// TODO: Use https://www.npmjs.com/package/paginator
 export default {
   mixins: [],
   name: "LiteratureViewer",
@@ -39,13 +83,44 @@ export default {
     LiteratureFilter,
   },
   data() {
-    return { config: Config };
+    return {
+      config: Config,
+      numLitItemsToShow: Config.NUM_LIT_ITEMS_PER_PAGE,
+      currentPage: 1,
+      paginator: new Paginator(Config.NUM_LIT_ITEMS_PER_PAGE, 5),
+    };
   },
   computed: {
     ...mapGetters({
-      shownLiterature: "literature/getShownLiterature",
+      filteredLiterature: "literature/getFilteredLiterature",
       loadingLiteratureData: "literature/getLoadingLiteratureData",
     }),
+    paginationInfo: function () {
+      return this.paginator.build(
+        this.filteredLiterature.length,
+        this.currentPage
+      );
+    },
+    shownLiterature: function () {
+      if (!this.filteredLiterature || this.filteredLiterature.length <= 0) {
+        return [];
+      }
+
+      return this.filteredLiterature.slice(
+        this.paginationInfo.first_result,
+        this.paginationInfo.last_result
+      );
+    },
+  },
+  watch: {
+    paginationInfo: {
+      handler: function (newPaginationInfo, _) {
+        if (this.currentPage < newPaginationInfo.first_page) {
+          this.currentPage = newPaginationInfo.first_page;
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     ...mapActions({
@@ -65,6 +140,21 @@ export default {
       this.updateResearchTypeFilter({
         researchTypeKey,
         showResearchType: showThisKey,
+      });
+    },
+    onPreviousPage() {
+      this.currentPage--;
+      this.scrollToTop();
+    },
+    onNextPage() {
+      this.currentPage++;
+      this.scrollToTop();
+    },
+    scrollToTop() {
+      setTimeout(() => {
+        document
+          .querySelector("ion-content.literature-section-content")
+          .scrollToTop(400);
       });
     },
   },
@@ -89,5 +179,13 @@ ion-spinner {
   top: 0;
   background: white;
   z-index: 9999;
+}
+
+.button-next-page {
+  float: right;
+}
+
+.current-page-text {
+  text-align: center;
 }
 </style>

@@ -81,18 +81,18 @@ export default {
     }
     return itemResearchTypeShouldBeShown && itemEducationTypeShouldBeShown;
   },
-  getShownLiterature: (state, getters, rootState, rootGetters) => {
+  getFilteredLiterature: (state, getters, rootState, rootGetters) => {
     if (!getters.getLiteratureData) {
       return [];
     }
-    let shownLiteratureData = getters.getLiteratureData
+    let filteredLiteratureData = getters.getLiteratureData
       .filter((litItem) => getters.isLitItemWithinDateFilter(litItem))
       .filter((litItem) => getters.isLitItemShownByFilters(litItem));
 
     const noThemesSelected =
       rootGetters["themes/getSelectedThemeIds"].length === 0;
     if (noThemesSelected) {
-      return shownLiteratureData;
+      return filteredLiteratureData;
     }
 
     // Show literature tagged with (at least) one of the selected themes
@@ -101,19 +101,19 @@ export default {
     // );
 
     // Show literature tagged with ALL of the selected themes
-    shownLiteratureData = shownLiteratureData.filter(
+    filteredLiteratureData = filteredLiteratureData.filter(
       (litItem) =>
         getters.getNumSelectedThemesForLitItem(litItem) ===
         rootGetters["themes/getSelectedThemeIds"].length
     );
 
-    shownLiteratureData.sort((firstItem, secondItem) => {
+    filteredLiteratureData.sort((firstItem, secondItem) => {
       return (
         getters.getNumSelectedThemesForLitItem(secondItem) -
         getters.getNumSelectedThemesForLitItem(firstItem)
       );
     });
 
-    return shownLiteratureData;
+    return filteredLiteratureData;
   },
 };

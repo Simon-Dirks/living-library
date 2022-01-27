@@ -105,5 +105,6 @@ ion-grid {
 
 .literature-viewer-column {
   padding-left: 50px;
+  padding-bottom: 56px; /* TODO: Use more elegant fix for offsetting header height */
 }
 </style>

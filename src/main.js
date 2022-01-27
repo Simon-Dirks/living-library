@@ -17,8 +17,11 @@ import {
   IonHeader,
   IonIcon,
   IonicVue,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
   IonItem,
   IonLabel,
+  IonList,
   IonPage,
   IonRow,
   IonSpinner,
@@ -35,6 +38,8 @@ import {
   arrowBackOutline,
   helpCircleOutline,
   globeOutline,
+  caretForwardOutline,
+  caretBackOutline,
 } from "ionicons/icons";
 import Config from "@/config.js";
 import { initializeApp } from "firebase/app";
@@ -43,8 +48,7 @@ import store from "@/store";
 
 document.title = "Living Library [PROTOTYPE]";
 
-const app = createApp(App).use(IonicVue).use(router);
-app.use(store);
+const app = createApp(App).use(IonicVue).use(router).use(store);
 
 initializeApp(Config.FIREBASE_CONFIG);
 
@@ -58,6 +62,8 @@ router.isReady().then(() => {
     calendar: calendarOutline,
     "help-circle": helpCircleOutline,
     globe: globeOutline,
+    "caret-forward": caretForwardOutline,
+    "caret-back": caretBackOutline,
   });
 
   app.mount("#app");
@@ -81,5 +87,8 @@ app.component("ion-chip", IonChip);
 app.component("ion-label", IonLabel);
 app.component("ion-title", IonTitle);
 app.component("ion-checkbox", IonCheckbox);
+app.component("ion-infinite-scroll-content", IonInfiniteScrollContent);
+app.component("ion-infinite-scroll", IonInfiniteScroll);
+app.component("ion-list", IonList);
 app.component("ion-item", IonItem);
 app.component("ion-spinner", IonSpinner);
