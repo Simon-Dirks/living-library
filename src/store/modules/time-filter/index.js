@@ -9,6 +9,7 @@ const timeFilterModule = {
   },
   mutations: {
     update(state, { min, max }) {
+      // TODO: Replace min diff with month snapping in slider
       const minDiff = Math.abs(state.timeFilter.min - min);
       const maxDiff = Math.abs(state.timeFilter.max - max);
       const minHasChanged = min !== state.timeFilter.min;
