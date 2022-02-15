@@ -17,8 +17,7 @@ export default {
 
     const linesState =
       JSON.stringify(timeFunnelPositions) + JSON.stringify(themeSelectBounds);
-    const linesAreUnchanged =
-      linesState === context.getters["lineDrawing/linesState"];
+    const linesAreUnchanged = linesState === context.getters["getLinesState"];
     if (linesAreUnchanged) {
       return;
     }
