@@ -37,6 +37,31 @@
             </ion-item>
           </ion-col>
         </ion-row>
+
+        <ion-row>
+          <ion-col size="6" class="checkbox-container">
+            <ion-item>
+              <ion-toggle
+                slot="start"
+                name="show-reviewer-thoughts"
+                :checked="getShowReviewerThoughts"
+                @ionChange="updateShowReviewerThoughts($event.target.checked)"
+              ></ion-toggle>
+              <ion-label>Show reviewer's thoughts?</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6" class="checkbox-container">
+            <ion-item>
+              <ion-toggle
+                slot="start"
+                name="show-reviewer-notes"
+                :checked="getShowReviewerNotes"
+                @ionChange="updateShowReviewerNotes($event.target.checked)"
+              ></ion-toggle>
+              <ion-label>Show reviewer's doubts?</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
@@ -44,6 +69,7 @@
 
 <script>
 import Config from "@/config";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {},
@@ -52,11 +78,22 @@ export default {
       config: Config,
     };
   },
+  computed: {
+    ...mapGetters({
+      getShowReviewerThoughts: "literature/getShowReviewerThoughts",
+      getShowReviewerNotes: "literature/getShowReviewerNotes",
+    }),
+  },
   props: {
     onEducationTypeFilterClicked: { type: Function },
     onResearchTypeFilterClicked: { type: Function },
   },
-  methods: {},
+  methods: {
+    ...mapMutations({
+      updateShowReviewerThoughts: "literature/updateShowReviewerThoughts",
+      updateShowReviewerNotes: "literature/updateShowReviewerNotes",
+    }),
+  },
 };
 </script>
 
@@ -64,6 +101,7 @@ export default {
 ion-card-header {
   padding-bottom: 0;
 }
+
 .checkbox-container {
   padding: 0;
 }

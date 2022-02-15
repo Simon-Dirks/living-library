@@ -59,12 +59,12 @@
 
       <div
         v-if="
-          getShowReviewerThoughts(literatureItem) ||
-          getShowReviewerNotes(literatureItem)
+          getShowReviewerThoughtsItem(literatureItem) ||
+          getShowReviewerNotesItem(literatureItem)
         "
         class="thoughts-text-container"
       >
-        <div v-if="getShowReviewerThoughts(literatureItem)">
+        <div v-if="getShowReviewerThoughtsItem(literatureItem)">
           <p>
             <strong>Reviewer's thoughts and discussion points</strong>
           </p>
@@ -76,13 +76,13 @@
 
         <div
           v-if="
-            getShowReviewerThoughts(literatureItem) &&
-            getShowReviewerNotes(literatureItem)
+            getShowReviewerThoughtsItem(literatureItem) &&
+            getShowReviewerNotesItem(literatureItem)
           "
           class="ion-margin-top"
         ></div>
 
-        <div v-if="getShowReviewerNotes(literatureItem)">
+        <div v-if="getShowReviewerNotesItem(literatureItem)">
           <p>
             <strong>Reviewer's notes and doubts</strong>
           </p>
@@ -136,8 +136,8 @@ export default {
       getThemeColor: "themes/getThemeColor",
       getThemeData: "themes/getThemeData",
       getThemeChipColor: "themes/getThemeChipColor",
-      getShowReviewerThoughts: "literature/getShowReviewerThoughts",
-      getShowReviewerNotes: "literature/getShowReviewerNotes",
+      getShowReviewerThoughtsItem: "literature/getShowReviewerThoughtsItem",
+      getShowReviewerNotesItem: "literature/getShowReviewerNotesItem",
     }),
   },
   methods: {

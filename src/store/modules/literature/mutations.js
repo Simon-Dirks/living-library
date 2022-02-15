@@ -17,4 +17,10 @@ export default {
   hideEducationType: (state, educationTypeKey) => {
     state.shownEducationTypeKeys.delete(educationTypeKey);
   },
+  updateShowReviewerThoughts: (state, isShown) => {
+    state.showReviewerThoughts = isShown;
+  },
+  updateShowReviewerNotes: (state, isShown) => {
+    state.showReviewerNotes = isShown;
+  },
 };

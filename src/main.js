@@ -26,6 +26,7 @@ import {
   IonRow,
   IonSpinner,
   IonTitle,
+  IonToggle,
   IonToolbar,
 } from "@ionic/vue";
 import { addIcons } from "ionicons";
@@ -92,3 +93,4 @@ app.component("ion-infinite-scroll", IonInfiniteScroll);
 app.component("ion-list", IonList);
 app.component("ion-item", IonItem);
 app.component("ion-spinner", IonSpinner);
+app.component("ion-toggle", IonToggle);
