@@ -59,12 +59,12 @@
 
       <div
         v-if="
-          literatureItem[config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS] ||
-          literatureItem[config.CSV_KEYS.NOTES_DOUBTS]
+          getShowReviewerThoughts(literatureItem) ||
+          getShowReviewerNotes(literatureItem)
         "
         class="thoughts-text-container"
       >
-        <div v-if="literatureItem[config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS]">
+        <div v-if="getShowReviewerThoughts(literatureItem)">
           <p>
             <strong>Reviewer's thoughts and discussion points</strong>
           </p>
@@ -76,13 +76,13 @@
 
         <div
           v-if="
-            literatureItem[config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS] &&
-            literatureItem[config.CSV_KEYS.NOTES_DOUBTS]
+            getShowReviewerThoughts(literatureItem) &&
+            getShowReviewerNotes(literatureItem)
           "
           class="ion-margin-top"
         ></div>
 
-        <div v-if="literatureItem[config.CSV_KEYS.NOTES_DOUBTS]">
+        <div v-if="getShowReviewerNotes(literatureItem)">
           <p>
             <strong>Reviewer's notes and doubts</strong>
           </p>
@@ -136,6 +136,8 @@ export default {
       getThemeColor: "themes/getThemeColor",
       getThemeData: "themes/getThemeData",
       getThemeChipColor: "themes/getThemeChipColor",
+      getShowReviewerThoughts: "literature/getShowReviewerThoughts",
+      getShowReviewerNotes: "literature/getShowReviewerNotes",
     }),
   },
   methods: {

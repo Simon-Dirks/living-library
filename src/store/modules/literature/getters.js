@@ -1,6 +1,4 @@
 import Config from "@/config";
-import fileLiteratureData from "@/assets/data/coded-articles.csv";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import moment from "moment";
 
 export default {
@@ -9,6 +7,15 @@ export default {
   },
   getLiteratureData: (state) => {
     return state.literatureData;
+  },
+  getShowReviewerThoughts: (state) => (litItem) => {
+    return (
+      litItem[Config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS] &&
+      state.showReviewerThoughts
+    );
+  },
+  getShowReviewerNotes: (state) => (litItem) => {
+    return litItem[Config.CSV_KEYS.NOTES_DOUBTS] && state.showReviewerNotes;
   },
   getShownResearchTypeKeys: (state) => {
     return state.shownResearchTypeKeys;
