@@ -122,7 +122,7 @@ export default {
         this.$store.dispatch(
           "lineDrawing/drawLineBetweenThemeSelectAndTimeFunnel"
         );
-      }, 75);
+      }, 50);
     },
   },
   mounted() {

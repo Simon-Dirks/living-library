@@ -53,8 +53,8 @@ export const lineDrawingMixin = {
         const yValue = timesliderHandlePos.top;
         const xOffset = (timeFunnelBounds.bottom - yValue) / 3.15;
         const timeFunnelLinePos = {
-          x: timeFunnelBounds.right + 40 - xOffset,
-          y: yValue,
+          x: Math.round(timeFunnelBounds.right + 40 - xOffset),
+          y: Math.round(yValue),
         };
         timeFunnelLinePositions.push(timeFunnelLinePos);
       }
