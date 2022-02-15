@@ -57,6 +57,42 @@
         <span>{{ literatureItem[config.CSV_KEYS.COUNTRY] }}</span>
       </p>
 
+      <div
+        v-if="
+          literatureItem[config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS] ||
+          literatureItem[config.CSV_KEYS.NOTES_DOUBTS]
+        "
+        class="thoughts-text-container"
+      >
+        <div v-if="literatureItem[config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS]">
+          <p>
+            <strong>Reviewer's thoughts and discussion points</strong>
+          </p>
+
+          <p>
+            {{ literatureItem[config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS] }}
+          </p>
+        </div>
+
+        <div
+          v-if="
+            literatureItem[config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS] &&
+            literatureItem[config.CSV_KEYS.NOTES_DOUBTS]
+          "
+          class="ion-margin-top"
+        ></div>
+
+        <div v-if="literatureItem[config.CSV_KEYS.NOTES_DOUBTS]">
+          <p>
+            <strong>Reviewer's notes and doubts</strong>
+          </p>
+
+          <p>
+            {{ literatureItem[config.CSV_KEYS.NOTES_DOUBTS] }}
+          </p>
+        </div>
+      </div>
+
       <!--      <p>-->
       <!--        <ion-icon class="ion-margin-end" name="calendar" />-->
       <!--        <span>Date of coding: {{ literatureItem[config.CSV_KEYS.DATE_OF_CODING] }}</span>-->
@@ -131,5 +167,12 @@ export default {
 a {
   color: #3880ff;
   text-decoration: none;
+}
+
+.thoughts-text-container {
+  border-radius: 5px;
+  background: aliceblue;
+  padding: 16px;
+  margin-top: 16px;
 }
 </style>
