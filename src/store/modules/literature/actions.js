@@ -16,8 +16,8 @@ export default {
 
     literatureData = literatureData.filter((litItem) => {
       const litItemHasName =
-        litItem[Config.CSV_KEYS.ARTICLE_NAME] &&
-        litItem[Config.CSV_KEYS.ARTICLE_NAME] !== "";
+        litItem[Config.LIT_CSV_KEYS.ARTICLE_NAME] &&
+        litItem[Config.LIT_CSV_KEYS.ARTICLE_NAME] !== "";
       return litItemHasName;
     });
 
@@ -26,21 +26,21 @@ export default {
       litItem["themes"] = [];
       litItem["year"] = null;
 
-      if (litItem[Config.CSV_KEYS.DATE]) {
+      if (litItem[Config.LIT_CSV_KEYS.DATE]) {
         litItem["date"] = context.getters.getDateFromLitItem(litItem);
 
-        // litItem[Config.CSV_KEYS.DATE_OF_CODING] = new Date(
-        //   litItem[Config.CSV_KEYS.DATE_OF_CODING]
+        // litItem[Config.LIT_CSV_KEYS.DATE_OF_CODING] = new Date(
+        //   litItem[Config.LIT_CSV_KEYS.DATE_OF_CODING]
         // );
       }
 
-      const countryConductedRaw = litItem[Config.CSV_KEYS.COUNTRY];
+      const countryConductedRaw = litItem[Config.LIT_CSV_KEYS.COUNTRY];
       if (countryConductedRaw) {
         const countriesConductedStr = countryConductedRaw.split(";").join(", ");
-        litItem[Config.CSV_KEYS.COUNTRY] = countriesConductedStr;
+        litItem[Config.LIT_CSV_KEYS.COUNTRY] = countriesConductedStr;
       }
 
-      for (const themeKey of Config.CSV_KEYS.THEMES) {
+      for (const themeKey of Config.LIT_CSV_KEYS.THEMES) {
         if (!litItem[themeKey] || litItem[themeKey] === "") {
           // console.warn(
           //   "Could not find themes for article:",
@@ -110,11 +110,11 @@ export default {
       return Promise.resolve(fileLiteratureData);
     }
 
-    console.log("Downloading coded articles file...", Config.CSV_URL);
+    console.log("Downloading coded articles file...", Config.LIT_CSV_URL);
 
     const rawResponse = await context.dispatch(
       "sendHttpRequest",
-      { url: Config.CSV_URL, responseType: "text" },
+      { url: Config.LIT_CSV_URL, responseType: "text" },
       { root: true }
     );
     return rawResponse;

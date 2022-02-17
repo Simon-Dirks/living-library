@@ -2,8 +2,8 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>{{ literatureItem["Article name"] }}</ion-card-title>
-      <ion-card-subtitle v-if="literatureItem[config.CSV_KEYS.SUMMARY]">
-        {{ literatureItem[config.CSV_KEYS.SUMMARY] }}
+      <ion-card-subtitle v-if="literatureItem[config.LIT_CSV_KEYS.SUMMARY]">
+        {{ literatureItem[config.LIT_CSV_KEYS.SUMMARY] }}
       </ion-card-subtitle>
       <br />
       <ion-chip
@@ -32,17 +32,20 @@
     </ion-card-header>
     <ion-card-content>
       <p>
-        <a :href="literatureItem[config.CSV_KEYS.ARTICLE_LINK]" target="_blank">
+        <a
+          :href="literatureItem[config.LIT_CSV_KEYS.ARTICLE_LINK]"
+          target="_blank"
+        >
           <ion-icon class="ion-margin-end" name="link" />
-          <span v-if="literatureItem[config.CSV_KEYS.AUTHORS]">
-            {{ literatureItem[config.CSV_KEYS.AUTHORS] }}</span
+          <span v-if="literatureItem[config.LIT_CSV_KEYS.AUTHORS]">
+            {{ literatureItem[config.LIT_CSV_KEYS.AUTHORS] }}</span
           ><span v-else>Article link</span>
         </a>
       </p>
 
       <p>
         <ion-icon class="ion-margin-end" name="book" />
-        <span>{{ literatureItem[config.CSV_KEYS.JOURNAL] }}</span>
+        <span>{{ literatureItem[config.LIT_CSV_KEYS.JOURNAL] }}</span>
       </p>
 
       <p>
@@ -52,9 +55,9 @@
         }}</span>
       </p>
 
-      <p v-if="literatureItem[config.CSV_KEYS.COUNTRY]">
+      <p v-if="literatureItem[config.LIT_CSV_KEYS.COUNTRY]">
         <ion-icon class="ion-margin-end" name="globe" />
-        <span>{{ literatureItem[config.CSV_KEYS.COUNTRY] }}</span>
+        <span>{{ literatureItem[config.LIT_CSV_KEYS.COUNTRY] }}</span>
       </p>
 
       <div
@@ -70,7 +73,7 @@
           </p>
 
           <p>
-            {{ literatureItem[config.CSV_KEYS.CONTENT_NOTES] }}
+            {{ literatureItem[config.LIT_CSV_KEYS.CONTENT_NOTES] }}
           </p>
         </div>
 
@@ -88,22 +91,22 @@
           </p>
 
           <p>
-            {{ literatureItem[config.CSV_KEYS.PROCESS_NOTES] }}
+            {{ literatureItem[config.LIT_CSV_KEYS.PROCESS_NOTES] }}
           </p>
         </div>
       </div>
 
       <!--      <p>-->
       <!--        <ion-icon class="ion-margin-end" name="calendar" />-->
-      <!--        <span>Date of coding: {{ literatureItem[config.CSV_KEYS.DATE_OF_CODING] }}</span>-->
+      <!--        <span>Date of coding: {{ literatureItem[config.LIT_CSV_KEYS.DATE_OF_CODING] }}</span>-->
       <!--      </p>-->
 
-      <!--      <p v-if="literatureItem[config.CSV_KEYS.CODED_BY]">-->
+      <!--      <p v-if="literatureItem[config.LIT_CSV_KEYS.CODED_BY]">-->
       <!--        <small>-->
       <!--          <em-->
-      <!--            >Coded by: {{ literatureItem[config.CSV_KEYS.CODED_BY] }}-->
-      <!--            <span v-if="literatureItem[config.CSV_KEYS.DATE_OF_CODING]">-->
-      <!--              ({{ literatureItem[config.CSV_KEYS.DATE_OF_CODING] }})-->
+      <!--            >Coded by: {{ literatureItem[config.LIT_CSV_KEYS.CODED_BY] }}-->
+      <!--            <span v-if="literatureItem[config.LIT_CSV_KEYS.DATE_OF_CODING]">-->
+      <!--              ({{ literatureItem[config.LIT_CSV_KEYS.DATE_OF_CODING] }})-->
       <!--            </span>-->
       <!--          </em>-->
       <!--        </small>-->

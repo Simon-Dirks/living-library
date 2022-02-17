@@ -10,12 +10,14 @@ export default {
   },
   getShowReviewerContentNotesItem: (state) => (litItem) => {
     return (
-      litItem[Config.CSV_KEYS.CONTENT_NOTES] && state.showReviewerContentNotes
+      litItem[Config.LIT_CSV_KEYS.CONTENT_NOTES] &&
+      state.showReviewerContentNotes
     );
   },
   getShowReviewerProcessNotesItem: (state) => (litItem) => {
     return (
-      litItem[Config.CSV_KEYS.PROCESS_NOTES] && state.showReviewerProcessNotes
+      litItem[Config.LIT_CSV_KEYS.PROCESS_NOTES] &&
+      state.showReviewerProcessNotes
     );
   },
   getShowReviewerContentNotes: (state) => {
@@ -31,8 +33,8 @@ export default {
     return state.shownEducationTypeKeys;
   },
   getDateFromLitItem: (state) => (litItem) => {
-    let itemYear = litItem[Config.CSV_KEYS.DATE].replace(/\D/g, "");
-    let itemMonth = litItem[Config.CSV_KEYS.DATE]
+    let itemYear = litItem[Config.LIT_CSV_KEYS.DATE].replace(/\D/g, "");
+    let itemMonth = litItem[Config.LIT_CSV_KEYS.DATE]
       .replace("date.", "")
       .replace(itemYear, "");
     const itemMonthStartsWithR = itemMonth[0].toLowerCase() === "r";

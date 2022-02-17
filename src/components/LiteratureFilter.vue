@@ -8,7 +8,7 @@
           </ion-col>
           <ion-col
             v-for="[filterTitle, filterKey] in Object.entries(
-              config.CSV_FILTER_KEYS
+              config.LIT_CSV_FILTER_KEYS
             )"
             :key="filterKey"
             class="checkbox-container"
@@ -26,7 +26,7 @@
           </ion-col>
           <ion-col
             v-for="[filterTitle, filterKey] in Object.entries(
-              config.CSV_EDUCATION_FILTER_KEYS
+              config.LIT_CSV_EDUCATION_FILTER_KEYS
             )"
             :key="filterKey"
             class="checkbox-container"

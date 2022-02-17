@@ -74,7 +74,6 @@ import { mapActions, mapGetters } from "vuex";
 
 const Paginator = require("paginator");
 
-// TODO: Use https://www.npmjs.com/package/paginator
 export default {
   mixins: [],
   name: "LiteratureViewer",

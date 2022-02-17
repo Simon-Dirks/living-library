@@ -4,10 +4,12 @@ import literatureModule from "@/store/modules/literature";
 import timeFilterModule from "@/store/modules/time-filter";
 import lineDrawingModule from "@/store/modules/line-drawing";
 import imageMapModule from "@/store/modules/image-map";
+import themeLogbookModule from "@/store/modules/theme-logbook";
 
 const store = createStore({
   modules: {
     themes: themeModule,
+    themeLogbook: themeLogbookModule,
     literature: literatureModule,
     timeFilter: timeFilterModule,
     lineDrawing: lineDrawingModule,

@@ -9,9 +9,9 @@ const literatureModule = {
     return {
       literatureData: [],
       loadingLiteratureData: false,
-      shownResearchTypeKeys: new Set(Object.values(Config.CSV_FILTER_KEYS)),
+      shownResearchTypeKeys: new Set(Object.values(Config.LIT_CSV_FILTER_KEYS)),
       shownEducationTypeKeys: new Set(
-        Object.values(Config.CSV_EDUCATION_FILTER_KEYS)
+        Object.values(Config.LIT_CSV_EDUCATION_FILTER_KEYS)
       ),
       showReviewerContentNotes: true,
       showReviewerProcessNotes: true,
