@@ -25,6 +25,8 @@ import {
   IonList,
   IonPage,
   IonRow,
+  IonSelect,
+  IonSelectOption,
   IonSpinner,
   IonTitle,
   IonToggle,
@@ -94,3 +96,5 @@ app.component("ion-spinner", IonSpinner);
 app.component("ion-toggle", IonToggle);
 app.component("ion-back-button", IonBackButton);
 app.component("ion-page", IonPage);
+app.component("ion-select", IonSelect);
+app.component("ion-select-option", IonSelectOption);

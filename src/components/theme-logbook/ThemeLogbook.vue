@@ -12,30 +12,55 @@
     </ion-header>
 
     <ion-content>
-      <p v-if="!logbookData" class="ion-padding-horizontal">
+      <p v-if="!filteredLogbookData" class="ion-padding-horizontal">
         <ion-spinner class="ion-margin-end" style="top: 8px"></ion-spinner>
         <em>Loading theme logbook data...</em>
       </p>
-      <div v-if="logbookData">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Show logs for themes:</ion-label>
+              <ion-select multiple interface="alert" v-model="selectedThemes">
+                <ion-select-option
+                  v-for="(
+                    themeTitle, themeKey
+                  ) in config.THEME_LOGBOOK_FILTER_VALUES"
+                  :key="themeKey"
+                  :value="themeKey"
+                  >{{ themeTitle }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div v-if="filteredLogbookData">
         <ion-card
-          v-for="logbookRow in logbookData"
-          :key="JSON.stringify(logbookRow)"
+          v-for="(logbookEntries, logbookEntryDate) in filteredLogbookData"
+          :key="JSON.stringify(logbookEntryDate)"
         >
           <ion-card-header>
             <ion-card-title>
-              {{ logbookRow[config.THEME_LOGBOOK_CSV_KEYS.DATE] }}
+              {{ logbookEntryDate }}
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <template v-for="(item, key) in logbookRow" :key="key">
+            <template
+              v-for="(logText, columnKey) in logbookEntries"
+              :key="columnKey"
+            >
               <div
-                v-if="key !== config.THEME_LOGBOOK_CSV_KEYS.DATE && item"
+                v-if="
+                  columnKey !== config.THEME_LOGBOOK_CSV_KEYS.DATE && logText
+                "
                 class="ion-padding-bottom"
               >
                 <p>
-                  <strong>{{ key }}</strong>
+                  <strong>{{ columnKey }}</strong>
                 </p>
-                <p>{{ item }}</p>
+                <p>{{ logText }}</p>
               </div>
             </template>
           </ion-card-content>
@@ -46,7 +71,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import Config from "@/config";
 import { useHead } from "@vueuse/head";
 
@@ -59,21 +84,31 @@ export default {
   },
   mixins: [],
   components: {},
-
   computed: {
     ...mapGetters({
-      logbookData: "themeLogbook/getLogbookData",
       logbookColumnNames: "themeLogbook/getLogbookColumnNames",
+      filteredLogbookData: "themeLogbook/getFilteredLogbookData",
     }),
   },
   data() {
     return {
       config: Config,
+      selectedThemes: null,
     };
+  },
+  watch: {
+    selectedThemes: {
+      handler: function (updatedSelectedThemes, _) {
+        this.updateSelectedThemes(updatedSelectedThemes);
+      },
+    },
   },
   methods: {
     ...mapActions({
       loadThemeLogbookData: "themeLogbook/loadThemeLogbookData",
+    }),
+    ...mapMutations({
+      updateSelectedThemes: "themeLogbook/updateSelectedThemes",
     }),
     goToHome() {
       // TODO: Use Ionic router instead (or ion-back-button with default href)
@@ -82,6 +117,7 @@ export default {
   },
   mounted() {
     this.loadThemeLogbookData();
+    this.selectedThemes = Object.keys(Config.THEME_LOGBOOK_FILTER_VALUES);
   },
 };
 </script>

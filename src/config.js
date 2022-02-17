@@ -36,6 +36,15 @@ export default {
     TECHNOLOGY: "Technology",
     OTHERS: "Others",
   },
+  THEME_LOGBOOK_FILTER_VALUES: {
+    ACHIEVEMENT_ASSESSMENT: "Achievement and Assessment",
+    AFFECT: "Affect",
+    CONTEXT_EDUCATION: "Context of Education",
+    EQUITY: "Equity",
+    TEACHING_PRACTICE: "Teaching Practice",
+    TECHNOLOGY: "Technology",
+    OTHERS: "Others",
+  },
   // STORAGE_URL: "gs://eduvision-living-library.appspot.com/",
   // ARTICLES_CSV_FILENAME: "coded-articles.csv",
   // FIREBASE_CONFIG: {

@@ -10,7 +10,7 @@ export default {
       dynamicTyping: true,
     }).data;
 
-    console.log("Theme logbook data:", logbookData);
+    console.log("Downloaded theme logbook data:", logbookData);
     context.commit("setLogbookData", logbookData);
   },
   getThemeLogbookCsvFile: async (context) => {
