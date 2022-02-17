@@ -17,25 +17,8 @@
         <em>Loading theme logbook data...</em>
       </p>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12">
-            <ion-item>
-              <ion-label>Show logs for themes:</ion-label>
-              <ion-select multiple interface="alert" v-model="selectedThemes">
-                <ion-select-option
-                  v-for="(
-                    themeTitle, themeKey
-                  ) in config.THEME_LOGBOOK_FILTER_VALUES"
-                  :key="themeKey"
-                  :value="themeKey"
-                  >{{ themeTitle }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <theme-log-filter></theme-log-filter>
+
       <div v-if="filteredLogbookData">
         <ion-card
           v-for="(logbookEntries, logbookEntryDate) in filteredLogbookData"
@@ -74,6 +57,7 @@
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import Config from "@/config";
 import { useHead } from "@vueuse/head";
+import ThemeLogFilter from "@/components/theme-logbook/ThemeLogbookFilter";
 
 export default {
   name: "ThemeLog",
@@ -83,7 +67,7 @@ export default {
     });
   },
   mixins: [],
-  components: {},
+  components: { ThemeLogFilter },
   computed: {
     ...mapGetters({
       logbookColumnNames: "themeLogbook/getLogbookColumnNames",
@@ -93,23 +77,13 @@ export default {
   data() {
     return {
       config: Config,
-      selectedThemes: null,
     };
-  },
-  watch: {
-    selectedThemes: {
-      handler: function (updatedSelectedThemes, _) {
-        this.updateSelectedThemes(updatedSelectedThemes);
-      },
-    },
   },
   methods: {
     ...mapActions({
       loadThemeLogbookData: "themeLogbook/loadThemeLogbookData",
     }),
-    ...mapMutations({
-      updateSelectedThemes: "themeLogbook/updateSelectedThemes",
-    }),
+
     goToHome() {
       // TODO: Use Ionic router instead (or ion-back-button with default href)
       window.location.href = "/";
@@ -117,20 +91,8 @@ export default {
   },
   mounted() {
     this.loadThemeLogbookData();
-    this.selectedThemes = Object.keys(Config.THEME_LOGBOOK_FILTER_VALUES);
   },
 };
 </script>
 
-<style>
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
+<style></style>
