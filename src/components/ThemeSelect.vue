@@ -13,7 +13,10 @@
       </ion-col>
       <ion-col size="6">
         <div class="theme-select-title">
-          <h2>Explore the themes</h2>
+          <h2>
+            Explore the
+            <a href="/theme-logbook" class="theme-logbook-button">themes</a>
+          </h2>
           <p>By clicking on the color map</p>
         </div>
 
@@ -166,5 +169,9 @@ export default {
 
 .theme-select-title p {
   margin-top: 8px;
+}
+
+.theme-logbook-button {
+  color: #3880ff; /* TODO: Use ionic primary color variable */
 }
 </style>

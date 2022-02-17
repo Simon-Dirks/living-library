@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import {
+  IonBackButton,
   IonButton,
   IonButtons,
   IonCard,
@@ -94,3 +95,5 @@ app.component("ion-list", IonList);
 app.component("ion-item", IonItem);
 app.component("ion-spinner", IonSpinner);
 app.component("ion-toggle", IonToggle);
+app.component("ion-back-button", IonBackButton);
+app.component("ion-page", IonPage);
