@@ -48,9 +48,15 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import Config from "@/config";
+import { useHead } from "@vueuse/head";
 
 export default {
   name: "ThemeLog",
+  setup() {
+    useHead({
+      title: "Living Library - Theme Logbook",
+    });
+  },
   mixins: [],
   components: {},
 

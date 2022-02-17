@@ -69,7 +69,7 @@
       >
         <div v-if="getShowReviewerContentNotesItem(literatureItem)">
           <p>
-            <strong>Reviewer's thoughts and discussion points</strong>
+            <strong>Reviewer's logs on article content</strong>
           </p>
 
           <p>
@@ -87,7 +87,7 @@
 
         <div v-if="getShowReviewerProcessNotesItem(literatureItem)">
           <p>
-            <strong>Reviewer's notes and doubts</strong>
+            <strong>Reviewer's logs on reviewing process</strong>
           </p>
 
           <p>

@@ -1,8 +1,4 @@
 <template>
-  <teleport to="head"
-    ><meta name="robots" content="noindex,nofollow" />
-  </teleport>
-
   <ion-app>
     <ion-router-outlet />
   </ion-app>
@@ -10,8 +6,56 @@
 
 <script>
 import { IonApp, IonRouterOutlet } from "@ionic/vue";
+import { useHead } from "@vueuse/head";
 
 export default {
+  setup() {
+    useHead({
+      title: "Living Library [Prototype]",
+      meta: [
+        {
+          name: `robots`,
+          content: `noindex,nofollow`,
+        },
+        {
+          name: `msapplication-TileColor`,
+          content: `#2b5797`,
+        },
+        {
+          name: `theme-color`,
+          content: `#ffffff`,
+        },
+      ],
+      link: [
+        {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "/apple-touch-icon.png",
+        },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "32x32",
+          href: "/favicon-32x32.png",
+        },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "16x16",
+          href: "/favicon-16x16.png",
+        },
+        {
+          rel: "manifest",
+          href: "/site.webmanifest",
+        },
+        {
+          rel: "mask-icon",
+          href: "/safari-pinned-tab.svg",
+          color: "#5bbad5",
+        },
+      ],
+    });
+  },
   name: "App",
   components: {
     IonApp,
@@ -25,6 +69,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   height: 100%;
 }
+
 html,
 body {
   width: 100%;

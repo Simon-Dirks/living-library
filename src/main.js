@@ -44,15 +44,12 @@ import {
   caretBackOutline,
 } from "ionicons/icons";
 import Config from "@/config.js";
-import { initializeApp } from "firebase/app";
 import "@ionic/core/css/padding.css";
 import store from "@/store";
+import { createHead } from "@vueuse/head";
 
-document.title = "Living Library [PROTOTYPE]";
-
-const app = createApp(App).use(IonicVue).use(router).use(store);
-
-initializeApp(Config.FIREBASE_CONFIG);
+const head = createHead();
+let app = createApp(App).use(head).use(IonicVue).use(router).use(store);
 
 router.isReady().then(() => {
   addIcons({
