@@ -13,8 +13,8 @@ const literatureModule = {
       shownEducationTypeKeys: new Set(
         Object.values(Config.CSV_EDUCATION_FILTER_KEYS)
       ),
-      showReviewerThoughts: false,
-      showReviewerNotes: false,
+      showReviewerContentNotes: true,
+      showReviewerProcessNotes: true,
     };
   },
   mutations: literatureMutations,

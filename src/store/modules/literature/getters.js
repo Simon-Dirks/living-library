@@ -8,20 +8,21 @@ export default {
   getLiteratureData: (state) => {
     return state.literatureData;
   },
-  getShowReviewerThoughtsItem: (state) => (litItem) => {
+  getShowReviewerContentNotesItem: (state) => (litItem) => {
     return (
-      litItem[Config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS] &&
-      state.showReviewerThoughts
+      litItem[Config.CSV_KEYS.CONTENT_NOTES] && state.showReviewerContentNotes
     );
   },
-  getShowReviewerNotesItem: (state) => (litItem) => {
-    return litItem[Config.CSV_KEYS.NOTES_DOUBTS] && state.showReviewerNotes;
+  getShowReviewerProcessNotesItem: (state) => (litItem) => {
+    return (
+      litItem[Config.CSV_KEYS.PROCESS_NOTES] && state.showReviewerProcessNotes
+    );
   },
-  getShowReviewerThoughts: (state) => {
-    return state.showReviewerThoughts;
+  getShowReviewerContentNotes: (state) => {
+    return state.showReviewerContentNotes;
   },
-  getShowReviewerNotes: (state) => {
-    return state.showReviewerNotes;
+  getShowReviewerProcessNotes: (state) => {
+    return state.showReviewerProcessNotes;
   },
   getShownResearchTypeKeys: (state) => {
     return state.shownResearchTypeKeys;

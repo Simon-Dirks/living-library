@@ -39,26 +39,33 @@
         </ion-row>
 
         <ion-row>
-          <ion-col size="6" class="checkbox-container">
+          <ion-col size="3">
+            <h2>Show reviewer's logs on</h2>
+          </ion-col>
+          <ion-col size="4" class="checkbox-container">
             <ion-item>
               <ion-toggle
                 slot="start"
                 name="show-reviewer-thoughts"
-                :checked="getShowReviewerThoughts"
-                @ionChange="updateShowReviewerThoughts($event.target.checked)"
+                :checked="getShowReviewerContentNotes"
+                @ionChange="
+                  updateShowReviewerContentNotes($event.target.checked)
+                "
               ></ion-toggle>
-              <ion-label>Show reviewer's thoughts?</ion-label>
+              <ion-label>Literature content</ion-label>
             </ion-item>
           </ion-col>
-          <ion-col size="6" class="checkbox-container">
+          <ion-col size="4" class="checkbox-container">
             <ion-item>
               <ion-toggle
                 slot="start"
                 name="show-reviewer-notes"
-                :checked="getShowReviewerNotes"
-                @ionChange="updateShowReviewerNotes($event.target.checked)"
+                :checked="getShowReviewerProcessNotes"
+                @ionChange="
+                  updateShowReviewerProcessNotes($event.target.checked)
+                "
               ></ion-toggle>
-              <ion-label>Show reviewer's doubts?</ion-label>
+              <ion-label>Reviewing process</ion-label>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -80,8 +87,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getShowReviewerThoughts: "literature/getShowReviewerThoughts",
-      getShowReviewerNotes: "literature/getShowReviewerNotes",
+      getShowReviewerContentNotes: "literature/getShowReviewerContentNotes",
+      getShowReviewerProcessNotes: "literature/getShowReviewerProcessNotes",
     }),
   },
   props: {
@@ -90,8 +97,10 @@ export default {
   },
   methods: {
     ...mapMutations({
-      updateShowReviewerThoughts: "literature/updateShowReviewerThoughts",
-      updateShowReviewerNotes: "literature/updateShowReviewerNotes",
+      updateShowReviewerContentNotes:
+        "literature/updateShowReviewerContentNotes",
+      updateShowReviewerProcessNotes:
+        "literature/updateShowReviewerProcessNotes",
     }),
   },
 };

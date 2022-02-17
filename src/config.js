@@ -14,8 +14,8 @@ export default {
     AUTHORS: "Authors",
     JOURNAL: "Journal",
     COUNTRY: "country_conducted",
-    THOUGHTS_DISCUSSION_POINTS: "Thoughts/Discussion points",
-    NOTES_DOUBTS: "Notes/Doubts",
+    CONTENT_NOTES: "Thoughts/Discussion points",
+    PROCESS_NOTES: "Notes/Doubts",
   },
   CSV_FILTER_KEYS: {
     Reflections: "Reflection",

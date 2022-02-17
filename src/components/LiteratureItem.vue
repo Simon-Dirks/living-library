@@ -59,36 +59,36 @@
 
       <div
         v-if="
-          getShowReviewerThoughtsItem(literatureItem) ||
-          getShowReviewerNotesItem(literatureItem)
+          getShowReviewerContentNotesItem(literatureItem) ||
+          getShowReviewerProcessNotesItem(literatureItem)
         "
         class="thoughts-text-container"
       >
-        <div v-if="getShowReviewerThoughtsItem(literatureItem)">
+        <div v-if="getShowReviewerContentNotesItem(literatureItem)">
           <p>
             <strong>Reviewer's thoughts and discussion points</strong>
           </p>
 
           <p>
-            {{ literatureItem[config.CSV_KEYS.THOUGHTS_DISCUSSION_POINTS] }}
+            {{ literatureItem[config.CSV_KEYS.CONTENT_NOTES] }}
           </p>
         </div>
 
         <div
           v-if="
-            getShowReviewerThoughtsItem(literatureItem) &&
-            getShowReviewerNotesItem(literatureItem)
+            getShowReviewerContentNotesItem(literatureItem) &&
+            getShowReviewerProcessNotesItem(literatureItem)
           "
           class="ion-margin-top"
         ></div>
 
-        <div v-if="getShowReviewerNotesItem(literatureItem)">
+        <div v-if="getShowReviewerProcessNotesItem(literatureItem)">
           <p>
             <strong>Reviewer's notes and doubts</strong>
           </p>
 
           <p>
-            {{ literatureItem[config.CSV_KEYS.NOTES_DOUBTS] }}
+            {{ literatureItem[config.CSV_KEYS.PROCESS_NOTES] }}
           </p>
         </div>
       </div>
@@ -136,8 +136,10 @@ export default {
       getThemeColor: "themes/getThemeColor",
       getThemeData: "themes/getThemeData",
       getThemeChipColor: "themes/getThemeChipColor",
-      getShowReviewerThoughtsItem: "literature/getShowReviewerThoughtsItem",
-      getShowReviewerNotesItem: "literature/getShowReviewerNotesItem",
+      getShowReviewerContentNotesItem:
+        "literature/getShowReviewerContentNotesItem",
+      getShowReviewerProcessNotesItem:
+        "literature/getShowReviewerProcessNotesItem",
     }),
   },
   methods: {
