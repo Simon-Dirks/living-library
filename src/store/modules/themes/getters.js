@@ -30,7 +30,11 @@ export default {
       : getters.getThemeColor(themeId, 0.3);
   },
   getThemeReasoningKey: (_, getters) => (themeId) => {
-    return getters.getThemeData(themeId)["reasoningKey"];
+    const themeData = getters.getThemeData(themeId);
+    if (!themeData) {
+      return null;
+    }
+    return themeData["reasoningKey"];
   },
   isThemeSelected: (_, getters) => (themeId) => {
     return getters.getSelectedThemeIds.includes(themeId);

@@ -5,30 +5,17 @@
       <ion-card-subtitle v-if="literatureItem[config.LIT_CSV_KEYS.SUMMARY]">
         {{ literatureItem[config.LIT_CSV_KEYS.SUMMARY] }}
       </ion-card-subtitle>
-      <br />
-      <ion-chip
-        @click="toggleTheme(themeId)"
-        :style="{
-          '--background': getThemeChipColor(themeId),
-        }"
-        v-for="themeId in literatureItem['themes']"
-        :key="themeId"
-      >
-        <ion-label color="secondary"
-          ><strong v-if="isThemeSelected(themeId)" style="color: white">
-            {{ getThemeTitle(themeId) }}</strong
-          >
-          <template v-else>{{ getThemeTitle(themeId) }}</template>
-        </ion-label>
 
-        <ion-icon
-          name="information-circle"
-          @click.stop="openThemeInfoPopup(themeId)"
-          :style="{
-            color: isThemeSelected(themeId) ? 'white' : 'darkslategrey',
-          }"
-        ></ion-icon>
-      </ion-chip>
+      <br />
+
+      <template v-if="literatureItem">
+        <theme-button
+          v-for="themeId in literatureItem['themes']"
+          :theme-id="themeId"
+          :theme-reasoning="literatureItem[getThemeReasoningKey(themeId)]"
+          :key="themeId"
+        ></theme-button>
+      </template>
     </ion-card-header>
     <ion-card-content>
       <p>
@@ -116,15 +103,14 @@
 </template>
 
 <script>
-import { modalController } from "@ionic/vue";
 import { Config } from "@/config";
 import { mapGetters, mapMutations } from "vuex";
-import ThemeInfoPopup from "@/components/popups/ThemeInfoPopup";
 import moment from "moment";
+import ThemeButton from "@/components/ThemeButton";
 
 export default {
   mixins: [],
-  components: {},
+  components: { ThemeButton },
   data() {
     return {
       config: Config,
@@ -133,12 +119,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isThemeSelected: "themes/isThemeSelected",
       getThemeReasoningKey: "themes/getThemeReasoningKey",
-      getThemeTitle: "themes/getThemeTitle",
-      getThemeColor: "themes/getThemeColor",
-      getThemeData: "themes/getThemeData",
-      getThemeChipColor: "themes/getThemeChipColor",
       getShowReviewerContentNotesItem:
         "literature/getShowReviewerContentNotesItem",
       getShowReviewerProcessNotesItem:
@@ -149,20 +130,6 @@ export default {
     ...mapMutations({
       toggleTheme: "themes/toggleTheme",
     }),
-    async openThemeInfoPopup(themeId) {
-      const themeReasoning =
-        this.literatureItem[this.getThemeReasoningKey(themeId)];
-      const modal = await modalController.create({
-        component: ThemeInfoPopup,
-        componentProps: {
-          themeData: this.getThemeData(themeId),
-          themeReasoning: themeReasoning,
-        },
-      });
-
-      await modal.present();
-      await modal.onDidDismiss();
-    },
   },
   props: ["literatureItem"],
   inject: [],
