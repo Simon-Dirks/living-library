@@ -23,10 +23,13 @@
             v-if="columnKey !== config.THEME_LOGBOOK_CSV_KEYS.DATE && logText"
             class="ion-padding-bottom"
           >
-            <p>
-              <strong>{{ columnKey }}</strong>
-            </p>
-            <p>{{ logText }}</p>
+            <theme-button
+              :theme-id="getThemeIdFromLogbookCsvId(columnKey)"
+              :disable-click="true"
+              :hide-info-button="true"
+              class="ion-margin-end"
+            ></theme-button>
+            <span>{{ logText }}</span>
           </div>
         </template>
       </ion-card-content>
@@ -37,9 +40,11 @@
 <script>
 import { mapGetters } from "vuex";
 import { Config } from "@/config";
+import ThemeButton from "@/components/ThemeButton";
 
 export default {
   name: "ThemeLogEntries",
+  components: { ThemeButton },
   data() {
     return {
       config: Config,
@@ -49,6 +54,32 @@ export default {
     ...mapGetters({
       filteredLogbookData: "themeLogbook/getFilteredLogbookData",
     }),
+  },
+  methods: {
+    getThemeIdFromLogbookCsvId(logbookCsvId) {
+      if (
+        logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.ACHIEVEMENT_ASSESSMENT
+      ) {
+        return "academicAchievementAssessment";
+      } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.AFFECT) {
+        return "affect";
+      } else if (
+        logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.CONTEXT_EDUCATION
+      ) {
+        return "contextTeaching";
+      } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.EQUITY) {
+        return "equity";
+      } else if (
+        logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.TEACHING_PRACTICE
+      ) {
+        return "teachingPractice";
+      } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.TECHNOLOGY) {
+        return "Technology";
+      } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.OTHERS) {
+        return "Others";
+      }
+      return logbookCsvId;
+    },
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <ion-chip
-    @click="toggleTheme(themeId)"
+    @click="onToggleTheme(themeId)"
     :style="{
       '--background': getThemeChipColor(themeId),
     }"
@@ -14,6 +14,7 @@
     </ion-label>
 
     <ion-icon
+      v-if="!disableClick"
       name="information-circle"
       @click.stop="openThemeInfoPopup(themeId)"
       :style="{
@@ -30,7 +31,7 @@ import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "ThemeButton",
-  props: ["themeId", "themeReasoning"],
+  props: ["themeId", "themeReasoning", "disableClick"],
   computed: {
     ...mapGetters({
       isThemeSelected: "themes/isThemeSelected",
@@ -44,6 +45,10 @@ export default {
       toggleTheme: "themes/toggleTheme",
     }),
     async openThemeInfoPopup(themeId) {
+      if (this.disableClick) {
+        return;
+      }
+
       const modal = await modalController.create({
         component: ThemeInfoPopup,
         componentProps: {
@@ -54,6 +59,12 @@ export default {
 
       await modal.present();
       await modal.onDidDismiss();
+    },
+    onToggleTheme(themeId) {
+      if (this.disableClick) {
+        return;
+      }
+      this.toggleTheme(themeId);
     },
   },
 };
