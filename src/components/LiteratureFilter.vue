@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import Config from "@/config";
+import { Config } from "@/config";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {

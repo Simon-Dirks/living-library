@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import Config from "@/config";
+import { Config } from "@/config";
 import fileLiteratureData from "@/assets/data/coded-articles.csv";
 
 export default {

@@ -1,5 +1,5 @@
-import Config from "@/config";
 import moment from "moment";
+import { Config } from "@/config";
 
 export default {
   getLoadingLiteratureData: (state) => {

@@ -12,52 +12,19 @@
     </ion-header>
 
     <ion-content>
-      <p v-if="!filteredLogbookData" class="ion-padding-horizontal">
-        <ion-spinner class="ion-margin-end" style="top: 8px"></ion-spinner>
-        <em>Loading theme logbook data...</em>
-      </p>
-
       <theme-log-filter></theme-log-filter>
 
-      <div v-if="filteredLogbookData">
-        <ion-card
-          v-for="(logbookEntries, logbookEntryDate) in filteredLogbookData"
-          :key="JSON.stringify(logbookEntryDate)"
-        >
-          <ion-card-header>
-            <ion-card-title>
-              {{ logbookEntryDate }}
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <template
-              v-for="(logText, columnKey) in logbookEntries"
-              :key="columnKey"
-            >
-              <div
-                v-if="
-                  columnKey !== config.THEME_LOGBOOK_CSV_KEYS.DATE && logText
-                "
-                class="ion-padding-bottom"
-              >
-                <p>
-                  <strong>{{ columnKey }}</strong>
-                </p>
-                <p>{{ logText }}</p>
-              </div>
-            </template>
-          </ion-card-content>
-        </ion-card>
-      </div>
+      <theme-log-entries></theme-log-entries>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
-import Config from "@/config";
+import { mapActions } from "vuex";
 import { useHead } from "@vueuse/head";
 import ThemeLogFilter from "@/components/theme-logbook/ThemeLogbookFilter";
+import ThemeLogEntries from "@/components/theme-logbook/ThemeLogbookEntries";
+import { Config } from "@/config";
 
 export default {
   name: "ThemeLog",
@@ -67,13 +34,8 @@ export default {
     });
   },
   mixins: [],
-  components: { ThemeLogFilter },
-  computed: {
-    ...mapGetters({
-      logbookColumnNames: "themeLogbook/getLogbookColumnNames",
-      filteredLogbookData: "themeLogbook/getFilteredLogbookData",
-    }),
-  },
+  components: { ThemeLogFilter, ThemeLogEntries },
+  computed: {},
   data() {
     return {
       config: Config,

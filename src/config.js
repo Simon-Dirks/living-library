@@ -1,6 +1,6 @@
 import THEMES from "@/assets/data/themes.json";
 
-export default {
+export const Config = {
   THEMES: THEMES,
   IGNORED_THEMES: ["them.TEC", "them.OTH"],
   LIT_CSV_KEYS: {

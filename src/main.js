@@ -45,7 +45,7 @@ import {
   caretForwardOutline,
   caretBackOutline,
 } from "ionicons/icons";
-import Config from "@/config.js";
+
 import "@ionic/core/css/padding.css";
 import store from "@/store";
 import { createHead } from "@vueuse/head";

@@ -43,7 +43,7 @@
 import LiteratureViewer from "./LiteratureViewer.vue";
 import ThemeSelect from "./ThemeSelect.vue";
 import { modalController } from "@ionic/vue";
-import Config from "@/config.js";
+import { Config } from "@/config";
 import { mapActions } from "vuex";
 import InformationPopup from "@/components/popups/InformationPopup";
 

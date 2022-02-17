@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import Config from "@/config";
 import { mapMutations } from "vuex";
+import { Config } from "@/config";
 
 export default {
   name: "ThemeLogFilter",

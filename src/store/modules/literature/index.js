@@ -1,7 +1,7 @@
-import Config from "@/config";
 import literatureGetters from "@/store/modules/literature/getters";
 import literatureActions from "@/store/modules/literature/actions";
 import literatureMutations from "@/store/modules/literature/mutations";
+import { Config } from "@/config";
 
 const literatureModule = {
   namespaced: true,

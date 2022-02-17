@@ -1,4 +1,4 @@
-import Config from "@/config";
+import { Config } from "@/config";
 import lineDrawingActions from "@/store/modules/line-drawing/actions";
 
 const lineDrawingModule = {

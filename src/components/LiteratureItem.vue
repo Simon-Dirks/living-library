@@ -117,7 +117,7 @@
 
 <script>
 import { modalController } from "@ionic/vue";
-import Config from "@/config.js";
+import { Config } from "@/config";
 import { mapGetters, mapMutations } from "vuex";
 import ThemeInfoPopup from "@/components/popups/ThemeInfoPopup";
 import moment from "moment";

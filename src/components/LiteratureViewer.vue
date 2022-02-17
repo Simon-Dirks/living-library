@@ -68,7 +68,7 @@
 <script>
 import LiteratureItem from "./LiteratureItem.vue";
 
-import Config from "@/config.js";
+import { Config } from "@/config";
 import LiteratureFilter from "@/components/LiteratureFilter";
 import { mapActions, mapGetters } from "vuex";
 
