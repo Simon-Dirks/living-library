@@ -1,28 +1,29 @@
 <template>
-  <ion-content>
-    <p v-if="!logbookData" class="ion-padding-horizontal">
+  <ion-content class="ion-padding-horizontal">
+    <p v-if="!logbookData">
       <ion-spinner class="ion-margin-end" style="top: 8px"></ion-spinner>
       <em>Loading theme logbook data...</em>
     </p>
     <div v-if="logbookData">
-      <table>
-        <tr>
-          <th v-for="colName in logbookColumnNames" :key="colName">
-            {{ colName }}
-          </th>
-        </tr>
-        <tr v-for="logbookRow in logbookData" :key="JSON.stringify(logbookRow)">
-          <td v-for="logbookCell in logbookRow" :key="logbookCell">
-            {{ logbookCell }}
-          </td>
-        </tr>
-      </table>
+      <div v-for="logbookRow in logbookData" :key="JSON.stringify(logbookRow)">
+        <div v-for="(item, key) in logbookRow" :key="key">
+          <template v-if="key !== config.THEME_LOGBOOK_CSV_KEYS.DATE && item">
+            <p>
+              <strong>{{
+                logbookRow[config.THEME_LOGBOOK_CSV_KEYS.DATE]
+              }}</strong>
+            </p>
+            <p>{{ key }}: {{ item }}</p>
+          </template>
+        </div>
+      </div>
     </div>
   </ion-content>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Config from "@/config";
 
 export default {
   name: "ThemeLog",
@@ -35,7 +36,9 @@ export default {
     }),
   },
   data() {
-    return {};
+    return {
+      config: Config,
+    };
   },
   methods: {
     ...mapActions({
