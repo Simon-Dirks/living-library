@@ -1,22 +1,33 @@
 <template>
-  <ion-content class="ion-padding-horizontal">
-    <p v-if="!logbookData">
+  <ion-content>
+    <p v-if="!logbookData" class="ion-padding-horizontal">
       <ion-spinner class="ion-margin-end" style="top: 8px"></ion-spinner>
       <em>Loading theme logbook data...</em>
     </p>
     <div v-if="logbookData">
-      <div v-for="logbookRow in logbookData" :key="JSON.stringify(logbookRow)">
-        <div v-for="(item, key) in logbookRow" :key="key">
-          <template v-if="key !== config.THEME_LOGBOOK_CSV_KEYS.DATE && item">
-            <p>
-              <strong>{{
-                logbookRow[config.THEME_LOGBOOK_CSV_KEYS.DATE]
-              }}</strong>
-            </p>
-            <p>{{ key }}: {{ item }}</p>
+      <ion-card
+        v-for="logbookRow in logbookData"
+        :key="JSON.stringify(logbookRow)"
+      >
+        <ion-card-header>
+          <ion-card-title>
+            {{ logbookRow[config.THEME_LOGBOOK_CSV_KEYS.DATE] }}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <template v-for="(item, key) in logbookRow" :key="key">
+            <div
+              v-if="key !== config.THEME_LOGBOOK_CSV_KEYS.DATE && item"
+              class="ion-padding-bottom"
+            >
+              <p>
+                <strong>{{ key }}</strong>
+              </p>
+              <p>{{ item }}</p>
+            </div>
           </template>
-        </div>
-      </div>
+        </ion-card-content>
+      </ion-card>
     </div>
   </ion-content>
 </template>
