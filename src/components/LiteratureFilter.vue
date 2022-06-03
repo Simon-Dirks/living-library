@@ -126,9 +126,7 @@ ion-card-header {
 .checkbox-container {
   padding: 0;
 }
-</style>
 
-<style>
 ion-checkbox {
   margin: 0 16px 0 0;
 }

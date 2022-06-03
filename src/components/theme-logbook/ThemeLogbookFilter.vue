@@ -2,7 +2,7 @@
   <ion-grid class="">
     <ion-row class="ion-padding-horizontal">
       <div class="ion-padding-end" style="margin-top: 4px;">
-        <p>Show logs for themes:</p>
+        <p style="font-size: 0.9em">Show logs for themes:</p>
       </div>
       <div
         class="checkbox-container"
@@ -10,10 +10,11 @@
         :key="themeKey"
       >
         <ion-item @click="onFilterToggle(themeKey)" v-if="selectedThemes">
-          <ion-label>{{ themeTitle }}</ion-label>
+          <ion-label style="font-size: 0.9em">{{ themeTitle }}</ion-label>
           <ion-checkbox
             :checked="!selectedThemes.includes(selectedThemes[themeKey])"
             slot="start"
+            style="zoom: 0.9"
           ></ion-checkbox>
         </ion-item>
       </div>
