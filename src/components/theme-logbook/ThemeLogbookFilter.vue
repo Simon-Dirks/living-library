@@ -1,21 +1,22 @@
 <template>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <ion-item>
-          <ion-label>Show logs for themes:</ion-label>
-          <ion-select multiple interface="alert" v-model="selectedThemes">
-            <ion-select-option
-              v-for="(
-                themeTitle, themeKey
-              ) in config.THEME_LOGBOOK_FILTER_VALUES"
-              :key="themeKey"
-              :value="themeKey"
-              >{{ themeTitle }}
-            </ion-select-option>
-          </ion-select>
+  <ion-grid class="">
+    <ion-row class="ion-padding-horizontal">
+      <div class="ion-padding-end" style="margin-top: 4px;">
+        <p>Show logs for themes:</p>
+      </div>
+      <div
+        class="checkbox-container"
+        v-for="(themeTitle, themeKey) in config.THEME_LOGBOOK_FILTER_VALUES"
+        :key="themeKey"
+      >
+        <ion-item @click="onFilterToggle(themeKey)" v-if="selectedThemes">
+          <ion-label>{{ themeTitle }}</ion-label>
+          <ion-checkbox
+            :checked="!selectedThemes.includes(selectedThemes[themeKey])"
+            slot="start"
+          ></ion-checkbox>
         </ion-item>
-      </ion-col>
+      </div>
     </ion-row>
   </ion-grid>
 </template>
@@ -43,9 +44,24 @@ export default {
     ...mapMutations({
       updateSelectedThemes: "themeLogbook/updateSelectedThemes",
     }),
+    onFilterToggle(themeKey) {
+      const selectedThemes = [...this.selectedThemes];
+      if (!selectedThemes.includes(themeKey)) {
+        selectedThemes.push(themeKey);
+      } else {
+        selectedThemes.splice(selectedThemes.indexOf(themeKey), 1);
+      }
+      this.selectedThemes = selectedThemes;
+    },
   },
   mounted() {
     this.selectedThemes = Object.keys(Config.THEME_LOGBOOK_FILTER_VALUES);
   },
 };
 </script>
+
+<style scoped>
+.checkbox-container {
+  margin-top: 5px;
+}
+</style>

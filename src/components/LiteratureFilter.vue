@@ -7,11 +7,11 @@
             <h2>Research type</h2>
           </ion-col>
           <ion-col
-            v-for="[filterTitle, filterKey] in Object.entries(
+              v-for="[filterTitle, filterKey] in Object.entries(
               config.LIT_CSV_FILTER_KEYS
             )"
-            :key="filterKey"
-            class="checkbox-container"
+              :key="filterKey"
+              class="checkbox-container"
           >
             <ion-item @click="onResearchTypeFilterClicked(filterKey, $event)">
               <ion-label>{{ filterTitle }}</ion-label>
@@ -25,11 +25,12 @@
             <h2>Education level</h2>
           </ion-col>
           <ion-col
-            v-for="[filterTitle, filterKey] in Object.entries(
+              v-for="[filterTitle, filterKey] in Object.entries(
               config.LIT_CSV_EDUCATION_FILTER_KEYS
             )"
-            :key="filterKey"
-            class="checkbox-container"
+              :key="filterKey"
+              class="checkbox-container"
+              size="3"
           >
             <ion-item @click="onEducationTypeFilterClicked(filterKey, $event)">
               <ion-label>{{ filterTitle }}</ion-label>
@@ -40,33 +41,41 @@
 
         <ion-row>
           <ion-col size="3">
-            <h2>Show reviewer's logs on</h2>
+            <h2>Show reviewer<br/>logs on</h2>
           </ion-col>
-          <ion-col size="4" class="checkbox-container">
+          <ion-col size="3" class="checkbox-container">
             <ion-item>
               <ion-toggle
-                slot="start"
-                name="show-reviewer-thoughts"
-                :checked="getShowReviewerContentNotes"
-                @ionChange="
+                  slot="start"
+                  name="show-reviewer-thoughts"
+                  :checked="getShowReviewerContentNotes"
+                  @ionChange="
                   updateShowReviewerContentNotes($event.target.checked)
                 "
               ></ion-toggle>
-              <ion-label>Literature content</ion-label>
+              <ion-label>Literature</ion-label>
             </ion-item>
           </ion-col>
-          <ion-col size="4" class="checkbox-container">
+          <ion-col size="3" class="checkbox-container">
             <ion-item>
               <ion-toggle
-                slot="start"
-                name="show-reviewer-notes"
-                :checked="getShowReviewerProcessNotes"
-                @ionChange="
+                  slot="start"
+                  name="show-reviewer-notes"
+                  :checked="getShowReviewerProcessNotes"
+                  @ionChange="
                   updateShowReviewerProcessNotes($event.target.checked)
                 "
               ></ion-toggle>
-              <ion-label>Reviewing process</ion-label>
+              <ion-label>Coding</ion-label>
             </ion-item>
+          </ion-col>
+          <ion-col size="3" class="text-center">
+            <ion-button size="small" fill="clear" id="themes-logs-button" @click="onLogbookButtonClicked">
+              <ion-icon name="book"></ion-icon>
+              <span>
+                View themes logs
+              </span>
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -75,8 +84,8 @@
 </template>
 
 <script>
-import { Config } from "@/config";
-import { mapGetters, mapMutations } from "vuex";
+import {Config} from "@/config";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
   components: {},
@@ -92,21 +101,24 @@ export default {
     }),
   },
   props: {
-    onEducationTypeFilterClicked: { type: Function },
-    onResearchTypeFilterClicked: { type: Function },
+    onEducationTypeFilterClicked: {type: Function},
+    onResearchTypeFilterClicked: {type: Function},
   },
   methods: {
     ...mapMutations({
       updateShowReviewerContentNotes:
-        "literature/updateShowReviewerContentNotes",
+          "literature/updateShowReviewerContentNotes",
       updateShowReviewerProcessNotes:
-        "literature/updateShowReviewerProcessNotes",
+          "literature/updateShowReviewerProcessNotes",
     }),
+    onLogbookButtonClicked() {
+      window.location.href = "/theme-logbook";
+    }
   },
 };
 </script>
 
-<style scoped>
+<style>
 ion-card-header {
   padding-bottom: 0;
 }
@@ -119,5 +131,20 @@ ion-card-header {
 <style>
 ion-checkbox {
   margin: 0 16px 0 0;
+}
+
+#themes-logs-button {
+  --background: #52c1ee;
+  --color: white;
+  margin-top: 6px;
+  font-weight: bold;
+}
+
+#themes-logs-button span {
+  margin-left: 8px;
+}
+
+ion-toggle {
+  padding-right: 0.5rem;
 }
 </style>

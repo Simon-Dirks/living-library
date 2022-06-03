@@ -76,7 +76,7 @@ export default {
       } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.TECHNOLOGY) {
         return "Technology";
       } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.OTHERS) {
-        return "Others";
+        return "Deliberations";
       }
       return logbookCsvId;
     },

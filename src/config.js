@@ -34,7 +34,7 @@ export const Config = {
     EQUITY: "Equity",
     TEACHING_PRACTICE: "Teaching Practice",
     TECHNOLOGY: "Technology",
-    OTHERS: "Others",
+    OTHERS: "Deliberations",
   },
   THEME_LOGBOOK_FILTER_VALUES: {
     ACHIEVEMENT_ASSESSMENT: "Achievement and Assessment",
@@ -43,7 +43,7 @@ export const Config = {
     EQUITY: "Equity",
     TEACHING_PRACTICE: "Teaching Practice",
     TECHNOLOGY: "Technology",
-    OTHERS: "Others",
+    OTHERS: "Deliberations",
   },
   // STORAGE_URL: "gs://eduvision-living-library.appspot.com/",
   // ARTICLES_CSV_FILENAME: "coded-articles.csv",

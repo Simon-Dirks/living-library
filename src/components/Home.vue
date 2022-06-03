@@ -100,8 +100,9 @@ ion-grid {
 }
 
 #about-popup-btn {
-  --background: #3498db;
+  --background: #52c1ee;
   --color: white;
+  font-weight: bold;
 }
 
 .literature-viewer-column {
