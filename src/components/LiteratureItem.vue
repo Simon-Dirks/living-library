@@ -38,7 +38,7 @@
       <p>
         <ion-icon class="ion-margin-end" name="calendar" />
         <span>{{
-          moment(literatureItem["date"]).format("MMMM DD, YYYY")
+          moment(literatureItem["date"]).format("MMMM YYYY")
         }}</span>
       </p>
 
