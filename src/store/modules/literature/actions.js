@@ -34,6 +34,21 @@ export default {
         // );
       }
 
+      const journalIsUppercased =
+        litItem[Config.LIT_CSV_KEYS.JOURNAL] ===
+        litItem[Config.LIT_CSV_KEYS.JOURNAL].toUpperCase();
+      if (litItem[Config.LIT_CSV_KEYS.JOURNAL] && journalIsUppercased) {
+        // Capitalize each word
+        litItem[Config.LIT_CSV_KEYS.JOURNAL] = litItem[
+          Config.LIT_CSV_KEYS.JOURNAL
+        ]
+          .split(" ")
+          .map((word) => {
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+          })
+          .join(" ");
+      }
+
       const countryConductedRaw = litItem[Config.LIT_CSV_KEYS.COUNTRY];
       if (countryConductedRaw) {
         const countriesConductedStr = countryConductedRaw.split(";").join(", ");
@@ -50,7 +65,7 @@ export default {
         }
 
         // Fix typos: replace colons with semi-colons
-        litItem[themeKey] = litItem[themeKey].replace(':', ';').trim();
+        litItem[themeKey] = litItem[themeKey].replace(":", ";").trim();
         const litItemThemes = litItem[themeKey].split(";");
         for (const litItemThemeCode of litItemThemes) {
           const hasValidTheme = litItemThemeCode !== "";
@@ -116,7 +131,10 @@ export default {
 
     const rawResponse = await context.dispatch(
       "sendHttpRequest",
-      { url: Config.LIT_CSV_URL, responseType: "text" },
+      {
+        url: Config.LIT_CSV_URL,
+        responseType: "text",
+      },
       { root: true }
     );
     return rawResponse;
