@@ -20,7 +20,7 @@
       </p>
 
       <p>
-        <ion-icon class="ion-margin-end" name="book" />
+        <ion-icon class="ion-margin-end" name="newspaper" />
         <span>{{ literatureItem[config.LIT_CSV_KEYS.JOURNAL] }}</span>
       </p>
 

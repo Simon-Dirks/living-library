@@ -54,7 +54,7 @@
       For example: motivation, engagement, distress and stress-related symptoms.
     </p>
     <p>Sample extracts from articles:</p>
-    <ul style="padding-left: 30px">
+    <ul>
       <li>
         “Our findings show that parents, as proxy educators, experience
         heightened levels of mental health distress when their child struggles
@@ -133,5 +133,9 @@ export default {
 .information-modal-container {
   flex: 0 1 auto;
   overflow: auto;
+}
+
+ul {
+  padding-left: 30px;
 }
 </style>

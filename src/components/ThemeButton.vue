@@ -7,7 +7,7 @@
     :key="themeId"
   >
     <ion-label color="secondary"
-      ><strong v-if="isThemeSelected(themeId)" style="color: white">
+      ><strong v-if="isThemeSelected(themeId)" class="text-white">
         {{ getThemeTitle(themeId) }}</strong
       >
       <template v-else>{{ getThemeTitle(themeId) }}</template>

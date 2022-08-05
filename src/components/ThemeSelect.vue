@@ -1,5 +1,5 @@
 <template>
-  <ion-grid class="ion-padding-vertical" style="height: 100%">
+  <ion-grid class="ion-padding-vertical h-full">
     <ion-row>
       <ion-col size="1">
         <time-filter></time-filter>

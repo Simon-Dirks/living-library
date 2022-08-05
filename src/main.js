@@ -1,73 +1,75 @@
-import { createApp } from "vue";
+import {createApp} from "vue";
 import App from "./App.vue";
 import router from "./router";
 import {
-  IonBackButton,
-  IonButton,
-  IonButtons,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonCheckbox,
-  IonChip,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonIcon,
-  IonicVue,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonPage,
-  IonRow,
-  IonSelect,
-  IonSelectOption,
-  IonSpinner,
-  IonTitle,
-  IonToggle,
-  IonToolbar,
+    IonBackButton,
+    IonButton,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonCheckbox,
+    IonChip,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonHeader,
+    IonIcon,
+    IonicVue,
+    IonInfiniteScroll,
+    IonInfiniteScrollContent,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonPage,
+    IonRow,
+    IonSelect,
+    IonSelectOption,
+    IonSpinner,
+    IonTitle,
+    IonToggle,
+    IonToolbar,
 } from "@ionic/vue";
-import { addIcons } from "ionicons";
+import {addIcons} from "ionicons";
 import {
-  linkOutline,
-  bulbOutline,
-  bookOutline,
-  calendarOutline,
-  informationCircleOutline,
-  arrowBackOutline,
-  helpCircleOutline,
-  globeOutline,
-  caretForwardOutline,
-  caretBackOutline,
+    arrowBackOutline,
+    bookOutline,
+    bulbOutline,
+    calendarOutline,
+    caretBackOutline,
+    caretForwardOutline,
+    globeOutline,
+    helpCircleOutline,
+    informationCircleOutline,
+    linkOutline,
+    newspaperOutline,
 } from "ionicons/icons";
 
 import "@ionic/core/css/padding.css";
 import store from "@/store";
-import { createHead } from "@vueuse/head";
+import {createHead} from "@vueuse/head";
 
 const head = createHead();
 let app = createApp(App).use(head).use(IonicVue).use(router).use(store);
 
 router.isReady().then(() => {
-  addIcons({
-    link: linkOutline,
-    book: bookOutline,
-    bulb: bulbOutline,
-    "information-circle": informationCircleOutline,
-    "arrow-back": arrowBackOutline,
-    calendar: calendarOutline,
-    "help-circle": helpCircleOutline,
-    globe: globeOutline,
-    "caret-forward": caretForwardOutline,
-    "caret-back": caretBackOutline,
-  });
+    addIcons({
+        link: linkOutline,
+        book: bookOutline,
+        bulb: bulbOutline,
+        "information-circle": informationCircleOutline,
+        "arrow-back": arrowBackOutline,
+        calendar: calendarOutline,
+        "help-circle": helpCircleOutline,
+        globe: globeOutline,
+        "caret-forward": caretForwardOutline,
+        "caret-back": caretBackOutline,
+        "newspaper": newspaperOutline,
+    });
 
-  app.mount("#app");
+    app.mount("#app");
 });
 
 app.component("ion-content", IonContent);

@@ -9,9 +9,9 @@
       />
 
       <ion-title>
-        <strong class="ion-margin-end"
-        ><span v-if="config.DEBUG_MODE" style="font-size: 1rem !important">[DEBUG MODE]</span
-        ><span v-else style="font-size: 1rem !important">LIVING LIBRARY</span></strong
+        <strong class="ion-margin-end header-title"
+        ><span v-if="config.DEBUG_MODE">[DEBUG MODE]</span
+        ><span v-else>LIVING LIBRARY</span></strong
         >
         Navigate an up-to-date library of educational literature on the pandemic
       </ion-title>
@@ -20,7 +20,7 @@
         <ion-button size="small" fill="clear" id="themes-logs-button" @click="onLogbookButtonClicked">
           <ion-icon name="book" class="ion-margin-end"></ion-icon>
           <span>
-                View themes logs
+                View researcher logbook
               </span>
         </ion-button>
 
@@ -36,11 +36,11 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <div style="display: flex; flex-flow: column; height: 98vh">
-            <div class="ion-padding-vertical" style="flex: 1 1 auto; overflow-y: hidden">
+          <div class="filter-container">
+            <div class="ion-padding-vertical theme-select-container">
               <theme-select></theme-select>
             </div>
-            <div style="flex: 0 1 auto; padding-top: 10px; margin-bottom: 70px;">
+            <div class="literature-filter-container">
               <literature-filter
                   :onEducationTypeFilterClicked="onEducationTypeFilterClicked"
                   :onResearchTypeFilterClicked="onResearchTypeFilterClicked"
@@ -119,6 +119,22 @@ export default {
 </script>
 
 <style scoped>
+.filter-container {
+  display: flex;
+  flex-flow: column;
+  height: 98vh;
+}
+
+.theme-select-container {
+  flex: 1 1 auto;
+  overflow-y: hidden;
+}
+
+.literature-filter-container {
+  flex: 0 1 auto;
+  padding-top: 10px;
+  margin-bottom: 70px;
+}
 
 #themes-logs-button {
   --background: #52c1ee;
@@ -143,6 +159,10 @@ ion-title {
 
 ion-grid {
   padding: 0;
+}
+
+.header-title span {
+  font-size: 1rem !important;
 }
 
 #about-popup-btn {

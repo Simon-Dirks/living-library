@@ -50,4 +50,3 @@ Themes are processed from the CSV as semicolon-separated strings (e.g. `them.REL
 - The **CSV column header names** from which themes are retrieved can be set in `src/config.js` ( `LIT_CSV_KEYS: { THEMES: [...] }`).
 - **Ignored theme codes** can be set in `src/config.js` as well (`IGNORED_THEMES`). These theme codes will not be shown in the application.
 - **New themes** can be added by adding a new entry to the `src/assets/data/themes.json` file.
-  - fdsaf
