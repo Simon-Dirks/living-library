@@ -73,6 +73,6 @@ export default {
 <style>
 ion-chip {
   height: 25px;
-  margin: 5px 10px 0px 0px;
+  margin: 7px 10px 0px 0px;
 }
 </style>

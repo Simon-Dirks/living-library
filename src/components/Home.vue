@@ -35,7 +35,7 @@
   <ion-content>
     <ion-grid>
       <ion-row>
-        <ion-col>
+        <ion-col size="4">
           <div class="filter-container">
             <h2 class="ion-margin-start ion-no-margin ion-margin-top">Explore the themes</h2>
             <div class="ion-padding-vertical theme-select-container">
@@ -48,9 +48,8 @@
               ></literature-filter>
             </div>
           </div>
-
         </ion-col>
-        <ion-col class="literature-viewer-column">
+        <ion-col class="literature-viewer-column" size="8">
           <literature-viewer></literature-viewer>
         </ion-col>
       </ion-row>

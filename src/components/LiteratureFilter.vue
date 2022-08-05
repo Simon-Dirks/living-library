@@ -41,7 +41,7 @@
 
         <ion-row>
           <ion-col size="3">
-            <h3>Show reviewer<br/>logs on</h3>
+            <h3>Show reviewer's<br/>logs on</h3>
           </ion-col>
           <ion-col size="3" class="checkbox-container">
             <ion-item>
