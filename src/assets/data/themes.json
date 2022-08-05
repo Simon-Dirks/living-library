@@ -46,5 +46,14 @@
     ],
     "description": "<h4>We give articles the label \"Equity\" when they contain...</h4><em>Elements relating to equity, diversity and inclusion of vulnerable student groups.</em><p>For example: differential access to resources and high quality education, risks of digital divide and social and racial justice. </p>\n\n<p>Example of extract from article:</p>\n\n<ul><li>“Finally, we demonstrated that differential access to technology and remote instruction during the COVID-19 school closures could widen school SES achievement gaps” (<a href=\"https://journals.sagepub.com/doi/full/10.3102/0013189X20965918\" target=\"_blank\">Kuhfeld et al., 2020, p. 560</a>) </li><li>“The Awards and Subsidies Department paid immediate attention to the students in financial difficulty due to the epidemic or the online teaching arrangements” (<a href=\"\nhttps://www.tandfonline.com/doi/full/10.1080/03075079.2020.1859687\" target=\"_blank\">Yang &amp; Huang, 2020, p.126</a>)</li></ul>",
     "reasoningKey": "equity_reasoning"
+  },
+  "technology": {
+    "title": "Technology",
+    "color": "189, 140, 8",
+    "themes": [
+      "them.TEC"
+    ],
+    "description": "",
+    "reasoningKey": "technology_reasoning"
   }
 }

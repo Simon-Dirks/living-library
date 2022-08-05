@@ -45,4 +45,9 @@ Note that you might be using different **column header names** in your data file
 See the `LIT_CSV_FILTER_KEYS` and `LIT_CSV_EDUCATION_FILTER_KEYS` settings in `src/config.js`. Note that these filters work independently of each other!
 
 ## Adding new themes
-[TO BE WRITTEN]
+Themes are processed from the CSV as semicolon-separated strings (e.g. `them.REL;them.AFF;them.EQU`).
+
+- The **CSV column header names** from which themes are retrieved can be set in `src/config.js` ( `LIT_CSV_KEYS: { THEMES: [...] }`).
+- **Ignored theme codes** can be set in `src/config.js` as well (`IGNORED_THEMES`). These theme codes will not be shown in the application.
+- **New themes** can be added by adding a new entry to the `src/assets/data/themes.json` file.
+  - fdsaf

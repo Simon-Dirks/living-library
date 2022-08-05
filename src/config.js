@@ -2,7 +2,7 @@ import THEMES from "@/assets/data/themes.json";
 
 export const Config = {
   THEMES: THEMES,
-  IGNORED_THEMES: ["them.TEC", "them.OTH"],
+  IGNORED_THEMES: ["them.OTH"],
   LIT_CSV_KEYS: {
     THEMES: ["Theme.FINDINGS", "Theme.IMPLICATIONS"],
     ARTICLE_LINK: "New Links",
