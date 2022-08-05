@@ -76,4 +76,17 @@ body {
   height: 100%;
   margin: 0;
 }
+/*div, h1, h2, h3, h4, ion-title, ion-card-title, ion-label, span, p {*/
+/*  font-size: 1rem !important;*/
+/*}*/
+
+ion-title, ion-card-title {
+  font-size: 1rem !important;
+}
+ion-label, label, span, p, ion-card-subtitle {
+  font-size: 0.8rem !important;
+}
+h2 {
+  font-size: 1.2rem !important;
+}
 </style>

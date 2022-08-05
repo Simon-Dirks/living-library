@@ -9,10 +9,6 @@
       <!--        {{ paginationInfo.total_pages }}-->
       <!--      </p>-->
 
-      <literature-filter
-        :onEducationTypeFilterClicked="onEducationTypeFilterClicked"
-        :onResearchTypeFilterClicked="onResearchTypeFilterClicked"
-      ></literature-filter>
     </div>
 
     <p v-if="loadingLiteratureData">
@@ -69,7 +65,6 @@
 import LiteratureItem from "./LiteratureItem.vue";
 
 import { Config } from "@/config";
-import LiteratureFilter from "@/components/LiteratureFilter";
 import { mapActions, mapGetters } from "vuex";
 
 const Paginator = require("paginator");
@@ -79,7 +74,6 @@ export default {
   name: "LiteratureViewer",
   components: {
     LiteratureItem,
-    LiteratureFilter,
   },
   data() {
     return {
@@ -131,24 +125,9 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateResearchTypeFilter: "literature/updateResearchTypeFilter",
-      updateEducationTypeFilter: "literature/updateEducationTypeFilter",
       loadLiteratureData: "literature/loadLiteratureData",
     }),
-    onEducationTypeFilterClicked(educationTypeKey, event) {
-      const showThisKey = event.target.checked;
-      this.updateEducationTypeFilter({
-        educationTypeKey,
-        showEducationType: showThisKey,
-      });
-    },
-    onResearchTypeFilterClicked(researchTypeKey, event) {
-      const showThisKey = event.target.checked;
-      this.updateResearchTypeFilter({
-        researchTypeKey,
-        showResearchType: showThisKey,
-      });
-    },
+
     onPreviousPage() {
       this.currentPage--;
       this.scrollToTop();

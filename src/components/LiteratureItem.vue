@@ -5,17 +5,6 @@
       <ion-card-subtitle v-if="literatureItem[config.LIT_CSV_KEYS.SUMMARY]">
         {{ literatureItem[config.LIT_CSV_KEYS.SUMMARY] }}
       </ion-card-subtitle>
-
-      <br />
-
-      <template v-if="literatureItem">
-        <theme-button
-          v-for="themeId in literatureItem['themes']"
-          :theme-id="themeId"
-          :theme-reasoning="literatureItem[getThemeReasoningKey(themeId)]"
-          :key="themeId"
-        ></theme-button>
-      </template>
     </ion-card-header>
     <ion-card-content>
       <p>
@@ -82,6 +71,14 @@
           </p>
         </div>
       </div>
+      <template v-if="literatureItem">
+        <theme-button
+            v-for="themeId in literatureItem['themes']"
+            :theme-id="themeId"
+            :theme-reasoning="literatureItem[getThemeReasoningKey(themeId)]"
+            :key="themeId"
+        ></theme-button>
+      </template>
 
       <!--      <p>-->
       <!--        <ion-icon class="ion-margin-end" name="calendar" />-->
@@ -138,6 +135,9 @@ export default {
 </script>
 
 <style scoped>
+ion-card-header {
+  padding-bottom: 0.5rem;
+}
 a {
   color: #3880ff;
   text-decoration: none;
@@ -147,6 +147,7 @@ a {
   border-radius: 5px;
   background: aliceblue;
   padding: 16px;
-  margin-top: 16px;
+  margin-top: 8px;
+  margin-bottom: 10px;
 }
 </style>

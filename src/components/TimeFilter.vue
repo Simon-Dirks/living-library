@@ -5,7 +5,6 @@
     <vue-slider
       v-model="sliderValue"
       direction="btt"
-      height="80vh"
       :max="maxDateUnixTimeSlider"
       :min="minDateUnixTimeSlider"
       :marks="getMonthMarkers(minDateUnixTimeSlider, maxDateUnixTimeSlider)"
@@ -87,6 +86,10 @@ export default {
 </script>
 
 <style>
+.vue-slider {
+  height: 100% !important;
+}
+
 .vue-slider-dot-tooltip-inner {
   background-color: rgba(52, 152, 219, 0.75) !important;
   border-color: rgba(52, 152, 219, 0.75) !important;
@@ -94,12 +97,16 @@ export default {
 
 .timeslider-container {
   padding-left: 10px;
+  height: 100%;
 }
+ion-row, ion-col {
+  height: 100%;
 
+}
 #timeslider-caption {
   position: absolute;
-  top: 40vh;
-  left: 5px;
+  top: 35vh;
+  left: 7px;
   transform-origin: 0;
   transform: rotate(-90deg);
   width: 300px;

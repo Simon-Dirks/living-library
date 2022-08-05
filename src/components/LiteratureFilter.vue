@@ -1,10 +1,10 @@
 <template>
-  <ion-card>
+  <ion-card class="ion-no-margin">
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col size="3">
-            <h2>Research type</h2>
+            <h3 style="margin-top: 0.6rem">Research type</h3>
           </ion-col>
           <ion-col
               v-for="[filterTitle, filterKey] in Object.entries(
@@ -22,7 +22,7 @@
 
         <ion-row>
           <ion-col size="3">
-            <h2>Education level</h2>
+            <h3>Education level</h3>
           </ion-col>
           <ion-col
               v-for="[filterTitle, filterKey] in Object.entries(
@@ -41,7 +41,7 @@
 
         <ion-row>
           <ion-col size="3">
-            <h2>Show reviewer<br/>logs on</h2>
+            <h3>Show reviewer<br/>logs on</h3>
           </ion-col>
           <ion-col size="3" class="checkbox-container">
             <ion-item>
@@ -68,14 +68,6 @@
               ></ion-toggle>
               <ion-label>Coding</ion-label>
             </ion-item>
-          </ion-col>
-          <ion-col size="3" class="text-center">
-            <ion-button size="small" fill="clear" id="themes-logs-button" @click="onLogbookButtonClicked">
-              <ion-icon name="book"></ion-icon>
-              <span>
-                View themes logs
-              </span>
-            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -110,10 +102,8 @@ export default {
           "literature/updateShowReviewerContentNotes",
       updateShowReviewerProcessNotes:
           "literature/updateShowReviewerProcessNotes",
-    }),
-    onLogbookButtonClicked() {
-      window.location.href = "/theme-logbook";
-    }
+    })
+
   },
 };
 </script>
@@ -131,18 +121,12 @@ ion-checkbox {
   margin: 0 16px 0 0;
 }
 
-#themes-logs-button {
-  --background: #52c1ee;
-  --color: white;
-  margin-top: 6px;
-  font-weight: bold;
-}
-
-#themes-logs-button span {
-  margin-left: 8px;
-}
-
 ion-toggle {
   padding-right: 0.5rem;
+  zoom: 0.8;
+}
+
+ion-checkbox {
+  zoom: 0.8;
 }
 </style>

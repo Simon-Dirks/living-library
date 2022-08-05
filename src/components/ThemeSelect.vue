@@ -1,10 +1,10 @@
 <template>
-  <ion-grid class="ion-no-padding">
+  <ion-grid class="ion-padding-vertical" style="height: 100%">
     <ion-row>
-      <ion-col size="1" class="ion-margin-top">
+      <ion-col size="1">
         <time-filter></time-filter>
       </ion-col>
-      <ion-col size="5" class="ion-margin-top">
+      <ion-col size="5">
         <img
           src="@/assets/img/time-funnel_v4.png"
           alt="Time funnel"
@@ -120,11 +120,11 @@ export default {
       toggleTheme: "themes/toggleTheme",
     }),
     initializeLineDrawing() {
-      setInterval(() => {
-        this.$store.dispatch(
-          "lineDrawing/drawLineBetweenThemeSelectAndTimeFunnel"
-        );
-      }, 50);
+      // setInterval(() => {
+      //   this.$store.dispatch(
+      //     "lineDrawing/drawLineBetweenThemeSelectAndTimeFunnel"
+      //   );
+      // }, 50);
     },
   },
   mounted() {
@@ -140,7 +140,7 @@ export default {
 }
 
 #time-funnel-img {
-  height: 80vh;
+  height: 100%;
   max-width: 100%;
 }
 
