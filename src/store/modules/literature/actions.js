@@ -49,6 +49,8 @@ export default {
           continue;
         }
 
+        // Fix typos: replace colons with semi-colons
+        litItem[themeKey] = litItem[themeKey].replace(':', ';').trim();
         const litItemThemes = litItem[themeKey].split(";");
         for (const litItemThemeCode of litItemThemes) {
           const hasValidTheme = litItemThemeCode !== "";
