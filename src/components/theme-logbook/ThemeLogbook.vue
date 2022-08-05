@@ -2,7 +2,10 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Theme Logbook</ion-title>
+        <ion-title>
+          <ion-icon name="book" class="ion-margin-end relative" style="top: 3px"></ion-icon>
+          Researcher Logbook
+        </ion-title>
         <ion-buttons slot="start">
           <ion-button @click="goToHome">
             <ion-icon name="arrow-back" />
@@ -57,4 +60,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+</style>

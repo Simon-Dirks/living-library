@@ -93,11 +93,28 @@ h2 {
   font-size: 1.2rem !important;
 }
 
+
+.w-full {
+  width: 100%;
+}
+
 .h-full {
   height: 100%;
 }
 
 .text-white {
   color: white;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.bottom-0 {
+  bottom: 0;
 }
 </style>

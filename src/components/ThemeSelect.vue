@@ -4,12 +4,22 @@
       <ion-col size="1">
         <time-filter></time-filter>
       </ion-col>
-      <ion-col size="11">
+      <ion-col size="4">
         <img
-          src="@/assets/img/time-funnel_v4.png"
-          alt="Time funnel"
-          id="time-funnel-img"
+            src="@/assets/img/time-funnel_v4.png"
+            alt="Time funnel"
+            id="time-funnel-img"
         />
+      </ion-col>
+      <ion-col size="7">
+        <div class="absolute bottom-0 w-full">
+          <div v-for="(theme, themeId) in getThemes" :key="themeId" class="ion-text-right"
+          >
+            <theme-button
+                :theme-id="themeId"
+            ></theme-button>
+          </div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -18,17 +28,19 @@
 <script>
 // import $ from "jquery";
 // import "imagemapster";
-import { mapGetters, mapMutations } from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 import TimeFilter from "@/components/TimeFilter";
+import ThemeButton from "@/components/ThemeButton";
 
 export default {
   name: "ThemeSelect",
   mixins: [],
-  components: { TimeFilter },
+  components: {ThemeButton, TimeFilter},
   computed: {
     ...mapGetters({
       getThemeTitle: "themes/getThemeTitle",
       selectedThemeIds: "themes/getSelectedThemeIds",
+      getThemes: "themes/getThemes"
     }),
   },
   data() {
@@ -66,10 +78,6 @@ export default {
 </script>
 
 <style>
-#blobs-img {
-  width: 100%;
-}
-
 #time-funnel-img {
   height: 100%;
   max-width: 100%;

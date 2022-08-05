@@ -99,7 +99,7 @@ export default {
       const modalResponse = await modal.onDidDismiss();
     },
     onLogbookButtonClicked() {
-      window.location.href = "/theme-logbook";
+      window.location.href = "/researcher-logbook";
     },
     onEducationTypeFilterClicked(educationTypeKey, event) {
       const showThisKey = event.target.checked;

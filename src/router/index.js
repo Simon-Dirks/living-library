@@ -4,7 +4,7 @@ import ThemeLogbook from "../components/theme-logbook/ThemeLogbook";
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/theme-logbook", component: ThemeLogbook },
+  { path: "/researcher-logbook", component: ThemeLogbook },
 ];
 
 const router = createRouter({

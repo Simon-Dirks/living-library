@@ -14,7 +14,7 @@
     </ion-label>
 
     <ion-icon
-      v-if="!disableClick"
+      v-if="!disableClick && themeReasoning"
       name="information-circle"
       @click.stop="openThemeInfoPopup(themeId)"
       :style="{
