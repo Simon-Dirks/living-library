@@ -104,7 +104,7 @@ export default {
 
       const literatureOnCurrentPage = this.filteredLiterature.slice(
         this.paginationInfo.first_result,
-        this.paginationInfo.last_result
+        this.paginationInfo.last_result + 1
       );
       const shownLiterature = literatureOnCurrentPage;
       // const shownLiterature = this.isDraggingTimeFilter
