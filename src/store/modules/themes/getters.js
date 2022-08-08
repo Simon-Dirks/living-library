@@ -39,6 +39,9 @@ export default {
   isThemeSelected: (_, getters) => (themeId) => {
     return getters.getSelectedThemeIds.includes(themeId);
   },
+  noThemesSelected: (_, getters) => () => {
+    return getters.getSelectedThemeIds.length === 0;
+  },
   getThemeIdByLitCode: (_, getters) => (themeAbbreviation) => {
     for (const [themeId, theme] of Object.entries(getters.getThemes)) {
       if (theme.themes.includes(themeAbbreviation)) {
