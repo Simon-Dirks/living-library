@@ -13,14 +13,16 @@
       <template v-else>{{ getThemeTitle(themeId) }}</template>
     </ion-label>
 
-    <ion-icon
+    <button
+      class="theme-reasoning-button"
       v-if="!disableClick && themeReasoning"
-      name="information-circle"
       @click.stop="openThemeInfoPopup(themeId)"
       :style="{
         color: isThemeSelected(themeId) ? 'white' : 'darkslategrey',
       }"
-    ></ion-icon>
+    >
+      Why?
+    </button>
   </ion-chip>
 </template>
 
@@ -70,9 +72,21 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 ion-chip {
   height: 25px;
   margin: 7px 10px 0px 0px;
+}
+
+.theme-reasoning-button {
+  background: rgba(0, 0, 0, 0.05);
+  /*border: 1px dashed rgba(0, 0, 0, 0.5);*/
+  border: none;
+  border-radius: 5px;
+  padding: 0 5px;
+  font-size: 0.6rem;
+  font-style: italic;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  margin-left: 0.4rem;
 }
 </style>
