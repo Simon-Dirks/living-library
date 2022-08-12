@@ -9,7 +9,7 @@
 
     <template v-if="!comment && !commentSubmitting">
       <ion-input
-        placeholder="Share your thoughts here..."
+        placeholder="Share your thoughts..."
         class="sticky-title-input"
         v-model="newCommentTitle"
       ></ion-input>
