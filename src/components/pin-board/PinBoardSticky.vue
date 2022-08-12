@@ -7,6 +7,7 @@
       <ion-input
         placeholder="Type your comment here..."
         class="sticky-title-input"
+        v-model="newCommentTitle"
       ></ion-input>
       <ion-textarea
         class="sticky-text-input"
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+import { alertController } from "@ionic/vue";
+
 export default {
   name: "PinBoardSticky",
   props: ["commentText"],
@@ -36,6 +39,7 @@ export default {
     return {
       autoGrow: false,
       newCommentText: "",
+      newCommentTitle: "",
     };
   },
   methods: {
@@ -43,8 +47,31 @@ export default {
       this.autoGrow = true;
     },
     submitToModerators() {
+      if (!this.newCommentTitle.trim()) {
+        this.presentAlert(
+          "Failed to submit",
+          "Please enter a title for your response."
+        );
+        return;
+      }
+
+      if (!this.newCommentText.trim()) {
+        this.presentAlert("Failed to submit", "Please enter a comment.");
+        return;
+      }
+
       console.log(this.newCommentText);
       alert("SENDING... " + this.newCommentText);
+    },
+    async presentAlert(header, message) {
+      const alert = await alertController.create({
+        header: header,
+        message: message,
+        buttons: ["OK"],
+        keyboardClose: true,
+      });
+
+      await alert.present();
     },
   },
 };
