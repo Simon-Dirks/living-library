@@ -3,7 +3,7 @@
     <template v-if="comment">
       <button
         class="remove-sticky-button"
-        @click="removeComment({ logId: logId, commentId: commentId })"
+        @click="presentRemoveConfirmation(logId, commentId)"
       >
         <ion-icon name="close"></ion-icon>
       </button>
@@ -110,6 +110,25 @@ export default {
 
       await alert.present();
     },
+    async presentRemoveConfirmation(logId, commentId) {
+      const alert = await alertController.create({
+        header: "Warning",
+        message: "Are you sure you want to remove this response?",
+        buttons: [
+          { text: "Cancel", role: "cancel" },
+          {
+            text: "Remove",
+            role: "confirm",
+            handler: () => {
+              this.removeComment({ logId: logId, commentId: commentId });
+            },
+          },
+        ],
+        keyboardClose: true,
+      });
+
+      await alert.present();
+    },
   },
 };
 </script>
@@ -167,6 +186,7 @@ export default {
   right: 0;
   color: rgba(0, 0, 0, 0.5);
 }
+
 .remove-sticky-button:hover {
   color: rgba(0, 0, 0, 1);
 }
