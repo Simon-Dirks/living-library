@@ -19,6 +19,8 @@
       v-for="(comment, commentId) in comments"
       :key="commentId"
       :comment="comment"
+      :commentId="commentId"
+      :log-id="logId"
     ></pin-board-sticky>
     <pin-board-sticky :log-id="logId"></pin-board-sticky>
   </div>

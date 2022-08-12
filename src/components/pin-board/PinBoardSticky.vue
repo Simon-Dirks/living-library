@@ -1,6 +1,13 @@
 <template>
   <div :class="`sticky-container ${comment ? '' : 'editable'}`">
     <template v-if="comment">
+      <button
+        class="remove-sticky-button"
+        @click="removeComment({ logId: logId, commentId: commentId })"
+      >
+        <ion-icon name="close"></ion-icon>
+      </button>
+
       <p>
         <strong class="sticky-title">{{ comment.title }}</strong>
       </p>
@@ -23,7 +30,7 @@
       <ion-button
         fill="clear"
         size="small"
-        @click="submitToModerators"
+        @click="submit"
         class="submit-sticky-button"
       >
         <ion-icon name="send"></ion-icon>
@@ -43,7 +50,7 @@ import { mapActions } from "vuex";
 
 export default {
   name: "PinBoardSticky",
-  props: ["logId", "comment"],
+  props: ["logId", "comment", "commentId"],
   data() {
     return {
       autoGrow: false,
@@ -55,11 +62,12 @@ export default {
   methods: {
     ...mapActions({
       sendComment: "themeLogbook/sendComment",
+      removeComment: "themeLogbook/removeComment",
     }),
     onFocus() {
       this.autoGrow = true;
     },
-    async submitToModerators() {
+    async submit() {
       if (!this.newCommentTitle.trim()) {
         await this.presentAlert(
           "Failed to submit",
@@ -116,6 +124,7 @@ export default {
   padding: 0.4rem 1rem;
   -webkit-box-shadow: 0px 3px 5px -4px rgba(0, 0, 0, 0.52);
   box-shadow: 0px 3px 5px -4px rgba(0, 0, 0, 0.52);
+  position: relative;
 }
 
 .sticky-container.editable {
@@ -147,5 +156,18 @@ export default {
 
 .sticky-title {
   font-size: 1rem;
+}
+
+.remove-sticky-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 3px;
+  right: 0;
+  color: rgba(0, 0, 0, 0.5);
+}
+.remove-sticky-button:hover {
+  color: rgba(0, 0, 0, 1);
 }
 </style>

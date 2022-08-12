@@ -1,6 +1,14 @@
 import { Config } from "@/config";
 import Papa from "papaparse";
-import { child, get, getDatabase, push, ref, set } from "firebase/database";
+import {
+  child,
+  get,
+  getDatabase,
+  push,
+  ref,
+  set,
+  remove,
+} from "firebase/database";
 
 export default {
   loadThemeLogbookData: async (context) => {
@@ -43,5 +51,14 @@ export default {
     const commentsRef = ref(db, "themeLogbookComments/" + payload["logId"]);
     const newCommentRef = push(commentsRef);
     return await set(newCommentRef, payload["comment"]);
+  },
+  async removeComment(context, payload) {
+    console.log("Removing comment:", payload);
+    const db = getDatabase();
+    const commentRef = ref(
+      db,
+      `themeLogbookComments/${payload["logId"]}/${payload["commentId"]}`
+    );
+    return await remove(commentRef);
   },
 };
