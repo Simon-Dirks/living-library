@@ -33,8 +33,8 @@
               fill="clear"
               @click="
                 openPinBoard(
-                  `${getThemeIdFromLogbookCsvId(
-                    columnKey
+                  `${getThemeTitle(
+                    getThemeIdFromLogbookCsvId(columnKey)
                   )} ${logbookEntryDate}`,
                   logText
                 )
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { Config } from "@/config";
 import ThemeButton from "@/components/ThemeButton";
 import { modalController } from "@ionic/vue";
@@ -68,6 +68,7 @@ export default {
   computed: {
     ...mapGetters({
       filteredLogbookData: "themeLogbook/getFilteredLogbookData",
+      getThemeTitle: "themes/getThemeTitle",
     }),
   },
   methods: {

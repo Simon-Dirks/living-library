@@ -15,19 +15,42 @@
       <em>{{ logText }}</em>
     </p>
 
-    <pin-board-sticky></pin-board-sticky>
+    <pin-board-sticky
+      v-for="(comment, commentId) in comments"
+      :key="commentId"
+      :comment="comment"
+    ></pin-board-sticky>
+    <pin-board-sticky :log-id="logId"></pin-board-sticky>
   </div>
 </template>
 
 <script>
 import { modalController } from "@ionic/vue";
 import PinBoardSticky from "@/components/pin-board/PinBoardSticky";
+import { mapActions } from "vuex";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 export default {
   name: "PinBoard",
   props: ["logId", "logText"],
   components: { PinBoardSticky },
+  data() {
+    return {
+      comments: null,
+    };
+  },
+  mounted() {
+    const db = getDatabase();
+    const commentsRef = ref(db, "themeLogbookComments/" + this.logId);
+    onValue(commentsRef, (snapshot) => {
+      const commentsSnapshot = snapshot.val();
+      this.comments = commentsSnapshot;
+    });
+  },
   methods: {
+    ...mapActions({
+      getComments: "themeLogbook/getCommentsSnapshot",
+    }),
     closeModal() {
       modalController.dismiss();
     },

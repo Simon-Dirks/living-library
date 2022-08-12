@@ -1,15 +1,15 @@
 <template>
-  <div
-    :class="`sticky-container ${commentText ? '' : 'editable'}`"
-    v-if="!commentSubmitted"
-  >
-    <template v-if="commentText">
-      <p>{{ commentText }}</p>
+  <div :class="`sticky-container ${comment ? '' : 'editable'}`">
+    <template v-if="comment">
+      <p>
+        <strong class="sticky-title">{{ comment.title }}</strong>
+      </p>
+      <p>{{ comment.text }}</p>
     </template>
 
-    <template v-if="!commentText && !commentSubmitted && !commentSubmitting">
+    <template v-if="!comment && !commentSubmitting">
       <ion-input
-        placeholder="Type your comment here..."
+        placeholder="Share your thoughts here..."
         class="sticky-title-input"
         v-model="newCommentTitle"
       ></ion-input>
@@ -31,43 +31,37 @@
       </ion-button>
     </template>
 
-    <template v-if="!commentText && !commentSubmitted && commentSubmitting">
+    <template v-if="!comment && commentSubmitting">
       <ion-spinner></ion-spinner>
     </template>
   </div>
-
-  <template v-if="commentSubmitted">
-    <div class="sticky-submitted-container">
-      <p>
-        Thank you for sharing your thoughts! We have submitted your response to
-        our team for moderation.
-      </p>
-    </div>
-  </template>
 </template>
 
 <script>
 import { alertController } from "@ionic/vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "PinBoardSticky",
-  props: ["commentText"],
+  props: ["logId", "comment"],
   data() {
     return {
       autoGrow: false,
       newCommentText: "",
       newCommentTitle: "",
-      commentSubmitted: false,
       commentSubmitting: false,
     };
   },
   methods: {
+    ...mapActions({
+      sendComment: "themeLogbook/sendComment",
+    }),
     onFocus() {
       this.autoGrow = true;
     },
-    submitToModerators() {
+    async submitToModerators() {
       if (!this.newCommentTitle.trim()) {
-        this.presentAlert(
+        await this.presentAlert(
           "Failed to submit",
           "Please enter a title for your response."
         );
@@ -75,17 +69,28 @@ export default {
       }
 
       if (!this.newCommentText.trim()) {
-        this.presentAlert("Failed to submit", "Please enter a comment.");
+        await this.presentAlert("Failed to submit", "Please enter a comment.");
         return;
       }
 
-      console.log(this.newCommentText);
       this.commentSubmitting = true;
-      setTimeout(() => {
-        this.commentSubmitting = false;
-        this.commentSubmitted = true;
-      }, 1000);
-      // alert("SENDING... " + this.newCommentText);
+      this.sendComment({
+        logId: this.logId,
+        comment: { text: this.newCommentText, title: this.newCommentTitle },
+      })
+        .then(() => {
+          this.newCommentText = "";
+          this.newCommentTitle = "";
+        })
+        .catch(() => {
+          this.presentAlert(
+            "Failed to submit",
+            "Could not submit your response."
+          );
+        })
+        .finally(() => {
+          this.commentSubmitting = false;
+        });
     },
     async presentAlert(header, message) {
       const alert = await alertController.create({
@@ -140,18 +145,7 @@ export default {
   margin-top: 0;
 }
 
-.sticky-submitted-container {
-  background: rgba(45, 211, 111, 0.2);
-  border: 1px dotted #2dd36f;
-  padding: 0.1rem 1rem;
-  border-radius: 5px;
-
-  width: 40%;
-  display: inline-block;
-  margin: 0.5rem;
-  vertical-align: top;
-
-  -webkit-box-shadow: 0px 3px 5px -4px rgba(0, 0, 0, 0.52);
-  box-shadow: 0px 3px 5px -4px rgba(0, 0, 0, 0.52);
+.sticky-title {
+  font-size: 1rem;
 }
 </style>

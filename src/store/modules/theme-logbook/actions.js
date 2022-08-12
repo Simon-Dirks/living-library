@@ -1,5 +1,6 @@
 import { Config } from "@/config";
 import Papa from "papaparse";
+import { child, get, getDatabase, push, ref, set } from "firebase/database";
 
 export default {
   loadThemeLogbookData: async (context) => {
@@ -25,5 +26,22 @@ export default {
       { root: true }
     );
     return rawResponse;
+  },
+  // async getCommentsSnapshot(context, logId) {
+  //   const dbRef = ref(getDatabase());
+  //   const snapshot = await get(child(dbRef, `themeLogbookComments/${logId}`));
+  //
+  //   if (snapshot.exists()) {
+  //     const snapshotData = snapshot.val();
+  //     return Promise.resolve(snapshotData);
+  //   }
+  //   return Promise.resolve([]);
+  // },
+  async sendComment(context, payload) {
+    console.log("Sending comment:", payload);
+    const db = getDatabase();
+    const commentsRef = ref(db, "themeLogbookComments/" + payload["logId"]);
+    const newCommentRef = push(commentsRef);
+    return await set(newCommentRef, payload["comment"]);
   },
 };

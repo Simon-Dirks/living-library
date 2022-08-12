@@ -54,6 +54,10 @@ import {
 import "@ionic/core/css/padding.css";
 import store from "@/store";
 import { createHead } from "@vueuse/head";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "@/firebase-config";
+
+initializeApp(firebaseConfig);
 
 const head = createHead();
 let app = createApp(App).use(head).use(IonicVue).use(router).use(store);
