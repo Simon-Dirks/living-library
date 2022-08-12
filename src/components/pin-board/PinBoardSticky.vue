@@ -1,9 +1,12 @@
 <template>
-  <div :class="`sticky-container ${commentText ? '' : 'editable'}`">
+  <div
+    :class="`sticky-container ${commentText ? '' : 'editable'}`"
+    v-if="!commentSubmitted"
+  >
     <template v-if="commentText">
       <p>{{ commentText }}</p>
     </template>
-    <template v-if="!commentText">
+    <template v-if="!commentText && !commentSubmitted">
       <ion-input
         placeholder="Type your comment here..."
         class="sticky-title-input"
@@ -27,6 +30,15 @@
       </ion-button>
     </template>
   </div>
+
+  <template v-if="commentSubmitted">
+    <div class="sticky-submitted-container">
+      <p>
+        Thank you for sharing your thoughts! We have submitted your response to
+        our team for moderation.
+      </p>
+    </div>
+  </template>
 </template>
 
 <script>
@@ -40,6 +52,7 @@ export default {
       autoGrow: false,
       newCommentText: "",
       newCommentTitle: "",
+      commentSubmitted: false,
     };
   },
   methods: {
@@ -61,7 +74,8 @@ export default {
       }
 
       console.log(this.newCommentText);
-      alert("SENDING... " + this.newCommentText);
+      this.commentSubmitted = true;
+      // alert("SENDING... " + this.newCommentText);
     },
     async presentAlert(header, message) {
       const alert = await alertController.create({
@@ -114,5 +128,20 @@ export default {
 
 .sticky-text-input {
   margin-top: 0;
+}
+
+.sticky-submitted-container {
+  background: rgba(45, 211, 111, 0.2);
+  border: 1px dotted #2dd36f;
+  padding: 0.1rem 1rem;
+  border-radius: 5px;
+
+  width: 40%;
+  display: inline-block;
+  margin: 0.5rem;
+  vertical-align: top;
+
+  -webkit-box-shadow: 0px 3px 5px -4px rgba(0, 0, 0, 0.52);
+  box-shadow: 0px 3px 5px -4px rgba(0, 0, 0, 0.52);
 }
 </style>
