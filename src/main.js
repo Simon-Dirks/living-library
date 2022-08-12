@@ -1,75 +1,81 @@
-import {createApp} from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import {
-    IonBackButton,
-    IonButton,
-    IonButtons,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonCheckbox,
-    IonChip,
-    IonCol,
-    IonContent,
-    IonGrid,
-    IonHeader,
-    IonIcon,
-    IonicVue,
-    IonInfiniteScroll,
-    IonInfiniteScrollContent,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonPage,
-    IonRow,
-    IonSelect,
-    IonSelectOption,
-    IonSpinner,
-    IonTitle,
-    IonToggle,
-    IonToolbar,
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCheckbox,
+  IonChip,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonicVue,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonPage,
+  IonRow,
+  IonSelect,
+  IonSelectOption,
+  IonSpinner,
+  IonTextarea,
+  IonTitle,
+  IonToggle,
+  IonToolbar,
 } from "@ionic/vue";
-import {addIcons} from "ionicons";
+import { addIcons } from "ionicons";
 import {
-    arrowBackOutline,
-    bookOutline,
-    bulbOutline,
-    calendarOutline,
-    caretBackOutline,
-    caretForwardOutline,
-    globeOutline,
-    helpCircleOutline,
-    informationCircleOutline,
-    linkOutline,
-    newspaperOutline,
+  arrowBackOutline,
+  bookOutline,
+  bulbOutline,
+  calendarOutline,
+  caretBackOutline,
+  caretForwardOutline,
+  chatbubblesOutline,
+  globeOutline,
+  helpCircleOutline,
+  informationCircleOutline,
+  linkOutline,
+  newspaperOutline,
+  send,
 } from "ionicons/icons";
 
 import "@ionic/core/css/padding.css";
 import store from "@/store";
-import {createHead} from "@vueuse/head";
+import { createHead } from "@vueuse/head";
 
 const head = createHead();
 let app = createApp(App).use(head).use(IonicVue).use(router).use(store);
 
 router.isReady().then(() => {
-    addIcons({
-        link: linkOutline,
-        book: bookOutline,
-        bulb: bulbOutline,
-        "information-circle": informationCircleOutline,
-        "arrow-back": arrowBackOutline,
-        calendar: calendarOutline,
-        "help-circle": helpCircleOutline,
-        globe: globeOutline,
-        "caret-forward": caretForwardOutline,
-        "caret-back": caretBackOutline,
-        "newspaper": newspaperOutline,
-    });
+  addIcons({
+    link: linkOutline,
+    book: bookOutline,
+    bulb: bulbOutline,
+    "information-circle": informationCircleOutline,
+    "arrow-back": arrowBackOutline,
+    calendar: calendarOutline,
+    "help-circle": helpCircleOutline,
+    globe: globeOutline,
+    "caret-forward": caretForwardOutline,
+    "caret-back": caretBackOutline,
+    newspaper: newspaperOutline,
+    chatbubbles: chatbubblesOutline,
+    send: send,
+  });
 
-    app.mount("#app");
+  app.mount("#app");
 });
 
 app.component("ion-content", IonContent);
@@ -100,3 +106,5 @@ app.component("ion-back-button", IonBackButton);
 app.component("ion-page", IonPage);
 app.component("ion-select", IonSelect);
 app.component("ion-select-option", IonSelectOption);
+app.component("ion-textarea", IonTextarea);
+app.component("ion-input", IonInput);

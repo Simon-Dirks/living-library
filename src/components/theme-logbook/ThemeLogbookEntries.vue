@@ -27,8 +27,21 @@
               :theme-id="getThemeIdFromLogbookCsvId(columnKey)"
               :disable-click="true"
               :hide-info-button="true"
-              class="ion-margin-end"
             ></theme-button>
+            <ion-button
+              size="small"
+              fill="clear"
+              @click="
+                openPinBoard(
+                  `${getThemeIdFromLogbookCsvId(
+                    columnKey
+                  )} ${logbookEntryDate}`,
+                  logText
+                )
+              "
+            >
+              <ion-icon name="chatbubbles"></ion-icon>
+            </ion-button>
             <span>{{ logText }}</span>
           </div>
         </template>
@@ -41,6 +54,8 @@
 import { mapGetters } from "vuex";
 import { Config } from "@/config";
 import ThemeButton from "@/components/ThemeButton";
+import { modalController } from "@ionic/vue";
+import PinBoard from "@/components/pin-board/PinBoard";
 
 export default {
   name: "ThemeLogEntries",
@@ -80,6 +95,23 @@ export default {
       }
       return logbookCsvId;
     },
+    async openPinBoard(logId, logText) {
+      const modal = await modalController.create({
+        component: PinBoard,
+        componentProps: {
+          logId: logId,
+          logText: logText,
+        },
+      });
+
+      await modal.present();
+    },
   },
 };
 </script>
+
+<style scoped>
+ion-chip {
+  margin-right: 0;
+}
+</style>

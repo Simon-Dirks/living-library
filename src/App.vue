@@ -1,12 +1,12 @@
 <template>
   <ion-app>
-    <ion-router-outlet/>
+    <ion-router-outlet />
   </ion-app>
 </template>
 
 <script>
-import {IonApp, IonRouterOutlet} from "@ionic/vue";
-import {useHead} from "@vueuse/head";
+import { IonApp, IonRouterOutlet } from "@ionic/vue";
+import { useHead } from "@vueuse/head";
 
 export default {
   setup() {
@@ -81,18 +81,24 @@ body {
 /*  font-size: 1rem !important;*/
 /*}*/
 
-ion-title, ion-card-title {
+ion-title,
+ion-card-title {
   font-size: 1rem !important;
 }
 
-ion-label, label, span, p, li, ion-card-subtitle {
+ion-label,
+label,
+span,
+p,
+li,
+ion-card-subtitle,
+textarea {
   font-size: 0.8rem !important;
 }
 
 h2 {
   font-size: 1.2rem !important;
 }
-
 
 .w-full {
   width: 100%;
