@@ -6,7 +6,8 @@
     <template v-if="commentText">
       <p>{{ commentText }}</p>
     </template>
-    <template v-if="!commentText && !commentSubmitted">
+
+    <template v-if="!commentText && !commentSubmitted && !commentSubmitting">
       <ion-input
         placeholder="Type your comment here..."
         class="sticky-title-input"
@@ -28,6 +29,10 @@
         <ion-icon name="send"></ion-icon>
         Submit
       </ion-button>
+    </template>
+
+    <template v-if="!commentText && !commentSubmitted && commentSubmitting">
+      <ion-spinner></ion-spinner>
     </template>
   </div>
 
@@ -53,6 +58,7 @@ export default {
       newCommentText: "",
       newCommentTitle: "",
       commentSubmitted: false,
+      commentSubmitting: false,
     };
   },
   methods: {
@@ -74,7 +80,11 @@ export default {
       }
 
       console.log(this.newCommentText);
-      this.commentSubmitted = true;
+      this.commentSubmitting = true;
+      setTimeout(() => {
+        this.commentSubmitting = false;
+        this.commentSubmitted = true;
+      }, 1000);
       // alert("SENDING... " + this.newCommentText);
     },
     async presentAlert(header, message) {
