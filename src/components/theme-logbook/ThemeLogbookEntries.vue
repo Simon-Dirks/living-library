@@ -32,15 +32,13 @@
               size="small"
               fill="clear"
               @click="
-                openPinBoard(
-                  `${getThemeTitle(
-                    getThemeIdFromLogbookCsvId(columnKey)
-                  )} ${logbookEntryDate}`,
-                  logText
-                )
+                openPinBoard(getLogId(columnKey, logbookEntryDate), logText)
               "
             >
               <ion-icon name="chatbubbles"></ion-icon>
+              <ion-badge color="primary">
+                {{ getNumComments(getLogId(columnKey, logbookEntryDate)) }}
+              </ion-badge>
             </ion-button>
             <span>{{ logText }}</span>
           </div>
@@ -51,17 +49,19 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import { Config } from "@/config";
 import ThemeButton from "@/components/ThemeButton";
 import { modalController } from "@ionic/vue";
 import PinBoard from "@/components/pin-board/PinBoard";
+import { getDatabase, onValue, ref } from "firebase/database";
 
 export default {
   name: "ThemeLogEntries",
   components: { ThemeButton },
   data() {
     return {
+      comments: {},
       config: Config,
     };
   },
@@ -70,6 +70,13 @@ export default {
       filteredLogbookData: "themeLogbook/getFilteredLogbookData",
       getThemeTitle: "themes/getThemeTitle",
     }),
+  },
+  mounted() {
+    const db = getDatabase();
+    const commentsRef = ref(db, "themeLogbookComments");
+    onValue(commentsRef, (snapshot) => {
+      this.comments = snapshot.val();
+    });
   },
   methods: {
     getThemeIdFromLogbookCsvId(logbookCsvId) {
@@ -106,6 +113,23 @@ export default {
       });
 
       await modal.present();
+    },
+    getNumComments(logId) {
+      if (!logId || !(logId in this.comments)) {
+        return null;
+      }
+      return Object.keys(this.comments[logId]).length;
+    },
+    getLogId(columnKey, logDate) {
+      if (!columnKey || !logDate) {
+        return null;
+      }
+
+      return (
+        this.getThemeTitle(this.getThemeIdFromLogbookCsvId(columnKey)) +
+        " " +
+        logDate
+      );
     },
   },
 };
