@@ -16,13 +16,13 @@
 
     <template v-if="!comment && !commentSubmitting">
       <ion-input
-        placeholder="Share your thoughts..."
+        placeholder="Give your note a title"
         class="sticky-title-input"
         v-model="newCommentTitle"
       ></ion-input>
       <ion-textarea
         class="sticky-text-input"
-        placeholder="..."
+        placeholder="Share your thoughts"
         :auto-grow="autoGrow"
         @ionFocus="onFocus"
         v-model="newCommentText"
