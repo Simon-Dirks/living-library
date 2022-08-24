@@ -17,6 +17,7 @@ import {
   IonGrid,
   IonHeader,
   IonIcon,
+  IonBadge,
   IonicVue,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
@@ -112,3 +113,4 @@ app.component("ion-select", IonSelect);
 app.component("ion-select-option", IonSelectOption);
 app.component("ion-textarea", IonTextarea);
 app.component("ion-input", IonInput);
+app.component("ion-badge", IonBadge);
