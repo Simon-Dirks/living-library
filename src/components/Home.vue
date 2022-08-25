@@ -33,7 +33,7 @@
           <span class="ion-margin-start">About the living library</span>
         </ion-button>
 
-        <login-button></login-button>
+        <!--        <login-button></login-button>-->
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -73,7 +73,6 @@ import { modalController } from "@ionic/vue";
 import { Config } from "@/config";
 import { mapActions } from "vuex";
 import InformationPopup from "@/components/popups/InformationPopup";
-import LoginButton from "@/components/auth/LoginButton";
 
 export default {
   data() {
@@ -84,7 +83,6 @@ export default {
   name: "Home",
   inheritAttrs: false,
   components: {
-    LoginButton,
     ThemeSelect,
     LiteratureViewer,
     LiteratureFilter,
