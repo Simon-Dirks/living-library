@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import {
   IonBackButton,
+  IonBadge,
   IonButton,
   IonButtons,
   IonCard,
@@ -17,7 +18,6 @@ import {
   IonGrid,
   IonHeader,
   IonIcon,
-  IonBadge,
   IonicVue,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
@@ -53,12 +53,14 @@ import {
 } from "ionicons/icons";
 
 import "@ionic/core/css/padding.css";
+import "firebaseui/dist/firebaseui.css";
 import store from "@/store";
 import { createHead } from "@vueuse/head";
-import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "@/firebase-config";
+import * as firebaseui from "firebaseui";
+import firebase from "firebase/compat";
 
-initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 const head = createHead();
 let app = createApp(App).use(head).use(IonicVue).use(router).use(store);

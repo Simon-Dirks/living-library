@@ -2,32 +2,38 @@
   <ion-header>
     <ion-toolbar>
       <img
-          src="@/assets/img/logo/logo_v5.png"
-          height="40"
-          id="logo-img"
-          alt="CARE logo"
+        src="@/assets/img/logo/logo_v5.png"
+        height="40"
+        id="logo-img"
+        alt="CARE logo"
       />
 
       <ion-title>
-        <strong class="ion-margin-end header-title"
-        ><span v-if="config.DEBUG_MODE">[DEBUG MODE]</span
-        ><span v-else>LIVING LIBRARY</span></strong
-        >
+        <strong class="ion-margin-end header-title">
+          <span v-if="config.DEBUG_MODE">[DEBUG MODE]</span>
+          <span v-else>LIVING LIBRARY</span>
+        </strong>
+
         Navigate an up-to-date library of educational literature on the pandemic
       </ion-title>
 
       <ion-buttons slot="end">
-        <ion-button size="small" fill="clear" id="themes-logs-button" @click="onLogbookButtonClicked">
+        <ion-button
+          size="small"
+          fill="clear"
+          id="themes-logs-button"
+          @click="onLogbookButtonClicked"
+        >
           <ion-icon name="book" class="ion-margin-end"></ion-icon>
-          <span>
-                View researcher logbook
-              </span>
+          <span> View researcher logbook </span>
         </ion-button>
 
         <ion-button @click="openMoreInfoModal" id="about-popup-btn">
-          <ion-icon name="information-circle"/>
+          <ion-icon name="information-circle" />
           <span class="ion-margin-start">About the living library</span>
         </ion-button>
+
+        <login-button></login-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -37,14 +43,16 @@
       <ion-row>
         <ion-col size="5">
           <div class="filter-container">
-            <h2 class="ion-margin-start ion-no-margin ion-margin-top">Explore the themes</h2>
+            <h2 class="ion-margin-start ion-no-margin ion-margin-top">
+              Explore the themes
+            </h2>
             <div class="ion-padding-vertical theme-select-container">
               <theme-select></theme-select>
             </div>
             <div class="literature-filter-container">
               <literature-filter
-                  :onEducationTypeFilterClicked="onEducationTypeFilterClicked"
-                  :onResearchTypeFilterClicked="onResearchTypeFilterClicked"
+                :onEducationTypeFilterClicked="onEducationTypeFilterClicked"
+                :onResearchTypeFilterClicked="onResearchTypeFilterClicked"
               ></literature-filter>
             </div>
           </div>
@@ -61,10 +69,11 @@
 import LiteratureViewer from "./LiteratureViewer.vue";
 import ThemeSelect from "./ThemeSelect.vue";
 import LiteratureFilter from "./LiteratureFilter.vue";
-import {modalController} from "@ionic/vue";
-import {Config} from "@/config";
-import {mapActions} from "vuex";
+import { modalController } from "@ionic/vue";
+import { Config } from "@/config";
+import { mapActions } from "vuex";
 import InformationPopup from "@/components/popups/InformationPopup";
+import LoginButton from "@/components/auth/LoginButton";
 
 export default {
   data() {
@@ -75,9 +84,10 @@ export default {
   name: "Home",
   inheritAttrs: false,
   components: {
+    LoginButton,
     ThemeSelect,
     LiteratureViewer,
-    LiteratureFilter
+    LiteratureFilter,
   },
   mounted() {
     this.loadLiteratureData();
