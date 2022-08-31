@@ -50,7 +50,7 @@ import { mapActions } from "vuex";
 
 export default {
   name: "PinBoardSticky",
-  props: ["logId", "comment", "commentId"],
+  props: ["logId", "comment", "commentId", "dbLogBookId"],
   data() {
     return {
       autoGrow: false,
@@ -85,6 +85,7 @@ export default {
       this.sendComment({
         logId: this.logId,
         comment: { text: this.newCommentText, title: this.newCommentTitle },
+        dbLogBookId: this.dbLogBookId,
       })
         .then(() => {
           this.newCommentText = "";
@@ -120,7 +121,11 @@ export default {
             text: "Remove",
             role: "confirm",
             handler: () => {
-              this.removeComment({ logId: logId, commentId: commentId });
+              this.removeComment({
+                logId: logId,
+                commentId: commentId,
+                dbLogBookId: this.dbLogBookId,
+              });
             },
           },
         ],

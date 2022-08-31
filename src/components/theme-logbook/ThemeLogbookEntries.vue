@@ -28,18 +28,14 @@
               :disable-click="true"
               :hide-info-button="true"
             ></theme-button>
-            <ion-button
-              size="small"
-              fill="clear"
-              @click="
-                openPinBoard(getLogId(columnKey, logbookEntryDate), logText)
+            <open-pin-board-button
+              :log-id="getLogId(columnKey, logbookEntryDate)"
+              :db-log-book-id="'themeLogbookComments'"
+              :log-text="logText"
+              :num-comments="
+                getNumComments(getLogId(columnKey, logbookEntryDate))
               "
-            >
-              <ion-icon name="chatbubbles"></ion-icon>
-              <ion-badge color="primary">
-                {{ getNumComments(getLogId(columnKey, logbookEntryDate)) }}
-              </ion-badge>
-            </ion-button>
+            ></open-pin-board-button>
             <span>{{ logText }}</span>
           </div>
         </template>
@@ -52,13 +48,12 @@
 import { mapGetters } from "vuex";
 import { Config } from "@/config";
 import ThemeButton from "@/components/ThemeButton";
-import { modalController } from "@ionic/vue";
-import PinBoard from "@/components/pin-board/PinBoard";
 import { getDatabase, onValue, ref } from "firebase/database";
+import OpenPinBoardButton from "@/components/pin-board/OpenPinBoardButton";
 
 export default {
   name: "ThemeLogEntries",
-  components: { ThemeButton },
+  components: { OpenPinBoardButton, ThemeButton },
   data() {
     return {
       comments: {},
@@ -103,19 +98,8 @@ export default {
       }
       return logbookCsvId;
     },
-    async openPinBoard(logId, logText) {
-      const modal = await modalController.create({
-        component: PinBoard,
-        componentProps: {
-          logId: logId,
-          logText: logText,
-        },
-      });
-
-      await modal.present();
-    },
     getNumComments(logId) {
-      if (!logId || !(logId in this.comments)) {
+      if (!this.comments || !logId || !(logId in this.comments)) {
         return null;
       }
       return Object.keys(this.comments[logId]).length;

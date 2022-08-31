@@ -32,6 +32,15 @@
 
             <br />
 
+            <div class="open-pin-board-button">
+              <open-pin-board-button
+                :log-text="null"
+                :log-id="getArticleLogId(literatureItem)"
+                :db-log-book-id="'articleComments'"
+                :num-comments="getNumComments(getArticleLogId(literatureItem))"
+              ></open-pin-board-button>
+            </div>
+
             <p class="literature-info-item">
               <a
                 :href="literatureItem[config.LIT_CSV_KEYS.ARTICLE_LINK]"
@@ -124,12 +133,17 @@ import { Config } from "@/config";
 import { mapGetters, mapMutations } from "vuex";
 import moment from "moment";
 import ThemeButton from "@/components/ThemeButton";
+import { modalController } from "@ionic/vue";
+import PinBoard from "@/components/pin-board/PinBoard";
+import OpenPinBoardButton from "@/components/pin-board/OpenPinBoardButton";
+import { getDatabase, onValue, ref } from "firebase/database";
 
 export default {
   mixins: [],
-  components: { ThemeButton },
+  components: { OpenPinBoardButton, ThemeButton },
   data() {
     return {
+      comments: {},
       config: Config,
       moment: moment,
     };
@@ -153,6 +167,38 @@ export default {
         this.getShowReviewerProcessNotesItem(this.literatureItem)
       );
     },
+    async openPinBoard(logId, logText) {
+      const modal = await modalController.create({
+        component: PinBoard,
+        componentProps: {
+          logId: logId,
+          logText: logText,
+          dbLogBookId: "themeLogbookComments",
+        },
+      });
+
+      await modal.present();
+    },
+    getArticleLogId(literatureItem) {
+      return (
+        literatureItem["Article name"] +
+        " - " +
+        moment(literatureItem["date"]).format("MMMM YYYY")
+      );
+    },
+    getNumComments(logId) {
+      if (!this.comments || !logId || !(logId in this.comments)) {
+        return null;
+      }
+      return Object.keys(this.comments[logId]).length;
+    },
+  },
+  mounted() {
+    const db = getDatabase();
+    const commentsRef = ref(db, "articleComments");
+    onValue(commentsRef, (snapshot) => {
+      this.comments = snapshot.val();
+    });
   },
   props: ["literatureItem"],
   inject: [],
@@ -200,5 +246,11 @@ ion-icon {
   display: inline-block;
   margin-top: 14px;
   margin-bottom: 0;
+}
+.open-pin-board-button {
+  display: inline-block;
+  position: relative;
+  top: -5px;
+  margin-right: 0.25rem;
 }
 </style>

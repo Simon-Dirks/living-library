@@ -48,7 +48,10 @@ export default {
   async sendComment(context, payload) {
     console.log("Sending comment:", payload);
     const db = getDatabase();
-    const commentsRef = ref(db, "themeLogbookComments/" + payload["logId"]);
+    const commentsRef = ref(
+      db,
+      payload["dbLogBookId"] + "/" + payload["logId"]
+    );
     const newCommentRef = push(commentsRef);
     return await set(newCommentRef, payload["comment"]);
   },
@@ -57,7 +60,7 @@ export default {
     const db = getDatabase();
     const commentRef = ref(
       db,
-      `themeLogbookComments/${payload["logId"]}/${payload["commentId"]}`
+      `${payload["dbLogBookId"]}/${payload["logId"]}/${payload["commentId"]}`
     );
     return await remove(commentRef);
   },

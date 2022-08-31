@@ -21,8 +21,13 @@
       :comment="comment"
       :commentId="commentId"
       :log-id="logId"
+      :db-log-book-id="dbLogBookId"
     ></pin-board-sticky>
-    <pin-board-sticky :log-id="logId"></pin-board-sticky>
+
+    <pin-board-sticky
+      :log-id="logId"
+      :db-log-book-id="dbLogBookId"
+    ></pin-board-sticky>
   </div>
 </template>
 
@@ -34,7 +39,7 @@ import { getDatabase, ref, onValue } from "firebase/database";
 
 export default {
   name: "PinBoard",
-  props: ["logId", "logText"],
+  props: ["logId", "logText", "dbLogBookId"],
   components: { PinBoardSticky },
   data() {
     return {
@@ -43,7 +48,7 @@ export default {
   },
   mounted() {
     const db = getDatabase();
-    const commentsRef = ref(db, "themeLogbookComments/" + this.logId);
+    const commentsRef = ref(db, this.dbLogBookId + "/" + this.logId);
     onValue(commentsRef, (snapshot) => {
       const commentsSnapshot = snapshot.val();
       this.comments = commentsSnapshot;
