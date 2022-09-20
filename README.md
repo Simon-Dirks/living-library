@@ -6,7 +6,7 @@ The Living Library is an interactive platform made to help you orient yourself i
 The library is a small-scale project run by a team of devoted teachers, students and researchers. The thematic organisation of articles is based on continuous qualitative analyses of the literature with a coding scheme that evolves along with the academic conversation. Our aim is to identify and help others integrate the various red threads running through the literature. Throughout the aftermath of the pandemic, we will keep a finger on the pulse, asking: what has happened, what is happening now, and what matters? In the Living Library, you can explore overall themes in the literature in a connective manner and observe how the academic conversation changes over time.
 
 ## Contact us
-We invite you to write to us with ideas, questions, praise and criticism on the Living Library: [E-MAIL ADDRESS FORTHCOMING]
+We invite you to write to us with ideas, questions, praise and criticism on the Living Library: livinglibrary@uu.nl.
 
 # Running the application
 The Living Library is built using [Vue](https://vuejs.org/) and [Ionic](https://ionicframework.com/).
