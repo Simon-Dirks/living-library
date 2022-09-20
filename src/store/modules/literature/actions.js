@@ -1,6 +1,5 @@
 import Papa from "papaparse";
 import { Config } from "@/config";
-import fileLiteratureData from "@/assets/data/coded-articles.csv";
 
 export default {
   loadLiteratureData: async (context) => {
@@ -121,22 +120,5 @@ export default {
       "Education type filter:",
       context.getters.getShownEducationTypeKeys
     );
-  },
-  getCodedArticlesCsvFile: async (context) => {
-    if (Config.DEBUG_MODE) {
-      return Promise.resolve(fileLiteratureData);
-    }
-
-    console.log("Downloading coded articles file...", Config.LIT_CSV_URL);
-
-    const rawResponse = await context.dispatch(
-      "sendHttpRequest",
-      {
-        url: Config.LIT_CSV_URL,
-        responseType: "text",
-      },
-      { root: true }
-    );
-    return rawResponse;
-  },
+  }
 };
