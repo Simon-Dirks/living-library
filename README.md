@@ -2,7 +2,7 @@
 ## The human face of academia
 The Living Library is an interactive platform made to help you orient yourself in the academic literature speaking about education in connection with the pandemic. While other search tools that have been created to date are run by algorithms and aim to be comprehensive, extracting and visualising quantitative data, the Living Library takes a complementary approach: it invites you to get to know a sampled part of the literature from an interpretive, human perspective.
 
-##It's alive!
+## It's alive!
 The library is a small-scale project run by a team of devoted teachers, students and researchers. The thematic organisation of articles is based on continuous qualitative analyses of the literature with a coding scheme that evolves along with the academic conversation. Our aim is to identify and help others integrate the various red threads running through the literature. Throughout the aftermath of the pandemic, we will keep a finger on the pulse, asking: what has happened, what is happening now, and what matters? In the Living Library, you can explore overall themes in the literature in a connective manner and observe how the academic conversation changes over time.
 
 ## Contact us
@@ -11,7 +11,7 @@ We invite you to write to us with ideas, questions, praise and criticism on the 
 # Running the application
 The Living Library is built using [Vue](https://vuejs.org/) and [Ionic](https://ionicframework.com/).
 
-To run the application on your own machine, you will need to install [Node.js](https://nodejs.org/en/).
+To run the application on your own machine, you will need to install [Node.js](https://nodejs.org/en/) first.
 
 ## Initial setup
 ```
