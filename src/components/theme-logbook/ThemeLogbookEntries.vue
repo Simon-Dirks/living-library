@@ -6,8 +6,8 @@
 
   <div v-if="filteredLogbookData">
     <ion-card
-      v-for="(logbookEntries, logbookEntryDate) in filteredLogbookData"
-      :key="JSON.stringify(logbookEntryDate)"
+        v-for="(logbookEntries, logbookEntryDate) in filteredLogbookData"
+        :key="JSON.stringify(logbookEntryDate)"
     >
       <ion-card-header>
         <ion-card-title>
@@ -16,23 +16,23 @@
       </ion-card-header>
       <ion-card-content>
         <template
-          v-for="(logText, columnKey) in logbookEntries"
-          :key="columnKey"
+            v-for="(logText, columnKey) in logbookEntries"
+            :key="columnKey"
         >
           <div
-            v-if="columnKey !== config.THEME_LOGBOOK_CSV_KEYS.DATE && logText"
-            class="ion-padding-bottom"
+              v-if="columnKey !== config.THEME_LOGBOOK_CSV_KEYS.DATE && logText"
+              class="ion-padding-bottom"
           >
             <theme-button
-              :theme-id="getThemeIdFromLogbookCsvId(columnKey)"
-              :disable-click="true"
-              :hide-info-button="true"
+                :theme-id="getThemeIdFromLogbookCsvId(columnKey)"
+                :disable-click="true"
+                :hide-info-button="true"
             ></theme-button>
             <open-pin-board-button
-              :log-id="getLogId(columnKey, logbookEntryDate)"
-              :db-log-book-id="'themeLogbookComments'"
-              :log-text="logText"
-              :num-comments="
+                :log-id="getLogId(columnKey, logbookEntryDate)"
+                :db-log-book-id="'themeLogbookComments'"
+                :log-text="logText"
+                :num-comments="
                 getNumComments(getLogId(columnKey, logbookEntryDate))
               "
             ></open-pin-board-button>
@@ -45,19 +45,21 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { Config } from "@/config";
+import {mapGetters} from "vuex";
+import {Config} from "@/config";
 import ThemeButton from "@/components/ThemeButton";
-import { getDatabase, onValue, ref } from "firebase/database";
+import {getDatabase, onValue, ref} from "firebase/database";
 import OpenPinBoardButton from "@/components/pin-board/OpenPinBoardButton";
+import {getApps} from "firebase/app";
 
 export default {
   name: "ThemeLogEntries",
-  components: { OpenPinBoardButton, ThemeButton },
+  components: {OpenPinBoardButton, ThemeButton},
   data() {
     return {
       comments: {},
       config: Config,
+      firebaseIsInitialized: false
     };
   },
   computed: {
@@ -67,28 +69,32 @@ export default {
     }),
   },
   mounted() {
-    const db = getDatabase();
-    const commentsRef = ref(db, "themeLogbookComments");
-    onValue(commentsRef, (snapshot) => {
-      this.comments = snapshot.val();
-    });
+    this.firebaseIsInitialized = getApps().length > 0;
+    if (this.firebaseIsInitialized) {
+      const db = getDatabase();
+      const commentsRef = ref(db, "themeLogbookComments");
+      onValue(commentsRef, (snapshot) => {
+        this.comments = snapshot.val();
+      });
+    }
+
   },
   methods: {
     getThemeIdFromLogbookCsvId(logbookCsvId) {
       if (
-        logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.ACHIEVEMENT_ASSESSMENT
+          logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.ACHIEVEMENT_ASSESSMENT
       ) {
         return "academicAchievementAssessment";
       } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.AFFECT) {
         return "affect";
       } else if (
-        logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.CONTEXT_EDUCATION
+          logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.CONTEXT_EDUCATION
       ) {
         return "contextTeaching";
       } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.EQUITY) {
         return "equity";
       } else if (
-        logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.TEACHING_PRACTICE
+          logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.TEACHING_PRACTICE
       ) {
         return "teachingPractice";
       } else if (logbookCsvId === Config.THEME_LOGBOOK_CSV_KEYS.TECHNOLOGY) {
@@ -110,9 +116,9 @@ export default {
       }
 
       return (
-        this.getThemeTitle(this.getThemeIdFromLogbookCsvId(columnKey)) +
-        " " +
-        logDate
+          this.getThemeTitle(this.getThemeIdFromLogbookCsvId(columnKey)) +
+          " " +
+          logDate
       );
     },
   },

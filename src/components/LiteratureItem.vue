@@ -4,49 +4,49 @@
       <ion-grid>
         <ion-row>
           <ion-col
-            :size="itemHasLogs() ? 7 : 12"
-            :class="`ion-padding-end ${itemHasLogs() ? 'border-right' : ''}`"
+              :size="itemHasLogs() ? 7 : 12"
+              :class="`ion-padding-end ${itemHasLogs() ? 'border-right' : ''}`"
           >
             <ion-card-title
-              >{{ literatureItem["Article name"] }}
+            >{{ literatureItem["Article name"] }}
             </ion-card-title>
             <ion-card-subtitle
-              v-if="literatureItem[config.LIT_CSV_KEYS.SUMMARY]"
+                v-if="literatureItem[config.LIT_CSV_KEYS.SUMMARY]"
             >
               {{ literatureItem[config.LIT_CSV_KEYS.SUMMARY] }}
             </ion-card-subtitle>
 
             <p v-if="literatureItem[config.LIT_CSV_KEYS.COUNTRY]">
-              <ion-icon class="ion-margin-end" name="globe" />
+              <ion-icon class="ion-margin-end" name="globe"/>
               <span>{{ literatureItem[config.LIT_CSV_KEYS.COUNTRY] }}</span>
             </p>
 
             <template v-if="literatureItem">
               <theme-button
-                v-for="themeId in literatureItem['themes']"
-                :theme-id="themeId"
-                :theme-reasoning="literatureItem[getThemeReasoningKey(themeId)]"
-                :key="themeId"
+                  v-for="themeId in literatureItem['themes']"
+                  :theme-id="themeId"
+                  :theme-reasoning="literatureItem[getThemeReasoningKey(themeId)]"
+                  :key="themeId"
               ></theme-button>
             </template>
 
-            <br />
+            <br/>
 
             <div class="open-pin-board-button">
               <open-pin-board-button
-                :log-text="null"
-                :log-id="getArticleLogId(literatureItem)"
-                :db-log-book-id="'articleComments'"
-                :num-comments="getNumComments(getArticleLogId(literatureItem))"
+                  :log-text="null"
+                  :log-id="getArticleLogId(literatureItem)"
+                  :db-log-book-id="'articleComments'"
+                  :num-comments="getNumComments(getArticleLogId(literatureItem))"
               ></open-pin-board-button>
             </div>
 
             <p class="literature-info-item">
               <a
-                :href="literatureItem[config.LIT_CSV_KEYS.ARTICLE_LINK]"
-                target="_blank"
+                  :href="literatureItem[config.LIT_CSV_KEYS.ARTICLE_LINK]"
+                  target="_blank"
               >
-                <ion-icon name="link" />
+                <ion-icon name="link"/>
                 <span v-if="literatureItem[config.LIT_CSV_KEYS.AUTHORS]">
                   {{ literatureItem[config.LIT_CSV_KEYS.AUTHORS] }}</span
                 ><span v-else>Article link</span>
@@ -54,22 +54,22 @@
             </p>
 
             <p class="literature-info-item">
-              <ion-icon name="newspaper" />
+              <ion-icon name="newspaper"/>
               <span>{{ literatureItem[config.LIT_CSV_KEYS.JOURNAL] }}</span>
             </p>
 
             <p class="literature-info-item">
-              <ion-icon name="calendar" />
+              <ion-icon name="calendar"/>
               <span>{{
-                moment(literatureItem["date"]).format("MMMM YYYY")
-              }}</span>
+                  moment(literatureItem["date"]).format("MMMM YYYY")
+                }}</span>
             </p>
 
             <p
-              class="literature-info-item"
-              v-if="literatureItem[config.LIT_CSV_KEYS.COUNTRY]"
+                class="literature-info-item"
+                v-if="literatureItem[config.LIT_CSV_KEYS.COUNTRY]"
             >
-              <ion-icon class="ion-margin-end" name="globe" />
+              <ion-icon class="ion-margin-end" name="globe"/>
               <span>{{ literatureItem[config.LIT_CSV_KEYS.COUNTRY] }}</span>
             </p>
 
@@ -103,11 +103,11 @@
                 </div>
 
                 <div
-                  v-if="
+                    v-if="
                     getShowReviewerContentNotesItem(literatureItem) &&
                     getShowReviewerProcessNotesItem(literatureItem)
                   "
-                  class="ion-margin-top"
+                    class="ion-margin-top"
                 ></div>
 
                 <div v-if="getShowReviewerProcessNotesItem(literatureItem)">
@@ -129,18 +129,19 @@
 </template>
 
 <script>
-import { Config } from "@/config";
-import { mapGetters, mapMutations } from "vuex";
+import {Config} from "@/config";
+import {mapGetters, mapMutations} from "vuex";
 import moment from "moment";
 import ThemeButton from "@/components/ThemeButton";
-import { modalController } from "@ionic/vue";
+import {modalController} from "@ionic/vue";
 import PinBoard from "@/components/pin-board/PinBoard";
 import OpenPinBoardButton from "@/components/pin-board/OpenPinBoardButton";
-import { getDatabase, onValue, ref } from "firebase/database";
+import {getDatabase, onValue, ref} from "firebase/database";
+import {getApps} from "firebase/app";
 
 export default {
   mixins: [],
-  components: { OpenPinBoardButton, ThemeButton },
+  components: {OpenPinBoardButton, ThemeButton},
   data() {
     return {
       comments: {},
@@ -152,9 +153,9 @@ export default {
     ...mapGetters({
       getThemeReasoningKey: "themes/getThemeReasoningKey",
       getShowReviewerContentNotesItem:
-        "literature/getShowReviewerContentNotesItem",
+          "literature/getShowReviewerContentNotesItem",
       getShowReviewerProcessNotesItem:
-        "literature/getShowReviewerProcessNotesItem",
+          "literature/getShowReviewerProcessNotesItem",
     }),
   },
   methods: {
@@ -163,8 +164,8 @@ export default {
     }),
     itemHasLogs() {
       return (
-        this.getShowReviewerContentNotesItem(this.literatureItem) ||
-        this.getShowReviewerProcessNotesItem(this.literatureItem)
+          this.getShowReviewerContentNotesItem(this.literatureItem) ||
+          this.getShowReviewerProcessNotesItem(this.literatureItem)
       );
     },
     async openPinBoard(logId, logText) {
@@ -181,9 +182,9 @@ export default {
     },
     getArticleLogId(literatureItem) {
       return (
-        literatureItem["Article name"] +
-        " - " +
-        moment(literatureItem["date"]).format("MMMM YYYY")
+          literatureItem["Article name"] +
+          " - " +
+          moment(literatureItem["date"]).format("MMMM YYYY")
       );
     },
     getNumComments(logId) {
@@ -194,11 +195,15 @@ export default {
     },
   },
   mounted() {
-    const db = getDatabase();
-    const commentsRef = ref(db, "articleComments");
-    onValue(commentsRef, (snapshot) => {
-      this.comments = snapshot.val();
-    });
+    const fireBaseIsInitialized = getApps().length > 0;
+    if (fireBaseIsInitialized) {
+      const db = getDatabase();
+      const commentsRef = ref(db, "articleComments");
+      onValue(commentsRef, (snapshot) => {
+        this.comments = snapshot.val();
+      });
+    }
+
   },
   props: ["literatureItem"],
   inject: [],
@@ -247,6 +252,7 @@ ion-icon {
   margin-top: 14px;
   margin-bottom: 0;
 }
+
 .open-pin-board-button {
   display: inline-block;
   position: relative;

@@ -60,7 +60,9 @@ import { firebaseConfig } from "@/firebase-config";
 import * as firebaseui from "firebaseui";
 import firebase from "firebase/compat";
 
-firebase.initializeApp(firebaseConfig);
+if (firebaseConfig) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 const head = createHead();
 let app = createApp(App).use(head).use(IonicVue).use(router).use(store);
