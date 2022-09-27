@@ -48,7 +48,7 @@ export const Config = {
   LIT_CSV_URL:
     "https://docs.google.com/spreadsheets/u/0/d/1gnNDzvtY12XTl4Q4sQNxLFA5-G8jcLngryO7OKOo8aM/gviz/tq?tqx=out:csv&tq=select+*",
   THEME_LOGBOOK_CSV_URL:
-    "https://docs.google.com/spreadsheets/u/0/d/1Mm23FJ_BTWhQFhl8xY_SnMkX26rUsn9f/gviz/tq?tqx=out:csv&tq=select+*",
+    "https://docs.google.com/spreadsheets/u/0/d/1e95HOt0aRgZHLF1WzGPNn6fp6Owm4BH9/gviz/tq?tqx=out:csv&tq=select+*",
   LINE_COLOR: "rgba(0, 0, 0, 0.45)",
   IMAGEAREAOFFSET: { xOffset: 0, yOffset: 0 },
   NUM_LIT_ITEMS_PER_PAGE: 9999,
