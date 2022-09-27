@@ -4,18 +4,18 @@ export const Config = {
   THEMES: THEMES,
   IGNORED_THEMES: ["them.OTH"],
   LIT_CSV_KEYS: {
-    THEMES: ["Theme.FINDINGS", "Theme.IMPLICATIONS"],
-    ARTICLE_LINK: "New Links",
+    THEMES: ["Theme FINDINGS", "Theme IMPLICATIONS"],
+    ARTICLE_LINK: "Links",
     SUMMARY: "Summary",
     ARTICLE_NAME: "Article name",
     DATE: "Date",
     DATE_OF_CODING: "Date of coding",
-    CODED_BY: "coded_by",
+    CODED_BY: "Coded by",
     AUTHORS: "Authors",
     JOURNAL: "Journal",
     COUNTRY: "country_conducted",
-    CONTENT_NOTES: "Thoughts/Discussion points",
-    PROCESS_NOTES: "Notes/Doubts",
+    CONTENT_NOTES: "Thoughts and discussion points",
+    PROCESS_NOTES: "Notes and doubts",
   },
   LIT_CSV_FILTER_KEYS: {
     Reflections: "Reflection",
@@ -23,8 +23,8 @@ export const Config = {
     Research: "Research",
   },
   LIT_CSV_EDUCATION_FILTER_KEYS: {
-    Secondary: "SecondaryEducation",
-    Higher: "HigherEducation",
+    Secondary: "Secondary education",
+    Higher: "Higher education",
   },
   THEME_LOGBOOK_CSV_KEYS: {
     DATE: "Date",
@@ -46,7 +46,7 @@ export const Config = {
     OTHERS: "Deliberations",
   },
   LIT_CSV_URL:
-    "https://docs.google.com/spreadsheets/u/0/d/1mQYw67fH-_uWqw7u5q9b2fs3_ZVx1UoHUfoOigqBCck/gviz/tq?tqx=out:csv&tq=select+*",
+    "https://docs.google.com/spreadsheets/u/0/d/1gnNDzvtY12XTl4Q4sQNxLFA5-G8jcLngryO7OKOo8aM/gviz/tq?tqx=out:csv&tq=select+*",
   THEME_LOGBOOK_CSV_URL:
     "https://docs.google.com/spreadsheets/u/0/d/1Mm23FJ_BTWhQFhl8xY_SnMkX26rUsn9f/gviz/tq?tqx=out:csv&tq=select+*",
   LINE_COLOR: "rgba(0, 0, 0, 0.45)",
