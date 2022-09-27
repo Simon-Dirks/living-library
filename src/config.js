@@ -3,6 +3,7 @@ import THEMES from "@/assets/data/themes.json";
 export const Config = {
   THEMES: THEMES,
   IGNORED_THEMES: ["them.OTH"],
+  USE_STATIC_TIMEFUNNEL_IMG: false,
   LIT_CSV_KEYS: {
     THEMES: ["Theme FINDINGS", "Theme IMPLICATIONS"],
     ARTICLE_LINK: "Links",

@@ -5,65 +5,76 @@
         <time-filter></time-filter>
       </ion-col>
       <ion-col size="4">
-        <img
-          src="@/assets/img/time-funnel_black.png"
-          alt="Time funnel"
-          class="time-funnel-img"
-          :style="{ opacity: noThemesSelected() ? 0 : 0.3 }"
-        />
-        <img
-          src="@/assets/img/time-funnel_v4.png"
-          alt="Time funnel"
-          class="time-funnel-img"
-          :style="{ opacity: noThemesSelected() ? 1 : 0 }"
-        />
-        <img
-          src="@/assets/img/time-funnel_green.png"
-          alt="Time funnel"
-          class="time-funnel-img time-funnel-overlay"
-          :style="{
+        <div v-if="Config.USE_STATIC_TIMEFUNNEL_IMG">
+          <img
+              src="@/assets/img/time-funnel_v4.png"
+              alt="Time funnel"
+              class="time-funnel-img"
+              :style="{opacity: 1}"
+          />
+        </div>
+        <div v-if="!Config.USE_STATIC_TIMEFUNNEL_IMG">
+          <img
+              src="@/assets/img/time-funnel_black.png"
+              alt="Time funnel"
+              class="time-funnel-img"
+              :style="{ opacity: noThemesSelected() ? 0 : 0.3 }"
+          />
+          <img
+              src="@/assets/img/time-funnel_v4.png"
+              alt="Time funnel"
+              class="time-funnel-img"
+              :style="{ opacity: noThemesSelected() ? 1 : 0 }"
+          />
+          <img
+              src="@/assets/img/time-funnel_green.png"
+              alt="Time funnel"
+              class="time-funnel-img time-funnel-overlay"
+              :style="{
             opacity: isThemeSelected('academicAchievementAssessment') ? 1 : 0,
           }"
-        />
-        <img
-          src="@/assets/img/time-funnel_red.png"
-          alt="Time funnel"
-          class="time-funnel-img time-funnel-overlay"
-          :style="{
+          />
+          <img
+              src="@/assets/img/time-funnel_red.png"
+              alt="Time funnel"
+              class="time-funnel-img time-funnel-overlay"
+              :style="{
             opacity: isThemeSelected('contextTeaching') ? 1 : 0,
           }"
-        />
-        <img
-          src="@/assets/img/time-funnel_blue.png"
-          alt="Time funnel"
-          class="time-funnel-img time-funnel-overlay"
-          :style="{
+          />
+          <img
+              src="@/assets/img/time-funnel_blue.png"
+              alt="Time funnel"
+              class="time-funnel-img time-funnel-overlay"
+              :style="{
             opacity: isThemeSelected('teachingPractice') ? 1 : 0,
           }"
-        />
-        <img
-          src="@/assets/img/time-funnel_yellow.png"
-          alt="Time funnel"
-          class="time-funnel-img time-funnel-overlay"
-          :style="{
+          />
+          <img
+              src="@/assets/img/time-funnel_yellow.png"
+              alt="Time funnel"
+              class="time-funnel-img time-funnel-overlay"
+              :style="{
             opacity: isThemeSelected('affect') ? 1 : 0,
           }"
-        />
-        <img
-          src="@/assets/img/time-funnel_gold.png"
-          alt="Time funnel"
-          class="time-funnel-img time-funnel-overlay"
-          :style="{
+          />
+          <img
+              src="@/assets/img/time-funnel_gold.png"
+              alt="Time funnel"
+              class="time-funnel-img time-funnel-overlay"
+              :style="{
             opacity: isThemeSelected('equity') ? 1 : 0,
           }"
-        />
+          />
+        </div>
+
       </ion-col>
       <ion-col size="7">
         <div class="absolute bottom-0 w-full">
           <div
-            v-for="(theme, themeId) in getThemes"
-            :key="themeId"
-            class="ion-text-right"
+              v-for="(theme, themeId) in getThemes"
+              :key="themeId"
+              class="ion-text-right"
           >
             <theme-button :theme-id="themeId"></theme-button>
           </div>
@@ -76,14 +87,15 @@
 <script>
 // import $ from "jquery";
 // import "imagemapster";
-import { mapGetters, mapMutations } from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 import TimeFilter from "@/components/TimeFilter";
 import ThemeButton from "@/components/ThemeButton";
+import {Config} from "@/config";
 
 export default {
   name: "ThemeSelect",
   mixins: [],
-  components: { ThemeButton, TimeFilter },
+  components: {ThemeButton, TimeFilter},
   computed: {
     ...mapGetters({
       getThemeTitle: "themes/getThemeTitle",
@@ -94,7 +106,9 @@ export default {
     }),
   },
   data() {
-    return {};
+    return {
+      Config: Config
+    };
   },
   watch: {
     selectedThemeIds: {
