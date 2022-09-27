@@ -120,5 +120,19 @@ export default {
       "Education type filter:",
       context.getters.getShownEducationTypeKeys
     );
-  }
+  },
+  getCodedArticlesCsvFile: async (context) => {
+    console.log("Downloading coded articles file...", Config.LIT_CSV_URL);
+
+    const rawResponse = await context.dispatch(
+      "sendHttpRequest",
+      {
+        url: Config.LIT_CSV_URL,
+        responseType: "text",
+      },
+      { root: true }
+    );
+
+    return rawResponse;
+  },
 };
