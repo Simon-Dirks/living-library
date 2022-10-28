@@ -70,7 +70,9 @@
       </ion-col>
       <ion-col size="6">
         <div class="absolute bottom-0 h-full w-full">
-          <h3 class="absolute ion-no-margin font-normal">
+          <h2 class="ion-no-margin">Explore the literature...</h2>
+
+          <h3 class="absolute ion-no-margin ion-margin-top font-normal">
             <ion-icon
               name="arrow-back"
               class="relative"
