@@ -8,13 +8,13 @@
         alt="CARE logo"
       />
 
-      <ion-title>
+      <ion-title style="white-space: normal">
         <strong class="ion-margin-end header-title">
           <span v-if="config.DEBUG_MODE">[DEBUG MODE]</span>
           <span v-else>LIVING LIBRARY</span>
         </strong>
-
-        Navigate an up-to-date library of educational literature on the pandemic
+        A platform for continuous surveying of the literature on a topic of
+        choice where the researchers open up their process to you
       </ion-title>
 
       <ion-buttons slot="end">

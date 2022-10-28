@@ -1,7 +1,7 @@
 <template>
   <ion-header class="information-modal-header">
     <ion-toolbar>
-      <ion-title>About the Living Library</ion-title>
+      <ion-title>Welcome to the Living Library</ion-title>
       <ion-buttons slot="start">
         <ion-button @click="closeModal">
           <ion-icon name="arrow-back" />
@@ -11,31 +11,59 @@
   </ion-header>
 
   <div class="ion-padding information-modal-container">
-    <em>*Disclaimer: The LL is work in progress!*</em>
+    <h3>Pushing the boundaries of open science</h3>
+    <p>
+      Welcome to our first prototype of a Living Library. The Living Library is
+      an experimental format for surveying the academic literature on a
+      particular topic.
+    </p>
+    <p>
+      As a medium, the Living Library is designed to invite reflection on the
+      meaning and the limits of open science. Its functions facilitate deeper
+      engagement with the role of the scientist in the academic conversation and
+      confronts "Living Librarians" with questions such as:
+    </p>
+    <ul>
+      <li>
+        "Are you willing to share your doubts, as well as your knowledge?"
+      </li>
 
-    <h3>The human face of academia</h3>
+      <li>"Who are you in public as a researcher?"</li>
+    </ul>
+    <p>
+      The Living Library invites you (yes, you!) to engage in conversation with
+      the Librarians and other visitors. Why don't you leave a note? Look out
+      for this icon: [ICON]
+    </p>
+
+    <h3>Using the Living Library</h3>
     <p>
       The Living Library is an interactive platform made to help you orient
       yourself in the academic literature speaking about education in connection
-      with the pandemic. While other search tools that have been created to date
-      are run by algorithms and aim to be comprehensive, extracting and
-      visualising quantitative data, the Living Library takes a complementary
-      approach: it invites you to get to know a sampled part of the literature
-      from an interpretive, human perspective.
+      with the pandemic. In the Living Library, you can explore prominent themes
+      in the literature in a connective manner and observe how the academic
+      conversation changes over time.
     </p>
+    <p>
+      While other search tools that have been created to date are run by
+      algorithms and aim to be comprehensive, extracting and visualising
+      quantitative data, the Living Library takes a complementary approach: it
+      invites you to get to know a sampled part of the literature from an
+      interpretive, human perspective.
+    </p>
+
+    <p></p>
 
     <h3>It's alive!</h3>
     <p>
-      The library is a small-scale project run by a team of devoted teachers,
-      students and researchers. The thematic organisation of articles is based
-      on continuous qualitative analyses of the literature with a coding scheme
-      that evolves along with the academic conversation. Our aim is to identify
-      and help others integrate the various red threads running through the
-      literature. Throughout the aftermath of the pandemic, we will keep a
-      finger on the pulse, asking: what has happened, what is happening now, and
-      what matters? In the Living Library, you can explore overall themes in the
-      literature in a connective manner and observe how the academic
-      conversation changes over time.
+      This first prototype of a Living Library is a small-scale project run by a
+      team of devoted teachers, students and researchers at Utrecht University.
+      The thematic organisation of articles is based on continuous qualitative
+      analyses of the literature with a coding scheme that evolves along with
+      the academic conversation. Our aim is to identify and help others
+      integrate the various red threads running through the educational
+      literature on the pandemic. For over a year we kept a finger on the pulse,
+      asking: What is happening, and what matters in education?
     </p>
 
     <h3>Contact us</h3>

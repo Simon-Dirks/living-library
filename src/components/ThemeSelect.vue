@@ -4,10 +4,10 @@
       <ion-col size="1">
         <time-filter></time-filter>
       </ion-col>
-      <ion-col size="4">
+      <ion-col size="5">
         <div v-if="Config.USE_STATIC_TIMEFUNNEL_IMG">
           <img
-            src="@/assets/img/time-funnel_v4.png"
+            src="@/assets/img/image-archive/time-funnel_v2.png"
             alt="Time funnel"
             class="time-funnel-img"
             :style="{ opacity: 1 }"
@@ -21,7 +21,7 @@
             :style="{ opacity: noThemesSelected() ? 0 : 0.3 }"
           />
           <img
-            src="@/assets/img/time-funnel_v4.png"
+            src="@/assets/img/image-archive/time-funnel_v2.png"
             alt="Time funnel"
             class="time-funnel-img"
             :style="{ opacity: noThemesSelected() ? 1 : 0 }"
@@ -68,7 +68,7 @@
           />
         </div>
       </ion-col>
-      <ion-col size="7">
+      <ion-col size="6">
         <div class="absolute bottom-0 h-full w-full">
           <h3 class="absolute ion-no-margin font-normal">
             <ion-icon
@@ -76,17 +76,17 @@
               class="relative"
               style="top: 3px"
             ></ion-icon>
-            By date of submission
+            by date of submission
           </h3>
 
           <div class="absolute bottom-0">
-            <h3 class="ion-no-margin font-normal">
+            <h3 class="ion-no-margin ion-margin-bottom font-normal">
               <ion-icon
                 name="arrow-down"
                 class="relative"
                 style="top: 3px"
               ></ion-icon>
-              By thematic context
+              by thematic content
             </h3>
             <div
               v-for="(theme, themeId) in getThemes"

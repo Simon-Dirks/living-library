@@ -7,11 +7,11 @@
             <h3 style="margin-top: 0.6rem">Research type</h3>
           </ion-col>
           <ion-col
-              v-for="[filterTitle, filterKey] in Object.entries(
+            v-for="[filterTitle, filterKey] in Object.entries(
               config.LIT_CSV_FILTER_KEYS
             )"
-              :key="filterKey"
-              class="checkbox-container"
+            :key="filterKey"
+            class="checkbox-container"
           >
             <ion-item @click="onResearchTypeFilterClicked(filterKey, $event)">
               <ion-label>{{ filterTitle }}</ion-label>
@@ -25,12 +25,12 @@
             <h3>Education level</h3>
           </ion-col>
           <ion-col
-              v-for="[filterTitle, filterKey] in Object.entries(
+            v-for="[filterTitle, filterKey] in Object.entries(
               config.LIT_CSV_EDUCATION_FILTER_KEYS
             )"
-              :key="filterKey"
-              class="checkbox-container"
-              size="3"
+            :key="filterKey"
+            class="checkbox-container"
+            size="3"
           >
             <ion-item @click="onEducationTypeFilterClicked(filterKey, $event)">
               <ion-label>{{ filterTitle }}</ion-label>
@@ -41,15 +41,15 @@
 
         <ion-row>
           <ion-col size="3">
-            <h3>Show reviewer's<br/>logs on</h3>
+            <h3>Show reviewer's<br />notes on</h3>
           </ion-col>
           <ion-col size="3" class="checkbox-container">
             <ion-item>
               <ion-toggle
-                  slot="start"
-                  name="show-reviewer-thoughts"
-                  :checked="getShowReviewerContentNotes"
-                  @ionChange="
+                slot="start"
+                name="show-reviewer-thoughts"
+                :checked="getShowReviewerContentNotes"
+                @ionChange="
                   updateShowReviewerContentNotes($event.target.checked)
                 "
               ></ion-toggle>
@@ -59,10 +59,10 @@
           <ion-col size="3" class="checkbox-container">
             <ion-item>
               <ion-toggle
-                  slot="start"
-                  name="show-reviewer-notes"
-                  :checked="getShowReviewerProcessNotes"
-                  @ionChange="
+                slot="start"
+                name="show-reviewer-notes"
+                :checked="getShowReviewerProcessNotes"
+                @ionChange="
                   updateShowReviewerProcessNotes($event.target.checked)
                 "
               ></ion-toggle>
@@ -76,8 +76,8 @@
 </template>
 
 <script>
-import {Config} from "@/config";
-import {mapGetters, mapMutations} from "vuex";
+import { Config } from "@/config";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {},
@@ -93,17 +93,16 @@ export default {
     }),
   },
   props: {
-    onEducationTypeFilterClicked: {type: Function},
-    onResearchTypeFilterClicked: {type: Function},
+    onEducationTypeFilterClicked: { type: Function },
+    onResearchTypeFilterClicked: { type: Function },
   },
   methods: {
     ...mapMutations({
       updateShowReviewerContentNotes:
-          "literature/updateShowReviewerContentNotes",
+        "literature/updateShowReviewerContentNotes",
       updateShowReviewerProcessNotes:
-          "literature/updateShowReviewerProcessNotes",
-    })
-
+        "literature/updateShowReviewerProcessNotes",
+    }),
   },
 };
 </script>

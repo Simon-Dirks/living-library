@@ -129,7 +129,7 @@ See the `LIT_CSV_FILTER_KEYS` and `LIT_CSV_EDUCATION_FILTER_KEYS` settings in `s
 Firebase offers both hosting functionalities (deploying your application to the web) as well as database functionalities (storing information of your application online). We can use Firebase database functionalities to allow discussions for each coded article, as well as the researcher logbook.
 
 1. Create a Realtime Database for your Firebase project through the [Firebase console](console.firebase.google.com).
-2. Start in “test mode”, or set the “Rules” to allow read and write access. **_Note that this allows anyone to view but also CHANGE, DOWNLOAD or even REMOVE all submitted comments. Auth/login functionality is still under development…_**
+2. Start in “test mode”, or set the “Rules” to allow read and write access. **_Note that this allows anyone to view but also CHANGE, DOWNLOAD or even REMOVE all submitted comments. We have made a start on auth/login functionality, you are welcome to develop this further if needed. (See the `src/components/auth` files)_**
 
    Example of database Rules:
 
