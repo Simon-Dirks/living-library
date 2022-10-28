@@ -15,7 +15,7 @@
         </div>
         <div v-if="!Config.USE_STATIC_TIMEFUNNEL_IMG">
           <img
-            src="@/assets/img/time-funnel_black.png"
+            src="@/assets/img/time-funnel_black-v2.png"
             alt="Time funnel"
             class="time-funnel-img"
             :style="{ opacity: noThemesSelected() ? 0 : 0.3 }"
@@ -27,7 +27,7 @@
             :style="{ opacity: noThemesSelected() ? 1 : 0 }"
           />
           <img
-            src="@/assets/img/time-funnel_green.png"
+            src="@/assets/img/time-funnel_green-v2.png"
             alt="Time funnel"
             class="time-funnel-img time-funnel-overlay"
             :style="{
@@ -35,7 +35,7 @@
             }"
           />
           <img
-            src="@/assets/img/time-funnel_red.png"
+            src="@/assets/img/time-funnel_red-v2.png"
             alt="Time funnel"
             class="time-funnel-img time-funnel-overlay"
             :style="{
@@ -43,7 +43,7 @@
             }"
           />
           <img
-            src="@/assets/img/time-funnel_blue.png"
+            src="@/assets/img/time-funnel_blue-v2.png"
             alt="Time funnel"
             class="time-funnel-img time-funnel-overlay"
             :style="{
@@ -51,7 +51,7 @@
             }"
           />
           <img
-            src="@/assets/img/time-funnel_yellow.png"
+            src="@/assets/img/time-funnel_yellow-v2.png"
             alt="Time funnel"
             class="time-funnel-img time-funnel-overlay"
             :style="{
@@ -59,11 +59,19 @@
             }"
           />
           <img
-            src="@/assets/img/time-funnel_gold.png"
+            src="@/assets/img/time-funnel_gold-v2.png"
             alt="Time funnel"
             class="time-funnel-img time-funnel-overlay"
             :style="{
               opacity: isThemeSelected('equity') ? 1 : 0,
+            }"
+          />
+          <img
+            src="@/assets/img/time-funnel_purple.png"
+            alt="Time funnel"
+            class="time-funnel-img time-funnel-overlay"
+            :style="{
+              opacity: isThemeSelected('technology') ? 1 : 0,
             }"
           />
         </div>
