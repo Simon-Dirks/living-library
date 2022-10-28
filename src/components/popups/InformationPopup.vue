@@ -2,9 +2,9 @@
   <ion-header class="information-modal-header">
     <ion-toolbar>
       <ion-title>Welcome to the Living Library</ion-title>
-      <ion-buttons slot="start">
+      <ion-buttons slot="end">
         <ion-button @click="closeModal">
-          <ion-icon name="arrow-back" />
+          <ion-icon name="close" />
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -33,7 +33,8 @@
     <p>
       The Living Library invites you (yes, you!) to engage in conversation with
       the Librarians and other visitors. Why don't you leave a note? Look out
-      for this icon: [ICON]
+      for this icon:
+      <ion-icon name="chatbubbles"></ion-icon>
     </p>
 
     <h3>Using the Living Library</h3>
