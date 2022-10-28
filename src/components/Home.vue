@@ -8,13 +8,12 @@
         alt="CARE logo"
       />
 
-      <ion-title style="white-space: normal">
+      <ion-title>
         <strong class="ion-margin-end header-title">
           <span v-if="config.DEBUG_MODE">[DEBUG MODE]</span>
           <span v-else>LIVING LIBRARY</span>
         </strong>
-        A platform for continuous surveying of the literature on a topic of
-        choice where the researchers open up their process to you
+        An open science platform for continuous literature surveying
       </ion-title>
 
       <ion-buttons slot="end">

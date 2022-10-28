@@ -21,14 +21,12 @@
       As a medium, the Living Library is designed to invite reflection on the
       meaning and the limits of open science. Its functions facilitate deeper
       engagement with the role of the scientist in the academic conversation and
-      confronts "Living Librarians" with questions such as:
+      confront "Living Librarians" with questions such as:
     </p>
     <ul>
-      <li>
-        "Are you willing to share your doubts, as well as your knowledge?"
-      </li>
+      <li>"Who are you as a researcher?"</li>
 
-      <li>"Who are you in public as a researcher?"</li>
+      <li>"What parts of your work should others be able to see?"</li>
     </ul>
     <p>
       The Living Library invites you (yes, you!) to engage in conversation with
@@ -39,21 +37,14 @@
 
     <h3>Using the Living Library</h3>
     <p>
-      The Living Library is an interactive platform made to help you orient
-      yourself in the academic literature speaking about education in connection
-      with the pandemic. In the Living Library, you can explore prominent themes
-      in the literature in a connective manner and observe how the academic
-      conversation changes over time.
+      In this particular Living Library, the Librarians survey the academic
+      literature that speaks about education in connection with the pandemic.
+      You can explore prominent themes in the literature,l in a connective
+      manner and apply other filters to find certain kinds of articles and read
+      the researchers' notes on their content and the coding work. Use a time
+      slider to filter articles according to submission dates and observe how
+      the literature changes over time!
     </p>
-    <p>
-      While other search tools that have been created to date are run by
-      algorithms and aim to be comprehensive, extracting and visualising
-      quantitative data, the Living Library takes a complementary approach: it
-      invites you to get to know a sampled part of the literature from an
-      interpretive, human perspective.
-    </p>
-
-    <p></p>
 
     <h3>It's alive!</h3>
     <p>
@@ -67,6 +58,22 @@
       asking: What is happening, and what matters in education?
     </p>
 
+    <h3>A human face</h3>
+    <p>
+      The Flow of Time was hand-painted by Lizzy, one of the founders of this
+      Living Library prototype. It reminds us that themes in the literature are
+      more fluent and intertwined than our categories make it seem. It also
+      reminds us that an overview on the literature is always a snapshot in
+      time.
+    </p>
+    <p>
+      While other search tools that have been created to date are run by
+      algorithms and aim to be comprehensive, extracting and visualising
+      quantitative data, the Living Library takes a complementary approach: it
+      invites you to get to know a sampled part of the literature from an
+      interpretive, human perspective.
+    </p>
+
     <h3>Contact us</h3>
     <p>
       We invite you to write to us with ideas, questions, praise and criticism
@@ -76,7 +83,10 @@
 
     <hr />
 
-    <h4>We give articles the label "Affect" when they contain...</h4>
+    <h3>How do we sort articles thematically?</h3>
+    <p>
+      <strong>We give articles the label "Affect" when they contain...</strong>
+    </p>
     <p>
       ... elements referring to the psychological-social phenomena of teachers,
       students, managers, parents and caregivers.
@@ -106,32 +116,44 @@
       </li>
     </ul>
 
-    <h4>We give articles the label "Teaching practice" when they contain...</h4>
+    <p>
+      <strong
+        >We give articles the label "Teaching practice" when they
+        contain...</strong
+      >
+    </p>
     <p>
       ... elements relating directly to the teaching process, e.g., online
       pedagogy and general or online teaching values.
     </p>
     <p>Note that assessment is considered together with achievement.</p>
 
-    <h4>
-      We give articles the label "Context of teaching" when they contain...
-    </h4>
+    <p>
+      <strong>
+        We give articles the label "Context of teaching" when they
+        contain...</strong
+      >
+    </p>
     <p>
       ... elements relating to the context within which the teaching is taking
       place, e.g., the universities, schools, or other organizational
       structures.
     </p>
 
-    <h4>
-      We give articles the label "Academic achievement and assessment" when they
-      contain...
-    </h4>
+    <p>
+      <strong
+        >We give articles the label "Academic achievement and assessment" when
+        they contain...</strong
+      >
+    </p>
     <p>
       ... elements relating to the actual performance of students and the forms
       of assessment being used.
     </p>
 
-    <h4>We give articles the label "Equity" when they contain...</h4>
+    <p>
+      <strong>We give articles the label "Equity" when they contain...</strong>
+    </p>
     <p>... elements relating to diversity and vulnerable student groups.</p>
   </div>
 </template>
