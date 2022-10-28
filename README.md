@@ -63,11 +63,11 @@ In this file, the Living Library maintenance work happens. New articles that fal
 
 The Living Library platform displays newly added articles and their information immediately when the site is refreshed.
 
-1. Make a copy of our Google Sheets literature [template](https://docs.google.com/spreadsheets/d/1n0ECfcbeiTpMPXv_fOnQ6Pao8U3o8wBZdZePa4Jv13g/edit?usp=sharing).
+1. Make a copy of our Google Sheets literature [template](https://docs.google.com/spreadsheets/d/1EKhDjiUBR55m67rKVSBKU3Va60Yj11PY).
 2. Make sure that your Google Sheets file can be viewed by “Anyone with the link”.
-3. Copy the link to your newly created Google Sheets literature file. (e.g., [https://docs.google.com/spreadsheets/d/1gnNDzvtY12XTl4Q4sQNxLFA5-G8jcLngryO7OKOo8aM](https://docs.google.com/spreadsheets/d/1gnNDzvtY12XTl4Q4sQNxLFA5-G8jcLngryO7OKOo8aM/edit?usp=sharing)).
+3. Copy the link to your newly created Google Sheets literature file. (e.g., [https://docs.google.com/spreadsheets/d/1V4BaGLiVy-POnesEwbCOXSrNusscxoqs](https://docs.google.com/spreadsheets/d/1V4BaGLiVy-POnesEwbCOXSrNusscxoqs)).
 4. Update the `LIT_CSV_URL` value in `src/config.js` to match your copied Google Sheets file URL.
-   1. Based on the copied link, find your Google Sheets ID (e.g., `1gnNDzvtY12XTl4Q4sQNxLFA5-G8jcLngryO7OKOo8aM`), and replace it in the following template URL: `https://docs.google.com/spreadsheets/u/0/d/**[YOUR_ID_HERE]**/gviz/tq?tqx=out:csv&tq=select+*`
+   1. Based on the copied link, find your Google Sheets ID (e.g., `1V4BaGLiVy-POnesEwbCOXSrNusscxoqs`), and replace it in the following template URL: `https://docs.google.com/spreadsheets/u/0/d/**[YOUR_ID_HERE]**/gviz/tq?tqx=out:csv&tq=select+*`
 5. Update the `LIT_CSV_KEYS`, `LIT_CSV_EDUCATION_FILTER_KEYS` and `LIT_CSV_FILTER_KEYS` values in `src/config.js` to match your Google Sheets file column header names. Please note that these values are CASE SENSITIVE.
 
 ## Setting up your own theme logbook file
@@ -76,9 +76,9 @@ In this file, researchers document the process of Living Library maintenance. Th
 
 1. Make a copy of our Google Sheets theme logbook [template](https://docs.google.com/spreadsheets/d/1nx18TNl0fD0CtaMjmWhIBabLrM4jSUaE/edit?usp=sharing&ouid=116729142426546289681&rtpof=true&sd=true).
 2. Make sure that your Google Sheets file can be viewed by “Anyone with the link”.
-3. Copy the link to your newly created Google Sheets literature file. (e.g., [https://docs.google.com/spreadsheets/d/1nx18TNl0fD0CtaMjmWhIBabLrM4jSUaE](https://docs.google.com/spreadsheets/d/1nx18TNl0fD0CtaMjmWhIBabLrM4jSUaE)).
+3. Copy the link to your newly created Google Sheets literature file. (e.g., [https://docs.google.com/spreadsheets/d/18-x3hThkgphINImYhXsNaE8BZlZfj4es](https://docs.google.com/spreadsheets/d/18-x3hThkgphINImYhXsNaE8BZlZfj4es)).
 4. Update the `THEME_LOGBOOK_CSV_URL` value in `src/config.js` to match your copied Google Sheets file URL.
-   1. Based on the copied link, find your Google Sheets ID (e.g., `1nx18TNl0fD0CtaMjmWhIBabLrM4jSUaE`), and replace it in the following template URL: `https://docs.google.com/spreadsheets/u/0/d/**[YOUR_ID_HERE]**/gviz/tq?tqx=out:csv&tq=select+*`
+   1. Based on the copied link, find your Google Sheets ID (e.g., `1rTyiamxhqvaUunRiJ9nrcVQG09GnM0hF`), and replace it in the following template URL: `https://docs.google.com/spreadsheets/u/0/d/**[YOUR_ID_HERE]**/gviz/tq?tqx=out:csv&tq=select+*`
 5. Update the `THEME_LOGBOOK_FILTER_VALUES` and `THEME_LOGBOOK_CSV_KEYS` values in `src/config.js` to match your Google Sheets file column header names. Please note that these values are CASE SENSITIVE.
 
 ## Adding or removing themes
