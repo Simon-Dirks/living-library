@@ -54,6 +54,15 @@ Most easily tweakable settings can be found in `src/config.js`.
 
 ## Setting up your own literature file
 
+In this file, the Living Library maintenance work happens. New articles that fall under the current selection criteria, once coded, are entered in the Google Sheets file. Each article occupies one row, with the columns holding:
+
+- basic information about the article (submission date, authors, key words, etc.)
+- information about the coding (themes assigned to the article, coder, coding date)
+- researchers’ notes (observations, thoughts, doubts) on the article content or the coding process specific to the article.
+  Anyone with an access link can work in this file.
+
+The Living Library platform displays newly added articles and their information immediately when the site is refreshed.
+
 1. Make a copy of our Google Sheets literature [template](https://docs.google.com/spreadsheets/d/1n0ECfcbeiTpMPXv_fOnQ6Pao8U3o8wBZdZePa4Jv13g/edit?usp=sharing).
 2. Make sure that your Google Sheets file can be viewed by “Anyone with the link”.
 3. Copy the link to your newly created Google Sheets literature file. (e.g., [https://docs.google.com/spreadsheets/d/1gnNDzvtY12XTl4Q4sQNxLFA5-G8jcLngryO7OKOo8aM](https://docs.google.com/spreadsheets/d/1gnNDzvtY12XTl4Q4sQNxLFA5-G8jcLngryO7OKOo8aM/edit?usp=sharing)).
@@ -62,6 +71,8 @@ Most easily tweakable settings can be found in `src/config.js`.
 5. Update the `LIT_CSV_KEYS`, `LIT_CSV_EDUCATION_FILTER_KEYS` and `LIT_CSV_FILTER_KEYS` values in `src/config.js` to match your Google Sheets file column header names. Please note that these values are CASE SENSITIVE.
 
 ## Setting up your own theme logbook file
+
+In this file, researchers document the process of Living Library maintenance. This includes their observations, thoughts, and doubts on the methods, as well as discussions held in the team, decisions taken together and the reasoning behind them. The logbook is organized according to the coding themes to allow an overview on the developments and decisions taken regarding each theme. General notes that apply to the Living Library and/or its methods as a whole are documented under ‘deliberations’.
 
 1. Make a copy of our Google Sheets theme logbook [template](https://docs.google.com/spreadsheets/d/1nx18TNl0fD0CtaMjmWhIBabLrM4jSUaE/edit?usp=sharing&ouid=116729142426546289681&rtpof=true&sd=true).
 2. Make sure that your Google Sheets file can be viewed by “Anyone with the link”.
