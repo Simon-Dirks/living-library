@@ -18,19 +18,9 @@
       </ion-title>
 
       <ion-buttons slot="end">
-        <ion-button
-          size="small"
-          fill="clear"
-          id="themes-logs-button"
-          @click="onLogbookButtonClicked"
-        >
-          <ion-icon name="book" class="ion-margin-end"></ion-icon>
-          <span> View researcher logbook </span>
-        </ion-button>
-
         <ion-button @click="openMoreInfoModal" id="about-popup-btn">
           <ion-icon name="information-circle" />
-          <span class="ion-margin-start">About the living library</span>
+          <span class="ion-margin-start">Welcome to the living library</span>
         </ion-button>
 
         <!--        <login-button></login-button>-->
@@ -105,9 +95,6 @@ export default {
       await modal.present();
       const modalResponse = await modal.onDidDismiss();
     },
-    onLogbookButtonClicked() {
-      window.location.href = "/researcher-logbook";
-    },
     onEducationTypeFilterClicked(educationTypeKey, event) {
       const showThisKey = event.target.checked;
       this.updateEducationTypeFilter({
@@ -144,12 +131,6 @@ export default {
   margin-bottom: 70px;
 }
 
-#themes-logs-button {
-  --background: #52c1ee;
-  --color: white;
-  font-weight: bold;
-}
-
 #logo-img {
   float: left;
   margin-left: 10px;
@@ -174,10 +155,11 @@ ion-grid {
 }
 
 #about-popup-btn {
-  --background: #52c1ee;
-  --color: white;
+  --background: #f7ce63;
+  --color: #052640;
   font-weight: bold;
-  margin-left: 1rem;
+  margin-right: 1rem;
+  letter-spacing: 0.1rem;
 }
 
 .literature-viewer-column {

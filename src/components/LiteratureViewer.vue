@@ -8,7 +8,15 @@
       <!--        Page {{ paginationInfo.current_page }} /-->
       <!--        {{ paginationInfo.total_pages }}-->
       <!--      </p>-->
-
+      <ion-button
+        size="small"
+        fill="clear"
+        id="themes-logs-button"
+        @click="onLogbookButtonClicked"
+      >
+        <ion-icon name="book" class="ion-margin-end"></ion-icon>
+        <span> View researcher logbook </span>
+      </ion-button>
     </div>
 
     <p v-if="loadingLiteratureData">
@@ -127,7 +135,9 @@ export default {
     ...mapActions({
       loadLiteratureData: "literature/loadLiteratureData",
     }),
-
+    onLogbookButtonClicked() {
+      window.location.href = "/researcher-logbook";
+    },
     onPreviousPage() {
       this.currentPage--;
       this.scrollToTop();
@@ -173,5 +183,14 @@ ion-spinner {
 
 .current-page-text {
   text-align: center;
+}
+
+#themes-logs-button {
+  --background: #52c1ee;
+  --color: white;
+  /*font-weight: bold;*/
+  position: absolute;
+  right: 8px;
+  top: 12px;
 }
 </style>
