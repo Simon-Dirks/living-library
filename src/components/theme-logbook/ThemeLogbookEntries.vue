@@ -36,7 +36,7 @@
                 getNumComments(getLogId(columnKey, logbookEntryDate))
               "
             ></open-pin-board-button>
-            <span>{{ logText }}</span>
+            <p class="ion-no-margin">{{ logText }}</p>
           </div>
         </template>
       </ion-card-content>
