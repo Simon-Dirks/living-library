@@ -44,7 +44,7 @@
         <ion-col size="5">
           <div class="filter-container">
             <h2 class="ion-margin-start ion-no-margin ion-margin-top">
-              Explore the themes
+              Explore the literature...
             </h2>
             <div class="ion-padding-vertical theme-select-container">
               <theme-select></theme-select>

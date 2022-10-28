@@ -123,4 +123,8 @@ h2 {
 .bottom-0 {
   bottom: 0;
 }
+
+.font-normal {
+  font-weight: normal;
+}
 </style>

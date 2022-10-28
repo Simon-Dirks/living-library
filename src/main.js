@@ -38,6 +38,7 @@ import {
 import { addIcons } from "ionicons";
 import {
   arrowBackOutline,
+  arrowDownOutline,
   bookOutline,
   bulbOutline,
   calendarOutline,
@@ -73,6 +74,7 @@ router.isReady().then(() => {
     book: bookOutline,
     bulb: bulbOutline,
     "information-circle": informationCircleOutline,
+    "arrow-down": arrowDownOutline,
     "arrow-back": arrowBackOutline,
     calendar: calendarOutline,
     "help-circle": helpCircleOutline,
