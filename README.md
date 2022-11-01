@@ -1,16 +1,24 @@
 # The Living Library
 
-## The human face of academia
+Welcome to the source code for building your own Living Library. The Living Library (LL) is an experimental format for surveying the academic literature on a topic of your choice. Three key features of the LL are its collaborative setup, thematic sorting according to article content, and temporal sorting according to the article submission date. This setup is ideal for working together in a team on a shared database that allows you to observe how the academic (or public) discourse develops over time. However, these are only some practical features. More importantly, the LL is designed to invite reflection on the meaning and the limits of open science. Its functions invite you to keep a logbook about the process of maintaining your LL, which is publicly visible on the platform – unless you choose otherwise by adjusting the source code accordingly. Your team members can also take notes on certain articles and the process of sorting them thematically. These notes can equally be visible on the platform – unless you choose otherwise. Finally, a commenting function allows anyone who visits your LL to enter the conversation – unless you choose otherwise. As you notice, your Living Library can take many shapes and become more or less open in different regards. This means that “Living Librarians” get to reflect on their values and boundaries, with questions such as:
 
-The Living Library is an interactive platform made to help you orient yourself in the academic literature speaking about education in connection with the pandemic. While other search tools that have been created to date are run by algorithms and aim to be comprehensive, extracting and visualising quantitative data, the Living Library takes a complementary approach: it invites you to get to know a sampled part of the literature from an interpretive, human perspective.
+- "Who are you as a researcher?"
+- "What parts of your work should others be able to see?"
+- "How do you feel about others commenting on your work?"
 
-## It's alive!
 
-The library is a small-scale project run by a team of devoted teachers, students and researchers. The thematic organisation of articles is based on continuous qualitative analyses of the literature with a coding scheme that evolves along with the academic conversation. Our aim is to identify and help others integrate the various red threads running through the literature. Throughout the aftermath of the pandemic, we will keep a finger on the pulse, asking: what has happened, what is happening now, and what matters? In the Living Library, you can explore overall themes in the literature in a connective manner and observe how the academic conversation changes over time.
+## A little history of the humans behind the LL
+The first prototype of an LL is a small-scale project run by a team of devoted teachers, students and researchers at Utrecht University. You can find the platform here: https://living-library-uu.web.app/
+
+The thematic organisation of articles in this LL was based on continuous qualitative analyses of the literature with a coding scheme that evolved along with the academic conversation. Our aim was to identify and help others integrate the various red threads running through the educational literature on the pandemic. For over a year between 2020 and 2022, we kept a finger on the pulse, asking: What is happening, and what matters in education?
+
+The Flow of Time was hand-painted by Lizzy, one of the founders of the Living Library prototype. It reminds us that themes in the literature are more fluent and intertwined than our categories make it seem. It also reminds us that an overview on the literature is always a snapshot in time.
+
+While other search tools that have been created to date are run by algorithms and aim to be comprehensive, extracting and visualising quantitative data, our prototype of a Living Library took a complementary approach: it invites you to get to know a sampled part of the literature from an interpretive, human perspective. We invite you to do the same!
 
 ## Contact us
 
-We invite you to write to us with ideas, questions, praise and criticism on the Living Library: livinglibrary@uu.nl.
+Please write to us with ideas, questions, praise, and criticism on the Living Library: livinglibrary@uu.nl
 
 # Running the application
 
