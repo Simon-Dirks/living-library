@@ -39,11 +39,11 @@
     <p>
       In this particular Living Library, the Librarians survey the academic
       literature that speaks about education in connection with the pandemic.
-      You can explore prominent themes in the literature,l in a connective
-      manner and apply other filters to find certain kinds of articles and read
-      the researchers' notes on their content and the coding work. Use a time
-      slider to filter articles according to submission dates and observe how
-      the literature changes over time!
+      You can explore prominent themes in the literature in a connective manner
+      and apply other filters to find certain kinds of articles and read the
+      researchers' notes on their content and the coding work. Use a time slider
+      to filter articles according to submission dates and observe how the
+      literature changes over time!
     </p>
 
     <h3>It's alive!</h3>
