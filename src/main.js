@@ -59,8 +59,7 @@ import "firebaseui/dist/firebaseui.css";
 import store from "@/store";
 import { createHead } from "@vueuse/head";
 import { firebaseConfig } from "@/firebase-config";
-import * as firebaseui from "firebaseui";
-import firebase from "firebase/compat";
+import firebase from "firebase/compat/app";
 
 if (firebaseConfig) {
   firebase.initializeApp(firebaseConfig);
