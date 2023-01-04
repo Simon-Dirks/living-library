@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import HomePage from "../components/HomePage.vue";
-import ThemeLogbook from "../components/theme-logbook/ThemeLogbook";
+import ThemeLogbook from "@/components/theme-logbook/ThemeLogbook";
 import SignIn from "@/components/auth/SignIn";
 
 const routes = [
