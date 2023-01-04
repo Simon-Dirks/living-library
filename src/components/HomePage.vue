@@ -66,7 +66,7 @@ export default {
       config: Config,
     };
   },
-  name: "Home",
+  name: "HomePage",
   inheritAttrs: false,
   components: {
     ThemeSelect,
