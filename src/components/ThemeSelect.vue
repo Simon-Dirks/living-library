@@ -116,8 +116,8 @@
 // import $ from "jquery";
 // import "imagemapster";
 import { mapGetters, mapMutations } from "vuex";
-import TimeFilter from "@/components/TimeFilter";
-import ThemeButton from "@/components/ThemeButton";
+import TimeFilter from "@/components/TimeFilter.vue";
+import ThemeButton from "@/components/ThemeButton.vue";
 import { Config } from "@/config";
 
 export default {

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import HomePage from "../components/HomePage.vue";
-import ThemeLogbook from "@/components/theme-logbook/ThemeLogbook";
-import SignIn from "@/components/auth/SignIn";
+import ThemeLogbook from "@/components/theme-logbook/ThemeLogbook.vue";
+import SignIn from "@/components/auth/SignIn.vue";
 
 const routes = [
   { path: "/", component: HomePage },
@@ -10,7 +10,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 

@@ -132,10 +132,10 @@
 import {Config} from "@/config";
 import {mapGetters, mapMutations} from "vuex";
 import moment from "moment";
-import ThemeButton from "@/components/ThemeButton";
+import ThemeButton from "@/components/ThemeButton.vue";
 import {modalController} from "@ionic/vue";
-import PinBoard from "@/components/pin-board/PinBoard";
-import OpenPinBoardButton from "@/components/pin-board/OpenPinBoardButton";
+import PinBoard from "@/components/pin-board/PinBoard.vue";
+import OpenPinBoardButton from "@/components/pin-board/OpenPinBoardButton.vue";
 import {getDatabase, onValue, ref} from "firebase/database";
 import {getApps} from "firebase/app";
 

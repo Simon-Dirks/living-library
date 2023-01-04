@@ -39,7 +39,7 @@
 
 <script>
 import {modalController} from "@ionic/vue";
-import PinBoardSticky from "@/components/pin-board/PinBoardSticky";
+import PinBoardSticky from "@/components/pin-board/PinBoardSticky.vue";
 import {mapActions} from "vuex";
 import {getDatabase, onValue, ref} from "firebase/database";
 import {getApps} from "firebase/app";

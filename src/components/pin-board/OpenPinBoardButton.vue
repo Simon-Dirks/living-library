@@ -9,7 +9,7 @@
 
 <script>
 import { modalController } from "@ionic/vue";
-import PinBoard from "@/components/pin-board/PinBoard";
+import PinBoard from "@/components/pin-board/PinBoard.vue";
 
 export default {
   name: "OpenPinBoardButton.vue",

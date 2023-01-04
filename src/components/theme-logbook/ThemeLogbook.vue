@@ -25,8 +25,8 @@
 <script>
 import { mapActions } from "vuex";
 import { useHead } from "@vueuse/head";
-import ThemeLogFilter from "@/components/theme-logbook/ThemeLogbookFilter";
-import ThemeLogEntries from "@/components/theme-logbook/ThemeLogbookEntries";
+import ThemeLogFilter from "@/components/theme-logbook/ThemeLogbookFilter.vue";
+import ThemeLogEntries from "@/components/theme-logbook/ThemeLogbookEntries.vue";
 import { Config } from "@/config";
 
 export default {
