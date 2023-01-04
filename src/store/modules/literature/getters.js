@@ -42,7 +42,7 @@ export default {
       itemMonth = itemMonth.substring(1);
     }
     itemYear = "20" + itemYear;
-    return new Date(itemMonth + " " + itemYear);
+    return new Date(itemMonth + " 1 " + itemYear);
   },
   getNumSelectedThemesForLitItem:
     (state, getters, rootState, rootGetters) => (litItem) => {
