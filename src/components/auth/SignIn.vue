@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import firebase from "firebase/compat";
+import firebase from "firebase/compat/app";
 import * as firebaseui from "firebaseui";
 
 export default {

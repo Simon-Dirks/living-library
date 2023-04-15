@@ -47,9 +47,9 @@
 <script>
 import {mapGetters} from "vuex";
 import {Config} from "@/config";
-import ThemeButton from "@/components/ThemeButton";
+import ThemeButton from "@/components/ThemeButton.vue";
 import {getDatabase, onValue, ref} from "firebase/database";
-import OpenPinBoardButton from "@/components/pin-board/OpenPinBoardButton";
+import OpenPinBoardButton from "@/components/pin-board/OpenPinBoardButton.vue";
 import {getApps} from "firebase/app";
 
 export default {

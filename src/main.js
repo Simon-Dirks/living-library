@@ -58,12 +58,14 @@ import "@ionic/core/css/padding.css";
 import "firebaseui/dist/firebaseui.css";
 import store from "@/store";
 import { createHead } from "@vueuse/head";
-import { firebaseConfig } from "@/firebase-config";
-import * as firebaseui from "firebaseui";
-import firebase from "firebase/compat";
-
-if (firebaseConfig) {
-  firebase.initializeApp(firebaseConfig);
+import firebase from "firebase/compat/app";
+try {
+  const firebaseConfig = (await import("@/firebase-config")).firebaseConfig;
+  if (firebaseConfig) {
+    firebase.initializeApp(firebaseConfig);
+  }
+} catch {
+  // Skip firebase initialization
 }
 
 const head = createHead();

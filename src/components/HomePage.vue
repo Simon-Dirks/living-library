@@ -58,7 +58,7 @@ import LiteratureFilter from "./LiteratureFilter.vue";
 import { modalController } from "@ionic/vue";
 import { Config } from "@/config";
 import { mapActions } from "vuex";
-import InformationPopup from "@/components/popups/InformationPopup";
+import InformationPopup from "@/components/popups/InformationPopup.vue";
 
 export default {
   data() {
@@ -66,7 +66,7 @@ export default {
       config: Config,
     };
   },
-  name: "Home",
+  name: "HomePage",
   inheritAttrs: false,
   components: {
     ThemeSelect,

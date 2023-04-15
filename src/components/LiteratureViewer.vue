@@ -74,8 +74,7 @@ import LiteratureItem from "./LiteratureItem.vue";
 
 import { Config } from "@/config";
 import { mapActions, mapGetters } from "vuex";
-
-const Paginator = require("paginator");
+import Paginator from "paginator";
 
 export default {
   mixins: [],

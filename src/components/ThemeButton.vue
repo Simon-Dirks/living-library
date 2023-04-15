@@ -28,7 +28,7 @@
 
 <script>
 import { modalController } from "@ionic/vue";
-import ThemeInfoPopup from "@/components/popups/ThemeInfoPopup";
+import ThemeInfoPopup from "@/components/popups/ThemeInfoPopup.vue";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
