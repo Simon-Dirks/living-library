@@ -27,6 +27,7 @@ import VueSlider from "vue-slider-component";
 import { mapMutations } from "vuex";
 import "vue-slider-component/theme/default.css";
 import moment from "moment";
+import { Config } from "@/config";
 
 export default {
   name: "TimeFilter",
@@ -34,9 +35,12 @@ export default {
   components: { VueSlider },
   data() {
     return {
-      minDateUnixTimeSlider: moment("2020-01-01").unix(),
+      minDateUnixTimeSlider: moment(Config.MIN_DATE_TIME_SLIDER).unix(),
       maxDateUnixTimeSlider: this.getMaxSliderValue(),
-      sliderValue: [moment("2020-01-01").unix(), this.getMaxSliderValue()],
+      sliderValue: [
+        moment(Config.INITIAL_DATE_TIME_SLIDER).unix(),
+        this.getMaxSliderValue(),
+      ],
       sliderFormatter: (unix) => moment.unix(unix).format("MMMM YYYY"),
     };
   },
@@ -69,11 +73,16 @@ export default {
       return markers;
     },
     getMaxSliderValue() {
-      return moment()
-        .add(1, "months")
-        .set("date", 1)
+      // const today = moment()
+      //   .add(1, "months")
+      //   .set("date", 1)
+      //   .set({ hour: 0, minute: 0, second: 0 })
+      //   .unix();
+
+      const maxDate = moment(Config.MAX_DATE_TIME_SLIDER)
         .set({ hour: 0, minute: 0, second: 0 })
         .unix();
+      return maxDate;
     },
   },
   mounted() {

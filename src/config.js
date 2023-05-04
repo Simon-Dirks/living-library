@@ -51,4 +51,7 @@ export const Config = {
   THEME_LOGBOOK_CSV_URL:
     "https://docs.google.com/spreadsheets/u/0/d/1Mm23FJ_BTWhQFhl8xY_SnMkX26rUsn9f/gviz/tq?tqx=out:csv&tq=select+*",
   NUM_LIT_ITEMS_PER_PAGE: 9999,
+  MAX_DATE_TIME_SLIDER: "2022-03-01",
+  MIN_DATE_TIME_SLIDER: "2020-03-01",
+  INITIAL_DATE_TIME_SLIDER: "2020-03-01",
 };
