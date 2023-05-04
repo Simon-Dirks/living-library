@@ -10,8 +10,7 @@
 
       <ion-title>
         <strong class="ion-margin-end header-title">
-          <span v-if="config.DEBUG_MODE">[DEBUG MODE]</span>
-          <span v-else>LIVING LIBRARY</span>
+          <span>LIVING LIBRARY</span>
         </strong>
         An open science platform for continuous literature surveying
       </ion-title>
@@ -30,6 +29,7 @@
   <ion-content>
     <ion-grid>
       <ion-row>
+        <!-- Filter column (left side of the screen) -->
         <ion-col size="5">
           <div class="filter-container">
             <div class="ion-padding-vertical theme-select-container">
@@ -43,6 +43,7 @@
             </div>
           </div>
         </ion-col>
+        <!-- Literature column (right side of the screen) -->
         <ion-col class="literature-viewer-column" size="7">
           <literature-viewer></literature-viewer>
         </ion-col>

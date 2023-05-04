@@ -1,4 +1,5 @@
 <template>
+  <!-- NOTE: Authentication/user accounts are still experimental and likely need work! -->
   <ion-content>
     <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>

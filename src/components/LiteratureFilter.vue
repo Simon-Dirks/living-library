@@ -2,6 +2,7 @@
   <ion-card class="ion-no-margin">
     <ion-card-content>
       <ion-grid>
+        <!--  Research type filter -->
         <ion-row>
           <ion-col size="3">
             <h3 style="margin-top: 0.6rem">Research type</h3>
@@ -20,6 +21,7 @@
           </ion-col>
         </ion-row>
 
+        <!-- Education level filter-->
         <ion-row>
           <ion-col size="3">
             <h3>Education level</h3>
@@ -38,6 +40,8 @@
             </ion-item>
           </ion-col>
         </ion-row>
+
+        <!-- Show reviewer's notes filter-->
 
         <ion-row>
           <ion-col size="3">

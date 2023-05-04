@@ -30,42 +30,43 @@
       </template>
     </div>
 
-    <div class="pagination-container" v-if="paginationInfo.total_pages > 1">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-button
-              @click="onPreviousPage"
-              :disabled="!paginationInfo.has_previous_page"
-              class="button-prev-page"
-            >
-              <ion-icon name="caret-back"></ion-icon>
-              Previous
-            </ion-button>
-          </ion-col>
+    <!-- Currently disabled/unsupported: Pagination -->
+    <!--    <div class="pagination-container" v-if="paginationInfo.total_pages > 1">-->
+    <!--      <ion-grid>-->
+    <!--        <ion-row>-->
+    <!--          <ion-col>-->
+    <!--            <ion-button-->
+    <!--              @click="onPreviousPage"-->
+    <!--              :disabled="!paginationInfo.has_previous_page"-->
+    <!--              class="button-prev-page"-->
+    <!--            >-->
+    <!--              <ion-icon name="caret-back"></ion-icon>-->
+    <!--              Previous-->
+    <!--            </ion-button>-->
+    <!--          </ion-col>-->
 
-          <ion-col>
-            <p class="current-page-text">
-              <em
-                >Current page: {{ currentPage }} /
-                {{ paginationInfo.total_pages }}</em
-              >
-            </p>
-          </ion-col>
+    <!--          <ion-col>-->
+    <!--            <p class="current-page-text">-->
+    <!--              <em-->
+    <!--                >Current page: {{ currentPage }} /-->
+    <!--                {{ paginationInfo.total_pages }}</em-->
+    <!--              >-->
+    <!--            </p>-->
+    <!--          </ion-col>-->
 
-          <ion-col>
-            <ion-button
-              @click="onNextPage"
-              :disabled="!paginationInfo.has_next_page"
-              class="button-next-page"
-            >
-              Next
-              <ion-icon name="caret-forward"></ion-icon>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+    <!--          <ion-col>-->
+    <!--            <ion-button-->
+    <!--              @click="onNextPage"-->
+    <!--              :disabled="!paginationInfo.has_next_page"-->
+    <!--              class="button-next-page"-->
+    <!--            >-->
+    <!--              Next-->
+    <!--              <ion-icon name="caret-forward"></ion-icon>-->
+    <!--            </ion-button>-->
+    <!--          </ion-col>-->
+    <!--        </ion-row>-->
+    <!--      </ion-grid>-->
+    <!--    </div>-->
   </ion-content>
 </template>
 

@@ -1,4 +1,5 @@
 <template>
+  <!-- NOTE: Authentication/user accounts are still experimental and likely need work! -->
   <ion-button @click="onLoginClicked" v-if="!user">
     <span> Log in </span>
   </ion-button>

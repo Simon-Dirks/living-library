@@ -1,9 +1,11 @@
 <template>
   <ion-grid class="ion-padding-vertical h-full">
     <ion-row>
+      <!-- Vertical time filter/slider -->
       <ion-col size="1">
         <time-filter></time-filter>
       </ion-col>
+      <!-- Time funnel image-->
       <ion-col size="5">
         <div v-if="Config.USE_STATIC_TIMEFUNNEL_IMG">
           <img
@@ -76,6 +78,7 @@
           />
         </div>
       </ion-col>
+      <!-- (Selected/unselected) theme buttons -->
       <ion-col size="6">
         <div class="absolute bottom-0 h-full w-full">
           <h2 class="ion-no-margin">Explore the literature...</h2>
