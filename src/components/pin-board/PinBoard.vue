@@ -4,7 +4,7 @@
       <ion-title><strong>Discussion</strong> {{ logId }}</ion-title>
       <ion-buttons slot="start">
         <ion-button @click="closeModal">
-          <ion-icon name="arrow-back"/>
+          <ion-icon name="arrow-back" />
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -17,41 +17,40 @@
 
     <div v-if="firebaseIsInitialized">
       <pin-board-sticky
-          v-for="(comment, commentId) in comments"
-          :key="commentId"
-          :comment="comment"
-          :commentId="commentId"
-          :log-id="logId"
-          :db-log-book-id="dbLogBookId"
+        v-for="(comment, commentId) in comments"
+        :key="commentId"
+        :comment="comment"
+        :commentId="commentId"
+        :log-id="logId"
+        :db-log-book-id="dbLogBookId"
       ></pin-board-sticky>
 
       <pin-board-sticky
-          :log-id="logId"
-          :db-log-book-id="dbLogBookId"
+        :log-id="logId"
+        :db-log-book-id="dbLogBookId"
       ></pin-board-sticky>
     </div>
     <div v-if="!firebaseIsInitialized">
       <p><em>Failed to show discussion. Firebase is not initialized...</em></p>
     </div>
-
   </div>
 </template>
 
 <script>
-import {modalController} from "@ionic/vue";
+import { modalController } from "@ionic/vue";
 import PinBoardSticky from "@/components/pin-board/PinBoardSticky.vue";
-import {mapActions} from "vuex";
-import {getDatabase, onValue, ref} from "firebase/database";
-import {getApps} from "firebase/app";
+import { mapActions } from "vuex";
+import { getDatabase, onValue, ref } from "firebase/database";
+import { getApps } from "firebase/app";
 
 export default {
   name: "PinBoard",
   props: ["logId", "logText", "dbLogBookId"],
-  components: {PinBoardSticky},
+  components: { PinBoardSticky },
   data() {
     return {
       comments: null,
-      firebaseIsInitialized: false
+      firebaseIsInitialized: false,
     };
   },
   mounted() {
@@ -64,7 +63,6 @@ export default {
         this.comments = commentsSnapshot;
       });
     }
-    ;
   },
   methods: {
     ...mapActions({

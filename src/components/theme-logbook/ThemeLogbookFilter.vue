@@ -1,7 +1,7 @@
 <template>
   <ion-grid class="">
     <ion-row class="ion-padding-horizontal">
-      <div class="ion-padding-end" style="margin-top: 4px;">
+      <div class="ion-padding-end" style="margin-top: 4px">
         <p>Show logs for themes:</p>
       </div>
       <div

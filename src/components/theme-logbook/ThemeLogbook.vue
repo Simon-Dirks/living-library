@@ -3,7 +3,11 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>
-          <ion-icon name="book" class="ion-margin-end relative" style="top: 3px"></ion-icon>
+          <ion-icon
+            name="book"
+            class="ion-margin-end relative"
+            style="top: 3px"
+          ></ion-icon>
           Researcher Logbook
         </ion-title>
         <ion-buttons slot="start">
@@ -60,5 +64,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

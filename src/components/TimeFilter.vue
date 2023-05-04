@@ -99,9 +99,9 @@ export default {
   padding-left: 10px;
   height: 100%;
 }
-ion-row, ion-col {
+ion-row,
+ion-col {
   height: 100%;
-
 }
 #timeslider-caption {
   position: absolute;
