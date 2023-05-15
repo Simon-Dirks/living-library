@@ -116,8 +116,6 @@
 </template>
 
 <script>
-// import $ from "jquery";
-// import "imagemapster";
 import { mapGetters, mapMutations } from "vuex";
 import TimeFilter from "@/components/TimeFilter.vue";
 import ThemeButton from "@/components/ThemeButton.vue";
@@ -141,34 +139,12 @@ export default {
       Config: Config,
     };
   },
-  watch: {
-    selectedThemeIds: {
-      handler: function (newThemes, prevThemes) {
-        // $("area").each((index, area) => {
-        //   const themeId = $(area).attr("name");
-        //   const isSelected = newThemes.includes(themeId);
-        //   $(area).mapster("set", isSelected);
-        // });
-      },
-      deep: true,
-    },
-  },
   methods: {
     ...mapMutations({
       toggleTheme: "themes/toggleTheme",
     }),
-    // initializeLineDrawing() {
-    // setInterval(() => {
-    //   this.$store.dispatch(
-    //     "lineDrawing/drawLineBetweenThemeSelectAndTimeFunnel"
-    //   );
-    // }, 50);
-    // },
   },
-  mounted() {
-    // this.initializeImageMap();
-    // this.initializeLineDrawing();
-  },
+  mounted() {},
 };
 </script>
 

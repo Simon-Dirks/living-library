@@ -9,7 +9,7 @@
             :class="`ion-padding-end ${itemHasLogs() ? 'border-right' : ''}`"
           >
             <ion-card-title
-              >{{ literatureItem["Article name"] }}
+              >{{ literatureItem[config.LIT_CSV_KEYS.ARTICLE_NAME] }}
             </ion-card-title>
             <ion-card-subtitle
               v-if="literatureItem[config.LIT_CSV_KEYS.SUMMARY]"
@@ -33,7 +33,10 @@
 
             <br />
 
-            <div class="open-pin-board-button">
+            <div
+              class="open-pin-board-button"
+              v-if="config.SHOW_ARTICLE_PINBOARDS"
+            >
               <open-pin-board-button
                 :log-text="null"
                 :log-id="getArticleLogId(literatureItem)"

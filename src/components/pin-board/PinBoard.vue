@@ -1,7 +1,7 @@
 <template>
   <ion-header class="information-modal-header">
     <ion-toolbar>
-      <ion-title><strong>Discussion</strong> {{ logId }}</ion-title>
+      <ion-title><strong>Pinboard</strong> {{ logId }}</ion-title>
       <ion-buttons slot="start">
         <ion-button @click="closeModal">
           <ion-icon name="arrow-back" />
@@ -31,7 +31,7 @@
       ></pin-board-sticky>
     </div>
     <div v-if="!firebaseIsInitialized">
-      <p><em>Failed to show discussion. Firebase is not initialized...</em></p>
+      <p><em>Failed to show pinboard. Firebase is not initialized...</em></p>
     </div>
   </div>
 </template>
@@ -65,9 +65,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      getComments: "themeLogbook/getCommentsSnapshot",
-    }),
+    ...mapActions({}),
     closeModal() {
       modalController.dismiss();
     },

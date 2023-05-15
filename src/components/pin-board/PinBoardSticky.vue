@@ -61,8 +61,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      sendComment: "themeLogbook/sendComment",
-      removeComment: "themeLogbook/removeComment",
+      sendComment: "pinBoard/sendComment",
+      removeComment: "pinBoard/removeComment",
     }),
     onFocus() {
       this.autoGrow = true;

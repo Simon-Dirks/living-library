@@ -1,7 +1,7 @@
 import { Config } from "@/config";
 
 export default {
-  getThemes: (_) => {
+  getThemes: () => {
     return Config.THEMES;
   },
   getSelectedThemeIds: (state) => {

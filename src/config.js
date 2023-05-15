@@ -52,5 +52,7 @@ export const Config = {
     "https://docs.google.com/spreadsheets/u/0/d/1Mm23FJ_BTWhQFhl8xY_SnMkX26rUsn9f/gviz/tq?tqx=out:csv&tq=select+*",
   MAX_DATE_TIME_SLIDER: "2022-03-01",
   MIN_DATE_TIME_SLIDER: "2020-03-01",
-  INITIAL_DATE_TIME_SLIDER: "2020-03-01",
+  INITIAL_STARTING_DATE_TIME_SLIDER: "2020-05-01",
+  SHOW_ARTICLE_PINBOARDS: true,
+  SHOW_LOG_PINBOARDS: true,
 };

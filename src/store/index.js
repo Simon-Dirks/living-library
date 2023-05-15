@@ -3,6 +3,7 @@ import themeModule from "@/store/modules/themes";
 import literatureModule from "@/store/modules/literature";
 import timeFilterModule from "@/store/modules/time-filter";
 import themeLogbookModule from "@/store/modules/theme-logbook";
+import pinBoardModule from "@/store/modules/pin-board";
 
 const store = createStore({
   modules: {
@@ -10,6 +11,7 @@ const store = createStore({
     themeLogbook: themeLogbookModule,
     literature: literatureModule,
     timeFilter: timeFilterModule,
+    pinBoard: pinBoardModule,
   },
   state() {
     return {};

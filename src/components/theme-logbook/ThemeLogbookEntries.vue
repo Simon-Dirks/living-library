@@ -28,6 +28,7 @@
               :disable-click="true"
               :hide-info-button="true"
             ></theme-button>
+
             <open-pin-board-button
               :log-id="getLogId(columnKey, logbookEntryDate)"
               :db-log-book-id="'themeLogbookComments'"
@@ -35,6 +36,7 @@
               :num-comments="
                 getNumComments(getLogId(columnKey, logbookEntryDate))
               "
+              v-if="config.SHOW_LOG_PINBOARDS"
             ></open-pin-board-button>
             <p class="ion-no-margin">{{ logText }}</p>
           </div>

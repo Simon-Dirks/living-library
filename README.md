@@ -6,8 +6,8 @@ Welcome to the source code for building your own Living Library. The Living Libr
 - "What parts of your work should others be able to see?"
 - "How do you feel about others commenting on your work?"
 
-
 ## A little history of the humans behind the LL
+
 The first prototype of an LL is a small-scale project run by a team of devoted teachers, students and researchers at Utrecht University. You can find the platform here: https://living-library-uu.web.app/
 
 The thematic organisation of articles in this LL was based on continuous qualitative analyses of the literature with a coding scheme that evolved along with the academic conversation. Our aim was to identify and help others integrate the various red threads running through the educational literature on the pandemic. For over a year between 2020 and 2022, we kept a finger on the pulse, asking: What is happening, and what matters in education?
@@ -143,7 +143,7 @@ See the `LIT_CSV_FILTER_KEYS` and `LIT_CSV_EDUCATION_FILTER_KEYS` settings in `s
 1. Run `npm run build`.
 2. Run `firebase deploy`.
 
-## [EXPERIMENTAL] Setting up a Firebase database (to allow discussions)
+## [EXPERIMENTAL] Setting up a Firebase database (to allow pinboards)
 
 Firebase offers both hosting functionalities (deploying your application to the web) as well as database functionalities (storing information of your application online). We can use Firebase database functionalities to allow discussions for each coded article, as well as the researcher logbook.
 

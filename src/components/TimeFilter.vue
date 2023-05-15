@@ -38,7 +38,7 @@ export default {
       minDateUnixTimeSlider: moment(Config.MIN_DATE_TIME_SLIDER).unix(),
       maxDateUnixTimeSlider: this.getMaxSliderValue(),
       sliderValue: [
-        moment(Config.INITIAL_DATE_TIME_SLIDER).unix(),
+        moment(Config.INITIAL_STARTING_DATE_TIME_SLIDER).unix(),
         this.getMaxSliderValue(),
       ],
       sliderFormatter: (unix) => moment.unix(unix).format("MMMM YYYY"),
@@ -73,15 +73,19 @@ export default {
       return markers;
     },
     getMaxSliderValue() {
-      // const today = moment()
-      //   .add(1, "months")
-      //   .set("date", 1)
-      //   .set({ hour: 0, minute: 0, second: 0 })
-      //   .unix();
-
-      const maxDate = moment(Config.MAX_DATE_TIME_SLIDER)
+      const today = moment()
+        .add(1, "months")
+        .set("date", 1)
         .set({ hour: 0, minute: 0, second: 0 })
         .unix();
+      let maxDate = today;
+
+      if (Config.MAX_DATE_TIME_SLIDER) {
+        maxDate = moment(Config.MAX_DATE_TIME_SLIDER)
+          .set({ hour: 0, minute: 0, second: 0 })
+          .unix();
+      }
+
       return maxDate;
     },
   },
