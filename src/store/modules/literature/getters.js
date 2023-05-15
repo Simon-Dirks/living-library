@@ -32,7 +32,7 @@ export default {
   getShownEducationTypeKeys: (state) => {
     return state.shownEducationTypeKeys;
   },
-  getDateFromLitItem: (state) => (litItem) => {
+  getDateFromLitItem: () => (litItem) => {
     let itemYear = litItem[Config.LIT_CSV_KEYS.DATE].replace(/\D/g, "");
     let itemMonth = litItem[Config.LIT_CSV_KEYS.DATE]
       .replace("date.", "")
