@@ -4,10 +4,7 @@
       <h2 class="literature-section-title ion-padding-top">
         Literature ({{ filteredLiterature.length }})
       </h2>
-      <!--      <p class="literature-section-title ion-no-margin">-->
-      <!--        Page {{ paginationInfo.current_page }} /-->
-      <!--        {{ paginationInfo.total_pages }}-->
-      <!--      </p>-->
+
       <ion-button
         size="small"
         fill="clear"
@@ -25,48 +22,10 @@
     </p>
 
     <div class="literature-item-container">
-      <template v-for="(literatureItem, idx) in shownLiterature" :key="idx">
+      <template v-for="(literatureItem, idx) in filteredLiterature" :key="idx">
         <literature-item :literatureItem="literatureItem"></literature-item>
       </template>
     </div>
-
-    <!-- Currently disabled/unsupported: Pagination -->
-    <!--    <div class="pagination-container" v-if="paginationInfo.total_pages > 1">-->
-    <!--      <ion-grid>-->
-    <!--        <ion-row>-->
-    <!--          <ion-col>-->
-    <!--            <ion-button-->
-    <!--              @click="onPreviousPage"-->
-    <!--              :disabled="!paginationInfo.has_previous_page"-->
-    <!--              class="button-prev-page"-->
-    <!--            >-->
-    <!--              <ion-icon name="caret-back"></ion-icon>-->
-    <!--              Previous-->
-    <!--            </ion-button>-->
-    <!--          </ion-col>-->
-
-    <!--          <ion-col>-->
-    <!--            <p class="current-page-text">-->
-    <!--              <em-->
-    <!--                >Current page: {{ currentPage }} /-->
-    <!--                {{ paginationInfo.total_pages }}</em-->
-    <!--              >-->
-    <!--            </p>-->
-    <!--          </ion-col>-->
-
-    <!--          <ion-col>-->
-    <!--            <ion-button-->
-    <!--              @click="onNextPage"-->
-    <!--              :disabled="!paginationInfo.has_next_page"-->
-    <!--              class="button-next-page"-->
-    <!--            >-->
-    <!--              Next-->
-    <!--              <ion-icon name="caret-forward"></ion-icon>-->
-    <!--            </ion-button>-->
-    <!--          </ion-col>-->
-    <!--        </ion-row>-->
-    <!--      </ion-grid>-->
-    <!--    </div>-->
   </ion-content>
 </template>
 
@@ -75,7 +34,6 @@ import LiteratureItem from "./LiteratureItem.vue";
 
 import { Config } from "@/config";
 import { mapActions, mapGetters } from "vuex";
-import Paginator from "paginator";
 
 export default {
   mixins: [],
@@ -86,9 +44,6 @@ export default {
   data() {
     return {
       config: Config,
-      numLitItemsToShow: Config.NUM_LIT_ITEMS_PER_PAGE,
-      currentPage: 1,
-      paginator: new Paginator(Config.NUM_LIT_ITEMS_PER_PAGE, 5),
     };
   },
   computed: {
@@ -96,40 +51,6 @@ export default {
       filteredLiterature: "literature/getFilteredLiterature",
       loadingLiteratureData: "literature/getLoadingLiteratureData",
     }),
-    isDraggingTimeFilter() {
-      return this.$store.getters["timeFilter/isDragging"];
-    },
-    paginationInfo: function () {
-      return this.paginator.build(
-        this.filteredLiterature.length,
-        this.currentPage
-      );
-    },
-    shownLiterature: function () {
-      if (!this.filteredLiterature || this.filteredLiterature.length <= 0) {
-        return [];
-      }
-
-      const literatureOnCurrentPage = this.filteredLiterature.slice(
-        this.paginationInfo.first_result,
-        this.paginationInfo.last_result + 1
-      );
-      const shownLiterature = literatureOnCurrentPage;
-      // const shownLiterature = this.isDraggingTimeFilter
-      //   ? []
-      //   : literatureOnCurrentPage;
-      return shownLiterature;
-    },
-  },
-  watch: {
-    paginationInfo: {
-      handler: function (newPaginationInfo, _) {
-        if (this.currentPage < newPaginationInfo.first_page) {
-          this.currentPage = newPaginationInfo.first_page;
-        }
-      },
-      deep: true,
-    },
   },
   methods: {
     ...mapActions({
@@ -137,21 +58,6 @@ export default {
     }),
     onLogbookButtonClicked() {
       window.location.href = "/researcher-logbook";
-    },
-    onPreviousPage() {
-      this.currentPage--;
-      this.scrollToTop();
-    },
-    onNextPage() {
-      this.currentPage++;
-      this.scrollToTop();
-    },
-    scrollToTop() {
-      setTimeout(() => {
-        document
-          .querySelector("ion-content.literature-section-content")
-          .scrollToTop(400);
-      });
     },
   },
   mounted() {},
@@ -175,14 +81,6 @@ ion-spinner {
   top: 0;
   background: white;
   z-index: 9999;
-}
-
-.button-next-page {
-  float: right;
-}
-
-.current-page-text {
-  text-align: center;
 }
 
 #themes-logs-button {

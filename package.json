@@ -19,7 +19,6 @@
     "imagemapster": "^1.5.4",
     "jquery": "^3.6.3",
     "moment": "^2.29.4",
-    "paginator": "^1.0.0",
     "papaparse": "^5.3.2",
     "vue": "^3.2.45",
     "vue-ionicons": "^3.0.5",
