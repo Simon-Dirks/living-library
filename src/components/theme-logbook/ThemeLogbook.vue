@@ -15,6 +15,16 @@
             <ion-icon name="arrow-back" />
           </ion-button>
         </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button @click="downloadCsv" class="ion-padding-end">
+            <ion-icon
+              name="download"
+              class="ion-margin-end relative"
+              style="top: -2px"
+            />
+            Download as CSV
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
@@ -56,6 +66,14 @@ export default {
     goToHome() {
       // TODO: Use Ionic router instead (or ion-back-button with default href)
       window.location.href = "/";
+    },
+    downloadCsv() {
+      const link = document.createElement("a");
+      link.href = Config.THEME_LOGBOOK_CSV_URL;
+      link.setAttribute("download", "");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     },
   },
   mounted() {

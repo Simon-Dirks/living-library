@@ -51,6 +51,7 @@ import {
   informationCircleOutline,
   linkOutline,
   newspaperOutline,
+  downloadOutline,
   send,
 } from "ionicons/icons";
 
@@ -88,6 +89,7 @@ router.isReady().then(() => {
     newspaper: newspaperOutline,
     chatbubbles: chatbubblesOutline,
     send: send,
+    download: downloadOutline,
   });
 
   app.mount("#app");
