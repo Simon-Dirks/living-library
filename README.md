@@ -12,7 +12,7 @@ The first prototype of an LL is a small-scale project run by a team of devoted t
 
 The thematic organisation of articles in this LL was based on continuous qualitative analyses of the literature with a coding scheme that evolved along with the academic conversation. Our aim was to identify and help others integrate the various red threads running through the educational literature on the pandemic. For over a year between 2020 and 2022, we kept a finger on the pulse, asking: What is happening, and what matters in education?
 
-The Flow of Time was hand-painted by Lizzy, one of the founders of the Living Library prototype. It reminds us that themes in the literature are more fluent and intertwined than our categories make it seem. It also reminds us that an overview on the literature is always a snapshot in time.
+The Flow of Time was hand-painted by Lisi, one of the founders of the Living Library prototype. It reminds us that themes in the literature are more fluent and intertwined than our categories make it seem. It also reminds us that an overview on the literature is always a snapshot in time.
 
 While other search tools that have been created to date are run by algorithms and aim to be comprehensive, extracting and visualising quantitative data, our prototype of a Living Library took a complementary approach: it invites you to get to know a sampled part of the literature from an interpretive, human perspective. We invite you to do the same!
 
